@@ -24,6 +24,7 @@ public class Map extends Canvas
     //will be used later Ask Me if curious. -Haron
     protected float widthFactor = 1, heightFactor = 1;
     protected float terminalVelocity = 0, gravity = 0;
+    public float flyFactor = 0,jumpFactor = 0;
     private static Map map;
 
     public static void main(String args[]){
@@ -43,8 +44,24 @@ public class Map extends Canvas
         return 0;
     }
     
+    protected int jumpSpawns(){
+        for(Spawn e: spawns){
+            e.jump(0);
+        }
+        return 0;
+    }
+    
+    protected int flySpawns(){
+        for(Spawn e: spawns){
+            e.fly(0);
+        }
+        return 0;
+    }
+    
     protected int iterateSpawns(){
         fallSpawns();
+        jumpSpawns();
+        flySpawns();
         moveSpawns();
         return 0;
     }

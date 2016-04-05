@@ -1,5 +1,5 @@
 #BlueJ class context
-comment0.params=jumpFactor\ onGround
-comment0.target=float[]\ jump(int,\ int)
-comment0.text=\r\n\ jumpFactor\ is\ an\ input\ that\ changes\ how\ jump\ behaves\r\n\ onGround\ checks\ whether\ or\ not\ object\ is\ currently\ on\ the\ ground\r\n\ \r\n\ output\ is\ an\ array\ of\ integers.\ Expected\ output\ is\r\n\ Index\ \ \ \ Corresponds\ to\r\n\ \ \ 0\ \ \ \ \ \ \ \ \ yVel\r\n\ \ 1&2\ \ \ \ \ \ \ \ change\ in\ xVel,\ index\ 1\ is\ 1\ if\ change\ in\ xVel(which\ is\ index\ 2)\ takes\ effect.\ \r\n\ \ \ \ \ \ \ \ \ \ \ \ \ 0\ if\ not.\r\n
+comment0.params=speed\ jumpFactor\ onGround\ jumpSpeed
+comment0.target=float[]\ jump(float[],\ int,\ int,\ float[])
+comment0.text=\r\n\ jumpFactor\ is\ an\ input\ that\ changes\ how\ jump\ behaves\r\n\ onGround\ checks\ whether\ or\ not\ object\ is\ currently\ on\ the\ ground\r\n\ \r\n\ output\ is\ an\ array\ of\ floats.\ Expected\ output\ is\r\n\ Index\ \ \ \ Corresponds\ to\r\n\ \ \ 0\ \ \ \ \ \ \ \ \ xVel\r\n\ \ \ 1\ \ \ \ \ \ \ \ \ yVel\r\n\ \ \ 2\ \ \ \ \ \ \ \ \ xPos\r\n\ \ \ 3\ \ \ \ \ \ \ \ \ yPos\r\n
 numComments=1

@@ -8,5 +8,7 @@ public class TESTSpawnVHCMExample1 extends Spawn
         height = h;
         movable = new StandardMovable();
         fallable = new StandardFallable();
+        flyable = new UnFlyable();
+        jumpable = new UnJumpable();
     }
 }
