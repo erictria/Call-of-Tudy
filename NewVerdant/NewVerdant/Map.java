@@ -27,9 +27,6 @@ public class Map extends Canvas
     public float flyFactor = 0,jumpFactor = 0;
     private static Map map;
 
-    public static void main(String args[]){
-    }
-
     protected int moveSpawns(){
         for(Spawn e: spawns){
             e.move(0);
