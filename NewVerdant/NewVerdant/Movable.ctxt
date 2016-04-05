@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.params=moveFactor\ speed
+comment0.target=float[]\ move(int,\ float[])
+comment0.text=\r\n\ moveFactor\ is\ an\ input\ that\ changes\ how\ move\ behaves\r\n\ speed\ takes\ the\ speed\ of\ an\ object\ in\ the\ given\ standard\r\n\ \r\n\ Index\ \ \ \ Corresponds\ to\r\n\ \ \ 0\ \ \ \ \ \ \ \ \ xVel\r\n\ \ \ 1\ \ \ \ \ \ \ \ \ yVel\r\n\ \ \ 2\ \ \ \ \ \ \ \ \ xPos\r\n\ \ \ 3\ \ \ \ \ \ \ \ \ yPos\r\n\ \ \ \r\n\ output\ is\ an\ array\ of\ integers.\ Expected\ output\ is\r\n\ Index\ \ \ \ Corresponds\ to\r\n\ \ \ 0\ \ \ \ \ \ \ \ \ xVel\r\n\ \ \ 1\ \ \ \ \ \ \ \ \ yVel\r\n\ \ \ 2\ \ \ \ \ \ \ \ \ xPos\r\n\ \ \ 3\ \ \ \ \ \ \ \ \ yPos\r\n
+numComments=1

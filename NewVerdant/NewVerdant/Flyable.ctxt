@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.params=flyFactor\ onGround
+comment0.target=float[]\ fly(int,\ int)
+comment0.text=\r\n\ flyFactor\ is\ an\ input\ that\ changes\ how\ fly\ behaves\r\n\ onGround\ checks\ whether\ or\ not\ object\ is\ currently\ on\ the\ ground.\ \r\n\ Usually\ only\ works\ if\ notOnGround.\r\n\ \r\n\ output\ is\ an\ array\ of\ integers.\ Expected\ output\ is\r\n\ Index\ \ \ \ Corresponds\ to\r\n\ \ \ 0\ \ \ \ \ \ \ \ \ yVel\r\n\ \ 1&2\ \ \ \ \ \ \ \ xVel\ modifier\r\n
+numComments=1
