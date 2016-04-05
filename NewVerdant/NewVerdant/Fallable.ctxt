@@ -1,5 +1,5 @@
 #BlueJ class context
-comment0.params=speed\ onGround
-comment0.target=float[]\ fall(float[],\ int)
-comment0.text=\r\n\ speed\ comes\ from\ Spawns\ getSpeed\ method\r\n\ onGround\ checks\ whether\ or\ not\ object\ is\ currently\ on\ the\ ground.\ \r\n\ Usually\ only\ works\ if\ onGround.\r\n\ \r\n\ output\ right\ now\ is\ just\ one\ and\ that's\ the\ new\ yVel.\r\n
+comment0.params=speed\ onGround\ gravity\ terminalVelocity
+comment0.target=float[]\ fall(float[],\ int,\ float,\ float)
+comment0.text=\r\n\ speed\ comes\ from\ Spawns\ getSpeed\ method\r\n\ onGround\ checks\ whether\ or\ not\ object\ is\ currently\ on\ the\ ground.\r\n\ gravity\ allows\ map\ to\ dictate\ the\ gravity\ in\ the\ world\r\n\ Usually\ only\ works\ if\ onGround.\r\n\ \r\n\ output\ right\ now\ is\ just\ one\ and\ that's\ the\ new\ yVel.\r\n
 numComments=1

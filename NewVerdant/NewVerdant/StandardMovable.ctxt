@@ -1,0 +1,4 @@
+#BlueJ class context
+comment0.params=moveFactor\ speed
+comment0.target=float[]\ move(int,\ float[])
+numComments=1
