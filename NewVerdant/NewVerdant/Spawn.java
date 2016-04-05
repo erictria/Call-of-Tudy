@@ -3,9 +3,11 @@
  * Everything that appears on screen is a spawn.
  * 
  * @author Vincent Haron C. Mamutuk 
- * @version 1.4 February 5, 2016
+ * @version 1.4 April 5, 2016
  * Changelog
  * VHCM 1.4 - Added Gravity and TerminalVelocity to fall method
+ *          - Changed everything to work with and output speed.
+ *          - Changed jump to decrement onGround if jumped.
  * VHCM 1.3 - Changed xPos to yVel to floats
  *          - Added setDead and isDead methods
  * VHCM 1.2 - Added kill and sprite methods along with hooks for them. 
@@ -35,6 +37,8 @@ public abstract class Spawn
     protected boolean hasSpawned, isAlive = true;
     //
     protected String spriteName = "Box.jpg";
+    
+    public float flySpeed[], jumpSpeed[];
     //shows the type. Will be explored more in the future.
     protected int type, onGround = 0;
     public final static int IS_ON_GROUND = 1;
@@ -46,11 +50,14 @@ public abstract class Spawn
     public final static int IS_POWERUP = 6;
 
     public int jump(int jumpFactor){
-        float[] x = jumpable.jump(jumpFactor,onGround);
-        //x[0] is always new yVel
-        yVel = x[0];
-        if(x[1]==1)
-            xVel += x[2];
+        float[] x = jumpable.jump(getSpeed(),jumpFactor,onGround,jumpSpeed);
+        if(Math.abs(yPos-x[3])<0.00001||Math.abs(yVel-x[1])<0.00001){
+            onGround--;
+        }
+        xVel = x[0];
+        yVel = x[1];
+        xPos = x[2];
+        yPos = x[3];
         return 0;
     }
     
@@ -79,9 +86,11 @@ public abstract class Spawn
     }
 
     public int fly(int flyFactor){
-        float[] x = flyable.fly(flyFactor,onGround);
-        yVel = x[0];
-        xVel *= x[1] /x[2];
+        float[] x = flyable.fly(getSpeed(),flyFactor,onGround,flySpeed);
+        xVel = x[0];
+        yVel = x[1];
+        xPos = x[2];
+        yPos = x[3];
         return 0;
     }
 
