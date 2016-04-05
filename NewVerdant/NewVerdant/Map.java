@@ -50,6 +50,7 @@ public class Map extends Canvas
     }
 
     public int gameLoop(){
+        setBackground(Color.BLACK);
         while(true){
             iterateSpawns();
             repaint();
@@ -100,7 +101,7 @@ public class Map extends Canvas
 
     public int prePaint(Graphics g)
     {
-        setBackground(Color.BLACK);
+        //setBackground(Color.BLACK);
         BufferedImage i = null;
         for(Spawn a: spawns){
             try{
