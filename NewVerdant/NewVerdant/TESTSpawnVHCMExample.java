@@ -1,7 +1,7 @@
 //unimportant. Just an example.
 public class TESTSpawnVHCMExample extends Spawn
 {
-    public TESTSpawnVHCMExample(int x, int y, int w, int h){
+    public TESTSpawnVHCMExample(float x, float y, float w, float h){
         xPos = x;
         yPos = y;
         width = w;

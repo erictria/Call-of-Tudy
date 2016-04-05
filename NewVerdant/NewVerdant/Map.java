@@ -36,28 +36,28 @@ public class Map extends Canvas
         }
         return 0;
     }
-    
+
     protected int fallSpawns(){
         for(Spawn e: spawns){
             e.fall(gravity,terminalVelocity);
         }
         return 0;
     }
-    
+
     protected int jumpSpawns(){
         for(Spawn e: spawns){
             e.jump(0);
         }
         return 0;
     }
-    
+
     protected int flySpawns(){
         for(Spawn e: spawns){
             e.fly(0);
         }
         return 0;
     }
-    
+
     protected int iterateSpawns(){
         fallSpawns();
         jumpSpawns();
@@ -70,6 +70,7 @@ public class Map extends Canvas
         setBackground(Color.BLACK);
         while(true){
             iterateSpawns();
+            gameHook();
             repaint();
             try{
                 Thread.sleep(16);
@@ -79,6 +80,10 @@ public class Map extends Canvas
                 return 0;
         }
         //return 0;
+    }
+
+    public void gameHook(){
+        
     }
 
     public int addSpawn(Spawn spawn){
@@ -97,21 +102,21 @@ public class Map extends Canvas
     public void update(Graphics g){
         paint(g);
     }
-    
+
     public int setGravity(float grav){
         gravity = grav;
         return 0;
     }
-    
+
     public int setTerVel(float tv){
         terminalVelocity = tv;
         return 0;
     }
-    
+
     public float getTerVel(){
         return terminalVelocity;
     }
-    
+
     public float getGravity(){
         return gravity;
     }
