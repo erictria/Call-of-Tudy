@@ -138,6 +138,14 @@ public abstract class Spawn
         x[3] = yPos;
         return x;
     }
+    
+    public int setLocation(float x, float y, float w, float h){
+        xPos = x;
+        yPos = y;
+        width = w;
+        height = h;
+        return 0;
+    }
 
     /*
      * gets the location of the current object in an array of ints
