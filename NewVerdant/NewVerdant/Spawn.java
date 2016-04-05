@@ -3,8 +3,9 @@
  * Everything that appears on screen is a spawn.
  * 
  * @author Vincent Haron C. Mamutuk 
- * @version 1.3 March 31
+ * @version 1.4 February 5, 2016
  * Changelog
+ * VHCM 1.4 - Added Gravity and TerminalVelocity to fall method
  * VHCM 1.3 - Changed xPos to yVel to floats
  *          - Added setDead and isDead methods
  * VHCM 1.2 - Added kill and sprite methods along with hooks for them. 
@@ -35,8 +36,14 @@ public abstract class Spawn
     //
     protected String spriteName = "Box.jpg";
     //shows the type. Will be explored more in the future.
-    protected int type, onGround;
+    protected int type, onGround = 0;
     public final static int IS_ON_GROUND = 1;
+    public final static int IS_PLATFORM = 1;
+    public final static int IS_WALL = 2;
+    public final static int IS_OBSTACLE = 3;
+    public final static int IS_PLAYER = 4;
+    public final static int IS_PROJECTILE = 5;
+    public final static int IS_POWERUP = 6;
 
     public int jump(int jumpFactor){
         float[] x = jumpable.jump(jumpFactor,onGround);
@@ -78,9 +85,12 @@ public abstract class Spawn
         return 0;
     }
 
-    public int fall(){
-        float[] x = fallable.fall(getSpeed(),onGround);
-        yVel = x[0];
+    public int fall(float gravity, float terminalVelocity){
+        float[] x = fallable.fall(getSpeed(),onGround, gravity, terminalVelocity);
+        xVel = x[0];
+        yVel = x[1];
+        xPos = x[2];
+        yPos = x[3];
         return 0;
     }
 
