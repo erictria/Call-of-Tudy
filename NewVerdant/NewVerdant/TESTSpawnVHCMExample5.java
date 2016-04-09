@@ -1,12 +1,12 @@
 //unimportant. Just an example.
-public class TESTSpawnVHCMExample extends Spawn
+public class TESTSpawnVHCMExample5 extends Spawn
 {
-    public TESTSpawnVHCMExample(float x, float y, float w, float h){
+    public TESTSpawnVHCMExample5(float x, float y, float w, float h){
         xPos = x;
         yPos = y;
         width = w;
         height = h;
-        movable = new RotatingMovable(2.5f);
+        movable = new StandardMovable();
         fallable = new UnFallable();
         flyable = new UnFlyable();
         jumpable = new UnJumpable();

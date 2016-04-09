@@ -1,4 +1,4 @@
-//JUST A TEST. Expected output is a bunch of red boxes not moving
+//JUST A TEST. Expected output is a bunch of red boxes not moving but rotating
 import javax.swing.*;
 import java.util.*;
 import java.awt.*;
