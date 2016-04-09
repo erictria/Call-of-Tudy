@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=z\ w\ x\ y
+comment0.target=OrbitingMovable(float,\ float,\ float,\ float)
+comment1.params=moveFactor\ speed
+comment1.target=float[]\ move(int,\ float[])
+numComments=2

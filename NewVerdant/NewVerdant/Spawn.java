@@ -6,6 +6,8 @@
  * @version 1.5 April 9, 2016
  * Changelog
  * VHCM 1.5 - Added prevXPos and prevYPos.
+ *          - Added getLocationPlusSprite.
+ *          - Added rotationDegrees
  * VHCM 1.4 - Added Gravity and TerminalVelocity to fall method
  *          - Changed everything to work with and output speed.
  *          - Changed jump to decrement onGround if jumped.
@@ -21,7 +23,7 @@ public abstract class Spawn
     // xPos = X-Coordinate. yPos = Y-Coordinate 
     protected float xPos, yPos, width, height, prevXPos, prevYPos;
     // xVel = X Velocity. yVel = yVelocity
-    protected float xVel, yVel;
+    protected float xVel, yVel, rotationDegrees;
     //dictates how an object collides with another
     protected Collisionable collisionable;
     //dictates how an object jumps
@@ -59,6 +61,8 @@ public abstract class Spawn
         yVel = x[1];
         xPos = x[2];
         yPos = x[3];
+        rotationDegrees = x[4];
+        rotationDegrees %= 360;
         return 0;
     }
     
@@ -84,6 +88,7 @@ public abstract class Spawn
         yVel = x[1];
         xPos = x[2];
         yPos = x[3];
+        rotationDegrees = x[4];
         return 0;
     }
 
@@ -93,6 +98,7 @@ public abstract class Spawn
         yVel = x[1];
         xPos = x[2];
         yPos = x[3];
+        rotationDegrees = x[4];
         return 0;
     }
 
@@ -102,6 +108,7 @@ public abstract class Spawn
         yVel = x[1];
         xPos = x[2];
         yPos = x[3];
+        rotationDegrees = x[4];
         return 0;
     }
 
@@ -133,11 +140,12 @@ public abstract class Spawn
      *   3         yPos
      */
     public float[] getSpeed(){
-        float[] x = new float[4];
+        float[] x = new float[5];
         x[0] = xVel;
         x[1] = yVel;
         x[2] = xPos;
         x[3] = yPos;
+        x[4] = rotationDegrees;
         return x;
     }
     
@@ -159,12 +167,13 @@ public abstract class Spawn
      *   4         type
      */
     public float[] getLocation(){
-        float[] x = new float[5];
+        float[] x = new float[6];
         x[0] = xPos;
         x[1] = yPos;
         x[2] = width;
         x[3] = height;
         x[4] = type;
+        x[5] = rotationDegrees;
         return x;
     }
     
@@ -185,6 +194,16 @@ public abstract class Spawn
         return 0;
     }
     
+    public String[] getLocationPlusSprite(){
+        String[] x = new String[6];
+        x[0]=xPos+"";
+        x[1]=yPos+"";
+        x[2]=width+"";
+        x[3]=height+"";
+        x[4]=spriteName;
+        x[5]=rotationDegrees+"";
+        return x;
+    }
     
     public int setDead(){
         isAlive = false;

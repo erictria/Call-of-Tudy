@@ -20,6 +20,7 @@ import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
+import java.awt.geom.*;
 public class Map extends Canvas
 {
     protected ArrayList<Spawn> spawns = new ArrayList<Spawn>();
@@ -67,13 +68,20 @@ public class Map extends Canvas
     }
 
     public int gameLoop(){
+        long timeElapsed = System.nanoTime();
+        //System.out.println(timeElapsed);
         setBackground(Color.BLACK);
         while(true){
+            //System.out.println(System.nanoTime()-timeElapsed);
+            timeElapsed = System.nanoTime();
+            //System.out.println(timeElapsed);
             iterateSpawns();
             gameHook();
             repaint();
+            long timer = System.nanoTime() - timeElapsed;
+            //System.out.println(timer);
             try{
-                Thread.sleep(16);
+                Thread.sleep((17*1000000-timer)/1000000);
             }catch(InterruptedException e){
             }
             if(false)
@@ -83,7 +91,7 @@ public class Map extends Canvas
     }
 
     public void gameHook(){
-        
+
     }
 
     public int addSpawn(Spawn spawn){
@@ -132,20 +140,36 @@ public class Map extends Canvas
                 System.out.println("Failed to find " + a.getSprite()+".");
             }
             float[] temp = a.getLocation();
-            g.drawImage(i,(int)(temp[0]*widthFactor),(int)(temp[1]*heightFactor),(int)(
-                    temp[2]*widthFactor),(int)(temp[3]*heightFactor),null);
+            double rotationRequired = Math.toRadians(temp[5]);
+            double locationX = i.getWidth() / 2;
+            double locationY = i.getHeight() / 2;
+            AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
+            AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+            float widther = temp[2]*widthFactor;
+            float heighter = (temp[3]*heightFactor);
+            g.drawImage(op.filter(i,null),(int)(temp[0]*widthFactor),(int)(temp[1]*heightFactor),(int) 
+                    normalize(widther,heighter,rotationRequired,true),(int)normalize(widther,heighter,rotationRequired,false),null);
+            /*g.drawImage(i,(int)(temp[0]*widthFactor),(int)(temp[1]*heightFactor),(int)(
+            temp[2]*widthFactor),(int)(temp[3]*heightFactor),null);*/             
         }
         return 0;
     }
-    
-    public float[][] giveMap(){
-        float[][] returnValue = new float[spawns.size()+players.size()][5];
+
+    public String[][] giveMap(){
+        String[][] returnValue = new String[spawns.size()+players.size()][6];
         for(int i = 0; i!=spawns.size(); i++){
-            returnValue[i] = spawns.get(i).getLocation();
+            returnValue[i] = spawns.get(i).getLocationPlusSprite();
         }
         for(int i = 0; i!=players.size(); i++){
-            returnValue[i+spawns.size()] = players.get(i).getLocation();
+            returnValue[i+spawns.size()] = players.get(i).getLocationPlusSprite();
         }
         return returnValue;
+    }
+    
+    public static double normalize(float x, float y, double radians, boolean isX){
+        if(!isX){
+            radians-=Math.toRadians(90);
+        }
+        return Math.sqrt(Math.abs(x*x*Math.cos(radians))+Math.abs(y*y*Math.sin(radians)));
     }
 }

@@ -1,4 +1,4 @@
-//JUST A TEST. Expected output is a bunch of red boxes slowly falling, if fallen too far, will reinstantiate
+//JUST A TEST. Expected output is a bunch of red boxes orbiting around the Center
 import javax.swing.*;
 import java.util.*;
 import java.awt.*;
@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
-public class TESTMapVHCM2 extends Map
+public class TESTMapVHCM4 extends Map
 {
     static Map map;
     static Map mapper;
@@ -23,14 +23,14 @@ public class TESTMapVHCM2 extends Map
          */
         addSpawnRandTestFunc(20);
         map.setGravity(0.05f);
-        map.setTerVel(10);
+        map.setTerVel(0);
         map.gameLoop();
         //x.add();
     }
 
     private static void addSpawnRandTestFunc(int x){
         for(int i =0;i!=x;i++){
-            map.addSpawn(new TESTSpawnVHCMExample1((int)(Math.random()*500+250),(int)(
+            map.addSpawn(new TESTSpawnVHCMExample3((int)(Math.random()*500+250),(int)(
                         Math.random()*500+100),(int)(Math.random()*50+25),(int)(Math.random()*50+25)));
         }
     }
