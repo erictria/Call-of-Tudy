@@ -15,7 +15,7 @@ public class TESTMapVHCM3 extends Map
         x.setSize(1050,720);
         x.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         x.setVisible(true);
-        map = new TESTMapVHCM2();
+        map = new TESTMapVHCM3();
         
         x.add(map);
         /*map.addSpawn(new SpawnExample(0,0,20,20));

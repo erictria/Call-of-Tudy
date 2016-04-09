@@ -29,6 +29,8 @@ public class Map extends Canvas
     protected float widthFactor = 1, heightFactor = 1;
     protected float terminalVelocity = 0, gravity = 0;
     public float flyFactor = 0,jumpFactor = 0;
+    private ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
+    private ArrayList<String> imageNames = new ArrayList<String>();
     private static Map map;
 
     protected int moveSpawns(){
@@ -70,13 +72,13 @@ public class Map extends Canvas
     public int gameLoop(){
         long timeElapsed = System.nanoTime();
         //System.out.println(timeElapsed);
-        setBackground(Color.BLACK);
+        setBackground(Color.BLUE);
         while(true){
             //System.out.println(System.nanoTime()-timeElapsed);
             timeElapsed = System.nanoTime();
             //System.out.println(timeElapsed);
-            iterateSpawns();
             gameHook();
+            iterateSpawns();
             repaint();
             long timer = System.nanoTime() - timeElapsed;
             //System.out.println(timer);
@@ -132,25 +134,50 @@ public class Map extends Canvas
     public int prePaint(Graphics g)
     {
         //setBackground(Color.BLACK);
-        BufferedImage i = null;
         for(Spawn a: spawns){
-            try{
-                i = ImageIO.read(new File(a.getSprite()));
-            }catch(IOException e){
-                System.out.println("Failed to find " + a.getSprite()+".");
+            String sprite = a.getSprite();
+            BufferedImage i = null;
+            //System.out.println(sprite);
+            for(int counter = 0; counter!=imageNames.size(); counter++){
+                if(imageNames.get(counter).equals(sprite)){
+                    //System.out.println(imageNames.get(counter));
+                    i = images.get(counter);
+                }
             }
+            if(i==null){
+                //System.out.println(sprite);
+                try{
+                    i = ImageIO.read(new File(sprite));
+                    //System.out.println(sprite);
+                    images.add(i);
+                    imageNames.add(sprite);
+                }catch(IOException e){
+                    System.out.println("Failed to find " + sprite+".");
+                }
+            }
+
             float[] temp = a.getLocation();
-            double rotationRequired = Math.toRadians(temp[5]);
+            float widther = temp[2]*widthFactor/i.getWidth();
+            float heighter = (temp[3]*heightFactor)/i.getHeight();
+            AffineTransform matrix = AffineTransform.getTranslateInstance((int)(temp[0]*widthFactor),
+                        (int)(temp[1]*heightFactor));
+            matrix.scale(widther,heighter);
+            matrix.rotate(Math.toRadians(temp[5]),i.getWidth()/2,i.getHeight()/2);
+            
+            Graphics2D gg = (Graphics2D) g;
+            gg.drawImage(i,matrix,null);
+            /*double rotationRequired = Math.toRadians(temp[5]);
             double locationX = i.getWidth() / 2;
             double locationY = i.getHeight() / 2;
             AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
             AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
             float widther = temp[2]*widthFactor;
             float heighter = (temp[3]*heightFactor);
+            //g.drawImage(i,tx,null);
             g.drawImage(op.filter(i,null),(int)(temp[0]*widthFactor),(int)(temp[1]*heightFactor),(int) 
-                    normalize(widther,heighter,rotationRequired,true),(int)normalize(widther,heighter,rotationRequired,false),null);
+            normalize(widther,heighter,rotationRequired,true),(int)normalize(widther,heighter,rotationRequired,false),null);
             /*g.drawImage(i,(int)(temp[0]*widthFactor),(int)(temp[1]*heightFactor),(int)(
-            temp[2]*widthFactor),(int)(temp[3]*heightFactor),null);*/             
+                    temp[2]*widthFactor),(int)(temp[3]*heightFactor),null);*/          
         }
         return 0;
     }
@@ -165,11 +192,26 @@ public class Map extends Canvas
         }
         return returnValue;
     }
-    
+
     public static double normalize(float x, float y, double radians, boolean isX){
         if(!isX){
             radians-=Math.toRadians(90);
         }
         return Math.sqrt(Math.abs(x*x*Math.cos(radians))+Math.abs(y*y*Math.sin(radians)));
+    }
+
+    class Listener implements KeyListener{
+        public void keyReleased(KeyEvent e){
+            if(e.getKeyCode()==KeyEvent.VK_Q){
+            }
+        }
+
+        public void keyPressed(KeyEvent e){
+            if(e.getKeyCode()==KeyEvent.VK_Q){
+            }
+        }
+        //public void keyClicked(KeyEvent e);
+        public void keyTyped(KeyEvent e){
+        }
     }
 }

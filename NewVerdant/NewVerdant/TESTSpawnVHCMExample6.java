@@ -1,15 +1,17 @@
 //unimportant. Just an example.
-public class TESTSpawnVHCMExample3 extends Spawn
+public class TESTSpawnVHCMExample6 extends Spawn
 {
-    public TESTSpawnVHCMExample3(float x, float y, float w, float h, Spawn s){
+    public TESTSpawnVHCMExample6(float x, float y, float w, float h, Spawn s){
         xPos = x;
         yPos = y;
         width = w;
         height = h;
-        movable = new OrbitingMovable((float)Math.random()*2,(float)Math.random()*2,s);
+        movable = new OrbitingMovable2(x,y,1,1,s);
         fallable = new UnFallable();
         flyable = new UnFlyable();
         jumpable = new UnJumpable();
+        setXSpeed(1);
+        setYSpeed(1);
     }
     public int setSpriteHook(){
         spriteName = "Images\\TestPinkishBox.jpg";

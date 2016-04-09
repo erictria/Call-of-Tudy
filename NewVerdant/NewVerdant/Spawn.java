@@ -8,6 +8,7 @@
  * VHCM 1.5 - Added prevXPos and prevYPos.
  *          - Added getLocationPlusSprite.
  *          - Added rotationDegrees
+ *          - Added setXandYSpeed methods
  * VHCM 1.4 - Added Gravity and TerminalVelocity to fall method
  *          - Changed everything to work with and output speed.
  *          - Changed jump to decrement onGround if jumped.
@@ -192,6 +193,22 @@ public abstract class Spawn
     public int setSpriteHook(){
         //override
         return 0;
+    }
+    
+    public void setXSpeed(float x){
+        xVel=x;
+    }
+    
+    public void setYSpeed(float x){
+        yVel=x;
+    }
+    
+    public void addXSpeed(float x){
+        xVel+=x;
+    }
+    
+    public void addYSpeed(float x){
+        yVel+=x;
     }
     
     public String[] getLocationPlusSprite(){

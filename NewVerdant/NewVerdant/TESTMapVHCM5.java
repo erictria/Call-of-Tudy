@@ -1,4 +1,4 @@
-//JUST A TEST. Expected output is a bunch of red boxes orbiting around the Center
+//JUST A TEST. Expected output is a bunch of rotating boxes next to each other in unison, as if just one long box
 import javax.swing.*;
 import java.util.*;
 import java.awt.*;
@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
-public class TESTMapVHCM4 extends Map
+public class TESTMapVHCM5 extends Map
 {
     static Map map;
     static Map mapper;
@@ -56,7 +56,11 @@ public class TESTMapVHCM4 extends Map
         x.add(map);
         te = new TESTSpawnVHCMExample(500,350,50,50);
         map.addSpawn(te);
-        for(int i =0;i!=20;i++){
+        map.addSpawn(new TESTSpawnVHCMExample4(30,0,50,50,te,false));
+        map.addSpawn(new TESTSpawnVHCMExample4(60,0,50,50,te,false));
+        map.addSpawn(new TESTSpawnVHCMExample4(-30,0,50,50,te,false));
+        map.addSpawn(new TESTSpawnVHCMExample4(-60,0,50,50,te,false));
+        /*for(int i =0;i!=20;i++){
             map.addSpawn(new TESTSpawnVHCMExample3((int)(Math.random()*500+250),(int)(
                         Math.random()*500+100),(int)(Math.random()*50+25),(int)(Math.random()*50+25),te));
         }
@@ -69,21 +73,4 @@ public class TESTMapVHCM4 extends Map
         map.gameLoop();
         //x.add();
     }
-
-    /*private static void addSpawnRandTestFunc(int x){
-    for(int i =0;i!=x;i++){
-    map.addSpawn(new TESTSpawnVHCMExample3((int)(Math.random()*500+250),(int)(
-    Math.random()*500+100),(int)(Math.random()*50+25),(int)(Math.random()*50+25)));
-    }
-    }*/
-
-    /*public void gameHook(){
-        for(Spawn e: spawns){
-            float[] x = e.getSpeed();
-            if(x[3]>800){
-                e.setLocation((float)(Math.random()*500+250),(float)(
-                        Math.random()*500+100),(float)(Math.random()*50+25),(float)(Math.random()*50+25));
-            }
-        }
-    }*/
 }
