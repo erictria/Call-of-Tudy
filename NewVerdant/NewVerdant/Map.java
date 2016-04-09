@@ -3,8 +3,10 @@
  * I'm the Map. I hold Everything. Extend me to create specific maps.
  * 
  * @author Vincent Haron C. Mamutuk 
- * @version 1.1 February 5, 2016
+ * @version 1.2 April 9, 2016
  * Changelog
+ * VHCM 1.2 - Added player ArrayList.
+ *          - Added giveMap function.
  * VHCM 1.1 - Added iterative move function of all spawns;
  *          - Added iterative fall function of all spawns;
  *          - Added terminalVelocity and Gravity variables as well as setter methods;
@@ -21,6 +23,7 @@ import javax.imageio.*;
 public class Map extends Canvas
 {
     protected ArrayList<Spawn> spawns = new ArrayList<Spawn>();
+    protected ArrayList<Spawn> players = new ArrayList<Spawn>();
     //will be used later Ask Me if curious. -Haron
     protected float widthFactor = 1, heightFactor = 1;
     protected float terminalVelocity = 0, gravity = 0;
@@ -133,5 +136,16 @@ public class Map extends Canvas
                     temp[2]*widthFactor),(int)(temp[3]*heightFactor),null);
         }
         return 0;
+    }
+    
+    public float[][] giveMap(){
+        float[][] returnValue = new float[spawns.size()+players.size()][5];
+        for(int i = 0; i!=spawns.size(); i++){
+            returnValue[i] = spawns.get(i).getLocation();
+        }
+        for(int i = 0; i!=players.size(); i++){
+            returnValue[i+spawns.size()] = players.get(i).getLocation();
+        }
+        return returnValue;
     }
 }

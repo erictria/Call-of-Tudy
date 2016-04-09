@@ -9,12 +9,14 @@ import javax.imageio.*;
 public class TESTMapVHCM2 extends Map
 {
     static Map map;
+    static Map mapper;
     public static void main(String args[]){
         JFrame x = new JFrame();
         x.setSize(1050,720);
         x.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         x.setVisible(true);
         map = new TESTMapVHCM2();
+        
         x.add(map);
         /*map.addSpawn(new SpawnExample(0,0,20,20));
         map.addSpawn(new SpawnExample(450,350,70,100));

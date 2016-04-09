@@ -3,8 +3,9 @@
  * Everything that appears on screen is a spawn.
  * 
  * @author Vincent Haron C. Mamutuk 
- * @version 1.4 April 5, 2016
+ * @version 1.5 April 9, 2016
  * Changelog
+ * VHCM 1.5 - Added prevXPos and prevYPos.
  * VHCM 1.4 - Added Gravity and TerminalVelocity to fall method
  *          - Changed everything to work with and output speed.
  *          - Changed jump to decrement onGround if jumped.
@@ -18,7 +19,7 @@
 public abstract class Spawn
 {
     // xPos = X-Coordinate. yPos = Y-Coordinate 
-    protected float xPos, yPos, width, height;
+    protected float xPos, yPos, width, height, prevXPos, prevYPos;
     // xVel = X Velocity. yVel = yVelocity
     protected float xVel, yVel;
     //dictates how an object collides with another
@@ -78,6 +79,7 @@ public abstract class Spawn
 
     public int move(int moveFactor){
         float[] x = movable.move(moveFactor,getSpeed());
+        prevXPos = xPos; prevYPos = yPos;
         xVel = x[0];
         yVel = x[1];
         xPos = x[2];
