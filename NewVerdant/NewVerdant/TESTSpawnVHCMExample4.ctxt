@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=x\ y\ w\ h\ s\ r
+comment0.target=TESTSpawnVHCMExample4(float,\ float,\ float,\ float,\ Spawn,\ boolean)
+comment1.params=
+comment1.target=int\ setSpriteHook()
+numComments=2
