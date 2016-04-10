@@ -3,10 +3,12 @@
  * I'm the Map. I hold Everything. Extend me to create specific maps.
  * 
  * @author Vincent Haron C. Mamutuk 
- * @version 1.2 April 9, 2016
+ * @version 1.3 April 10, 2016
  * Changelog
+ * VHCM 1.3 - Added Resize Capabilities
  * VHCM 1.2 - Added player ArrayList.
  *          - Added giveMap function.
+ *          - Added rotateSize Capabilities.
  * VHCM 1.1 - Added iterative move function of all spawns;
  *          - Added iterative fall function of all spawns;
  *          - Added terminalVelocity and Gravity variables as well as setter methods;
@@ -199,19 +201,9 @@ public class Map extends Canvas
         }
         return Math.sqrt(Math.abs(x*x*Math.cos(radians))+Math.abs(y*y*Math.sin(radians)));
     }
-
-    class Listener implements KeyListener{
-        public void keyReleased(KeyEvent e){
-            if(e.getKeyCode()==KeyEvent.VK_Q){
-            }
-        }
-
-        public void keyPressed(KeyEvent e){
-            if(e.getKeyCode()==KeyEvent.VK_Q){
-            }
-        }
-        //public void keyClicked(KeyEvent e);
-        public void keyTyped(KeyEvent e){
-        }
+    
+    public void setSizeRatio(float x, float y){
+        widthFactor = x/1000;
+        heightFactor = y/700;
     }
 }
