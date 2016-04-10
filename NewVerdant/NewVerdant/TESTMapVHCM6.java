@@ -88,6 +88,7 @@ public class TESTMapVHCM6 extends Map
         map.addKeyListener(new Listener());
 
         x.add(map);
+        x.addComponentListener(new Resizer(map));
         ReD = new TESTSpawnVHCMExample5(500,350,50,50);
         map.addSpawn(ReD);
         te = new TESTSpawnVHCMExample6(550,350,50,50,ReD);

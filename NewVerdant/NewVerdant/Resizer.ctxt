@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=map
+comment0.target=Resizer(Map)
+comment1.params=e
+comment1.target=void\ componentHidden(java.awt.event.ComponentEvent)
+comment2.params=e
+comment2.target=void\ componentMoved(java.awt.event.ComponentEvent)
+comment3.params=e
+comment3.target=void\ componentShown(java.awt.event.ComponentEvent)
+comment4.params=e
+comment4.target=void\ componentResized(java.awt.event.ComponentEvent)
+numComments=5
