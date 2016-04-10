@@ -227,6 +227,11 @@ public abstract class Spawn
         return 0;
     }
     
+    protected int setType(int x){
+        type = x;
+        return 0;
+    }
+    
     public boolean isDead(){
         return !isAlive;
     }

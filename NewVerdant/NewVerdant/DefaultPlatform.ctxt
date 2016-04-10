@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=x\ y\ w\ h
+comment0.target=DefaultPlatform(float,\ float,\ float,\ float)
+comment1.params=x\ y\ w\ h\ sh
+comment1.target=DefaultPlatform(float,\ float,\ float,\ float,\ java.lang.String)
+comment2.params=
+comment2.target=int\ setSpriteHook()
+numComments=3

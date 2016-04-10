@@ -132,6 +132,13 @@ public class Map extends Canvas
     public float getGravity(){
         return gravity;
     }
+    
+    public int setCage(){
+        addSpawn(new DefaultPlatform(0,-50,1000,50));
+        addSpawn(new DefaultWall(-50,0,50,700));
+        addSpawn(new DefaultWall(1000,0,50,700));
+        return 0;
+    }
 
     public int prePaint(Graphics g)
     {
