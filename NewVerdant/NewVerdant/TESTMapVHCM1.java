@@ -16,6 +16,7 @@ public class TESTMapVHCM1
         x.setVisible(true);
         map = new Map();
         x.add(map);
+        x.addComponentListener(new Resizer(map));
         /*map.addSpawn(new SpawnExample(0,0,20,20));
         map.addSpawn(new SpawnExample(450,350,70,100));
          */

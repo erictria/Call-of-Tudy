@@ -18,6 +18,7 @@ public class TESTMapVHCM2 extends Map
         map = new TESTMapVHCM2();
         
         x.add(map);
+        x.addComponentListener(new Resizer(map));
         /*map.addSpawn(new SpawnExample(0,0,20,20));
         map.addSpawn(new SpawnExample(450,350,70,100));
          */
