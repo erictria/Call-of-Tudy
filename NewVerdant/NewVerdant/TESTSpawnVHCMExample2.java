@@ -6,9 +6,11 @@ public class TESTSpawnVHCMExample2 extends Spawn
         yPos = y;
         width = w;
         height = h;
-        movable = new RotatingMovable(1.0f);
+        rotationSpeed = 1;
+        movable = new RotatingMovable();
         fallable = new StandardFallable();
         flyable = new UnFlyable();
         jumpable = new UnJumpable();
+        collisionable = new UnCollisionable();
     }
 }

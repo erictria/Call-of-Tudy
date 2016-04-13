@@ -1,20 +1,27 @@
 //unimportant. Just an example.
-public class TESTSpawnVHCMExample3 extends Spawn
+public class TESTSpawnVHCMExample8 extends Spawn
 {
-    public TESTSpawnVHCMExample3(float x, float y, float w, float h, Spawn s){
+    private int killMeIn = 299;
+    public TESTSpawnVHCMExample8(float x, float y, float w, float h){
         xPos = x;
         yPos = y;
         width = w;
         height = h;
-        rotationSpeed = (float)Math.random()*2;
-        movable = new OrbitingMovable((float)Math.random()*2,s);
+        killMeIn+=Math.random()*500;
+        setType(Spawn.IS_PLATFORM);
+        movable = new Immovable();
         fallable = new UnFallable();
         flyable = new UnFlyable();
         jumpable = new UnJumpable();
+        //spriteHere = "Images\\Box.jpg";
         collisionable = new UnCollisionable();
     }
     public int setSpriteHook(){
         spriteName = "Images\\TestPinkishBox.jpg";
+        killMeIn--;
+        if(killMeIn<0){
+            setDead();
+        }
         //System.out.println(spriteName);
         return 0;
     }

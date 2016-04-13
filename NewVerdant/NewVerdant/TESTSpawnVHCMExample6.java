@@ -6,12 +6,14 @@ public class TESTSpawnVHCMExample6 extends Spawn
         yPos = y;
         width = w;
         height = h;
-        movable = new OrbitingMovable2(x,y,1,1,s);
+        rotationSpeed = 1;
+        movable = new OrbitingMovable2(x,y,1,s);
         fallable = new UnFallable();
         flyable = new UnFlyable();
         jumpable = new UnJumpable();
         setXSpeed(1);
         setYSpeed(1);
+        collisionable = new UnCollisionable();
     }
     public int setSpriteHook(){
         spriteName = "Images\\TestPinkishBox.jpg";

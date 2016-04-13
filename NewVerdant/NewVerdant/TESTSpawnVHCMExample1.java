@@ -6,9 +6,11 @@ public class TESTSpawnVHCMExample1 extends Spawn
         yPos = y;
         width = w;
         height = h;
+        setType(Spawn.IS_PLAYER);
         movable = new StandardMovable();
         fallable = new StandardFallable();
         flyable = new UnFlyable();
         jumpable = new UnJumpable();
+        collisionable = new UnCollisionable();
     }
 }
