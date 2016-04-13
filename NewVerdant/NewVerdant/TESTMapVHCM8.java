@@ -1,4 +1,4 @@
-//JUST A TEST. Expected output is a bunch of red boxes not moving. These are platforms.
+//JUST A TEST. Expected output is a bunch of pinkRed boxes that are platforms that disappear after a while
 import javax.swing.*;
 import java.util.*;
 import java.awt.*;
@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
-public class TESTMapVHCM7 extends Map
+public class TESTMapVHCM8 extends Map
 {
     static Map map;
     public static void main(String args[]){
@@ -14,7 +14,7 @@ public class TESTMapVHCM7 extends Map
         x.setSize(1050,720);
         x.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         x.setVisible(true);
-        map = new TESTMapVHCM7();
+        map = new TESTMapVHCM8();
         x.add(map);
         x.addComponentListener(new Resizer(map));
         /*map.addSpawn(new SpawnExample(0,0,20,20));
@@ -22,12 +22,12 @@ public class TESTMapVHCM7 extends Map
          */
         //addSpawnRandTestFunc(20);
         map.setCage();
-        map.addSpawn(new DefaultPlatform(0,650,1000,50));
-        map.addSpawn(new DefaultPlatform(0,350,200,25));
-        map.addSpawn(new DefaultPlatform(800,350,200,25));
-        map.addSpawn(new DefaultPlatform(350,100,300,25));
-        map.addSpawn(new DefaultPlatform(350,500,300,25));
-        map.addSpawn(new DefaultWall(480,125,40,375));
+        map.addSpawn(new TESTSpawnVHCMExample8(0,650,1000,50));
+        map.addSpawn(new TESTSpawnVHCMExample8(0,350,200,25));
+        map.addSpawn(new TESTSpawnVHCMExample8(800,350,200,25));
+        map.addSpawn(new TESTSpawnVHCMExample8(350,100,300,25));
+        map.addSpawn(new TESTSpawnVHCMExample8(350,500,300,25));
+        map.addSpawn(new TESTSpawnVHCMExample8(480,125,40,375));
         map.gameLoop();
         //x.add();
     }

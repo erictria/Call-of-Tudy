@@ -12,6 +12,7 @@ public class StandardMovable implements Movable
         //speed[1] = 1;
         speed[2] += speed[0];
         speed[3] += speed[1];
+        speed[4] += speed[5];
         return speed;
     }
 }

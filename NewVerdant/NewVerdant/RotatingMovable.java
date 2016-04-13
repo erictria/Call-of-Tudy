@@ -7,16 +7,16 @@
  */
 public class RotatingMovable implements Movable
 {
-    float rotatingFactor = 1;
-    public RotatingMovable(float x){
-        rotatingFactor = x;
+    //float rotatingFactor = 1;
+    public RotatingMovable(){
+        //rotatingFactor = x;
     }
     public float[] move(int moveFactor, float[] speed){
         //speed[0] = 1;
         //speed[1] = 1;
         speed[2] += speed[0];
         speed[3] += speed[1];
-        speed[4] += rotatingFactor;
+        speed[4] += speed[5];
         return speed;
     }
 }

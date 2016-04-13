@@ -1,0 +1,4 @@
+#BlueJ class context
+comment0.params=x\ location
+comment0.target=float[]\ collision(Spawn,\ float[])
+numComments=1
