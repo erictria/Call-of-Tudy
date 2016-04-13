@@ -22,6 +22,8 @@ public class TESTMapVHCM8 extends Map
          */
         //addSpawnRandTestFunc(20);
         map.setCage();
+        map.setGravity(0.05f);
+        map.setTerVel(10);
         map.addSpawn(new TESTSpawnVHCMExample8(0,650,1000,50));
         map.addSpawn(new TESTSpawnVHCMExample8(0,350,200,25));
         map.addSpawn(new TESTSpawnVHCMExample8(800,350,200,25));

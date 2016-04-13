@@ -65,6 +65,7 @@ public abstract class Spawn
         xPos = x[2];
         yPos = x[3];
         rotationDegrees = x[4];
+        rotationSpeed = x[5];
         rotationDegrees %= 360;
         return 0;
     }
@@ -92,6 +93,9 @@ public abstract class Spawn
         xPos = x[2];
         yPos = x[3];
         rotationDegrees = x[4];
+        rotationSpeed = x[5];
+        if(onGround==IS_ON_GROUND)
+            onGround=IS_ON_GROUND-1;
         return 0;
     }
 
@@ -102,6 +106,7 @@ public abstract class Spawn
         xPos = x[2];
         yPos = x[3];
         rotationDegrees = x[4];
+        rotationSpeed = x[5];
         return 0;
     }
 
@@ -112,6 +117,7 @@ public abstract class Spawn
         xPos = x[2];
         yPos = x[3];
         rotationDegrees = x[4];
+        rotationSpeed = x[5];
         return 0;
     }
 
@@ -132,12 +138,17 @@ public abstract class Spawn
         yVel = collisionResult[1];
         xPos = collisionResult[2];
         yPos = collisionResult[3];
-        kill(collisionResult[4]);
+        rotationDegrees = collisionResult[4];
+        rotationSpeed = collisionResult[5];
+        kill(collisionResult[6]);
         return 0;
     }
 
     public int kill(float killFactor){
-        float[] x = killable.kill(killFactor);
+        /*
+         * Will uncomment when kill is fully implemented. Right now, can't be asked - VHCM
+         */
+        //float[] x = killable.kill(killFactor);
         killHook(killFactor);
         return 0;
     }
@@ -282,5 +293,24 @@ public abstract class Spawn
     
     public boolean isDead(){
         return !isAlive;
+    }
+    
+    public int isOnGround(){
+        return onGround;
+    }
+    
+    public int ground(){
+        onGround = IS_ON_GROUND;
+        return 0;
+    }
+    
+    public static float clampZero(float max, float clamped){
+        if(clamped<0){
+            return 0;
+        }
+        if(clamped>max){
+            return max;
+        }
+        return clamped;
     }
 }

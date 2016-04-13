@@ -19,6 +19,7 @@ public class DefaultPlatform extends Spawn
         fallable = new UnFallable();
         flyable = new UnFlyable();
         jumpable = new UnJumpable();
+        collisionable = new PlatformCollisionable();
         spriteHere = "Images\\Box.jpg";
     }
     
@@ -32,8 +33,25 @@ public class DefaultPlatform extends Spawn
         fallable = new UnFallable();
         flyable = new UnFlyable();
         jumpable = new UnJumpable();
+        collisionable = new PlatformCollisionable();
         spriteHere = sh;
     }
+    
+    //ForTestingPurposesOnly
+    /*public DefaultPlatform(float x, float y, float w, float h, boolean wh){
+        xPos = x;
+        yPos = y;
+        width = w;
+        height = h;
+        setType(Spawn.IS_PLATFORM);
+        yVel = -4;
+        movable = new StandardMovable();
+        fallable = new UnFallable();
+        flyable = new UnFlyable();
+        jumpable = new UnJumpable();
+        collisionable = new PlatformCollisionable();
+        spriteHere = "Images\\Box.jpg";
+    }*/
     
     public int setSpriteHook(){
         spriteName = spriteHere;

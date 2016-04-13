@@ -19,6 +19,7 @@ public class DefaultWall extends Spawn
         fallable = new UnFallable();
         flyable = new UnFlyable();
         jumpable = new UnJumpable();
+        collisionable = new PlatformCollisionable();
         spriteHere = "Images\\Box.jpg";
     }
     
@@ -32,6 +33,7 @@ public class DefaultWall extends Spawn
         fallable = new UnFallable();
         flyable = new UnFlyable();
         jumpable = new UnJumpable();
+        collisionable = new PlatformCollisionable();
         spriteHere = sh;
     }
     
