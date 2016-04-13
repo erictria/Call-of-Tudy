@@ -116,7 +116,7 @@ public abstract class Spawn
     }
 
     public float[] collisionActive(Spawn y){
-        float[] x = collisionable.collision(y);
+        float[] x = collisionable.collision(y,getLocation());
         return x;
         /*xPos = x[0];
         yPos = x[1];

@@ -6,7 +6,7 @@
  */
 public class UnCollisionable implements Collisionable
 {
-    public float[] collision(Spawn x){
+    public float[] collision(Spawn x, float[] location){
         return null;
     }
 }

@@ -15,5 +15,5 @@ public interface Collisionable
      *   0         xPos
      *   1         yPos
      */
-    public float[] collision(Spawn collidedWith);
+    public float[] collision(Spawn collidedWith, float[] location);
 }

@@ -6,8 +6,11 @@
  */
 public class PlatformCollisionable implements Collisionable
 {
-    public float[] collision(Spawn x){
+    public float[] collision(Spawn x, float[] location){
         if(x.getType()==Spawn.IS_PLAYER||x.getType()==Spawn.IS_OBSTACLE){
+            float[] prev = x.getPrevCor();
+            float[] speed = x.getSpeed();
+            float[] loc = x.getLocation();
         }
         return null;
     }
