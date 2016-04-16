@@ -3,10 +3,13 @@
  * I'm the Map. I hold Everything. Extend me to create specific maps.
  * 
  * @author Vincent Haron C. Mamutuk 
- * @version 1.2 April 9, 2016
+ * @version 1.4 April 13, 2016
  * Changelog
+ * VHCM 1.4 - Added Collision and Kill
+ * VHCM 1.3 - Added Resize Capabilities
  * VHCM 1.2 - Added player ArrayList.
  *          - Added giveMap function.
+ *          - Added rotateSize Capabilities.
  * VHCM 1.1 - Added iterative move function of all spawns;
  *          - Added iterative fall function of all spawns;
  *          - Added terminalVelocity and Gravity variables as well as setter methods;
@@ -60,12 +63,39 @@ public class Map extends Canvas
         }
         return 0;
     }
+    
+    protected int collideSpawns(){
+        for(int i = 0; i!=spawns.size();i++){
+            Spawn a = spawns.get(i);
+            for(int j = i+1; j!=spawns.size(); j++){
+                Spawn b = spawns.get(j);
+                if(Spawn.checkCollisionWithSpawn(a.getLocation(),b.getLocation())==1){
+                    b.collisionPassive(a.collisionActive(b));
+                    a.collisionPassive(b.collisionActive(a));
+                }
+            }
+        }
+        return 0;
+    }
+    
+    protected int removeSpawns(){
+        for(int i = 0; i!=spawns.size();i++){
+            Spawn a = spawns.get(i);
+            if(a.isDead()){
+                spawns.remove(i);
+                i--;
+            }
+        }
+        return 0;
+    }
 
     protected int iterateSpawns(){
         fallSpawns();
         jumpSpawns();
         flySpawns();
         moveSpawns();
+        collideSpawns();
+        removeSpawns();
         return 0;
     }
 
@@ -129,6 +159,13 @@ public class Map extends Canvas
 
     public float getGravity(){
         return gravity;
+    }
+    
+    public int setCage(){
+        addSpawn(new DefaultPlatform(0,-50,1000,50));
+        addSpawn(new DefaultWall(-50,0,50,700));
+        addSpawn(new DefaultWall(1000,0,50,700));
+        return 0;
     }
 
     public int prePaint(Graphics g)
@@ -199,19 +236,9 @@ public class Map extends Canvas
         }
         return Math.sqrt(Math.abs(x*x*Math.cos(radians))+Math.abs(y*y*Math.sin(radians)));
     }
-
-    class Listener implements KeyListener{
-        public void keyReleased(KeyEvent e){
-            if(e.getKeyCode()==KeyEvent.VK_Q){
-            }
-        }
-
-        public void keyPressed(KeyEvent e){
-            if(e.getKeyCode()==KeyEvent.VK_Q){
-            }
-        }
-        //public void keyClicked(KeyEvent e);
-        public void keyTyped(KeyEvent e){
-        }
+    
+    public void setSizeRatio(float x, float y){
+        widthFactor = x/1000;
+        heightFactor = y/700;
     }
 }

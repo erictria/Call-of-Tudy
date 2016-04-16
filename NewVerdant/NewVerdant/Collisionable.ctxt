@@ -1,5 +1,5 @@
 #BlueJ class context
-comment0.params=collisionables
-comment0.target=float[]\ collision(float[][])
-comment0.text=\r\n\ output\ is\ an\ array\ of\ integers.\ Expected\ output\ is\r\n\ Index\ \ \ \ Corresponds\ to\r\n\ \ \ 0\ \ \ \ \ \ \ \ \ xPos\r\n\ \ \ 1\ \ \ \ \ \ \ \ \ yPos\r\n
+comment0.params=collidedWith\ location
+comment0.target=float[]\ collision(Spawn,\ float[])
+comment0.text=\r\n\ output\ is\ an\ array\ of\ integers.\ Expected\ output\ is\r\n\ Index\ \ \ \ Corresponds\ to\r\n\ \ \ 0\ \ \ \ \ \ \ \ \ xVel\r\n\ \ \ 1\ \ \ \ \ \ \ \ \ yVel\r\n\ \ \ 2\ \ \ \ \ \ \ \ \ xPos\r\n\ \ \ 3\ \ \ \ \ \ \ \ \ yPos\r\n\ \ \ 4\ \ \ \ \ \ \ \ \ rotationDegrees\r\n\ \ \ 5\ \ \ \ \ \ \ \ \ rotationSpeed\r\n\ \ \ 6\ \ \ \ \ \ \ \ \ killFactor\r\n
 numComments=1

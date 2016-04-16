@@ -11,6 +11,7 @@ public class TESTSpawnVHCMExample4 extends Spawn
         fallable = new UnFallable();
         flyable = new UnFlyable();
         jumpable = new UnJumpable();
+        collisionable = new UnCollisionable();
     }
     public int setSpriteHook(){
         spriteName = "Images\\TestPinkishBox.jpg";

@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=x
-comment0.target=RotatingMovable(float)
+comment0.params=
+comment0.target=RotatingMovable()
 comment1.params=moveFactor\ speed
 comment1.target=float[]\ move(int,\ float[])
 numComments=2

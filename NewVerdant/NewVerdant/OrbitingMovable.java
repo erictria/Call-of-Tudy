@@ -8,12 +8,12 @@
  */
 public class OrbitingMovable implements Movable
 {
-    float rotatingFactor = 1;
+    //float rotatingFactor = 1;
     float orbitingFactor = 1;
     Spawn x;
     float prevX, prevY; 
-    public OrbitingMovable(float z, float w, Spawn x){
-        rotatingFactor = z;
+    public OrbitingMovable(float w, Spawn x){
+        //rotatingFactor = z;
         orbitingFactor = w;
         this.x = x;
         float[] center = x.getSpeed();
@@ -54,7 +54,7 @@ public class OrbitingMovable implements Movable
         float yValue = center[3]+(float)((float)radius*(float)Math.sin(radians));
         speed[2] = xValue;
         speed[3] = yValue;
-        speed[4] += rotatingFactor;
+        speed[4] += speed[5];
         prevX = center[2];
         prevY = center[3];
         return speed;

@@ -3,8 +3,10 @@
  * Everything that appears on screen is a spawn.
  * 
  * @author Vincent Haron C. Mamutuk 
- * @version 1.5 April 9, 2016
+ * @version 1.6 April 13, 2016
  * Changelog
+ * VHCM 1.6 - Changed Collision to an actual implementation. Ask me how it works.
+ *          - Added rotationSpeed
  * VHCM 1.5 - Added prevXPos and prevYPos.
  *          - Added getLocationPlusSprite.
  *          - Added rotationDegrees
@@ -24,7 +26,7 @@ public abstract class Spawn
     // xPos = X-Coordinate. yPos = Y-Coordinate 
     protected float xPos, yPos, width, height, prevXPos, prevYPos;
     // xVel = X Velocity. yVel = yVelocity
-    protected float xVel, yVel, rotationDegrees;
+    protected float xVel, yVel, rotationDegrees, rotationSpeed;
     //dictates how an object collides with another
     protected Collisionable collisionable;
     //dictates how an object jumps
@@ -63,6 +65,7 @@ public abstract class Spawn
         xPos = x[2];
         yPos = x[3];
         rotationDegrees = x[4];
+        rotationSpeed = x[5];
         rotationDegrees %= 360;
         return 0;
     }
@@ -74,7 +77,7 @@ public abstract class Spawn
      * 1 Collision is true
      * Haven't tested yet. Please Test.
      */ 
-    public static int checkCollisionWithSpawn(int[] cor,int[] res){
+    public static int checkCollisionWithSpawn(float[] cor,float[] res){
         if(res[0]==cor[0]&&res[1]==cor[1]&&res[2]==cor[2]&&cor[3]==res[3]&&cor[4]==res[4])
             return -1;
         if(res[0]+res[2]>cor[0]&&res[0]<cor[0]+cor[2]&&res[1]+res[3]>cor[1]&&res[1]<cor[1]+cor[3])
@@ -90,6 +93,9 @@ public abstract class Spawn
         xPos = x[2];
         yPos = x[3];
         rotationDegrees = x[4];
+        rotationSpeed = x[5];
+        if(onGround==IS_ON_GROUND)
+            onGround=IS_ON_GROUND-1;
         return 0;
     }
 
@@ -100,6 +106,7 @@ public abstract class Spawn
         xPos = x[2];
         yPos = x[3];
         rotationDegrees = x[4];
+        rotationSpeed = x[5];
         return 0;
     }
 
@@ -110,24 +117,44 @@ public abstract class Spawn
         xPos = x[2];
         yPos = x[3];
         rotationDegrees = x[4];
+        rotationSpeed = x[5];
         return 0;
     }
 
-    public int collision(float[][] y){
-        float[] x = collisionable.collision(y);
-        xPos = x[0];
+    public float[] collisionActive(Spawn y){
+        float[] x = collisionable.collision(y,getLocation());
+        return x;
+        /*xPos = x[0];
         yPos = x[1];
+        killable.kill(x[2]);
+        //isAlive = (int) x[2];
+        return 0;*/
+    }
+    
+    public int collisionPassive(float[] collisionResult){
+        if(collisionResult==null)
+            return 0;
+        xVel = collisionResult[0];
+        yVel = collisionResult[1];
+        xPos = collisionResult[2];
+        yPos = collisionResult[3];
+        rotationDegrees = collisionResult[4];
+        rotationSpeed = collisionResult[5];
+        kill(collisionResult[6]);
         return 0;
     }
 
-    public int kill(int killFactor){
-        float[] x = killable.kill(killFactor);
+    public int kill(float killFactor){
+        /*
+         * Will uncomment when kill is fully implemented. Right now, can't be asked - VHCM
+         */
+        //float[] x = killable.kill(killFactor);
         killHook(killFactor);
         return 0;
     }
 
     //override to create specific kill behavior.
-    public int killHook(int killFactor){
+    public int killHook(float killFactor){
         //override
         return 0;
     }
@@ -141,12 +168,13 @@ public abstract class Spawn
      *   3         yPos
      */
     public float[] getSpeed(){
-        float[] x = new float[5];
+        float[] x = new float[6];
         x[0] = xVel;
         x[1] = yVel;
         x[2] = xPos;
         x[3] = yPos;
         x[4] = rotationDegrees;
+        x[5] = rotationSpeed;
         return x;
     }
     
@@ -176,6 +204,10 @@ public abstract class Spawn
         x[4] = type;
         x[5] = rotationDegrees;
         return x;
+    }
+    
+    public int getType(){
+        return type;
     }
     
     public int setSprite(){
@@ -211,6 +243,14 @@ public abstract class Spawn
         yVel+=x;
     }
     
+    public void setRotSpeed(float x){
+        rotationDegrees=x;
+    }
+    
+    public void addRotSpeed(float x){
+        rotationSpeed+=x;
+    }
+    
     public String[] getLocationPlusSprite(){
         String[] x = new String[6];
         x[0]=xPos+"";
@@ -222,12 +262,55 @@ public abstract class Spawn
         return x;
     }
     
+    /*public float getXPos(){
+        return xPos;
+    }
+    
+    public float getYPos(){
+        return yPos;
+    }
+    
+    /*public float getX(){
+        return xPos;
+    }*/
+    
     public int setDead(){
         isAlive = false;
         return 0;
     }
     
+    public float[] getPrevCor(){
+        float[] x = new float[2];
+        x[0] = prevXPos;
+        x[1] = prevYPos;
+        return x;
+    }
+    
+    protected int setType(int x){
+        type = x;
+        return 0;
+    }
+    
     public boolean isDead(){
         return !isAlive;
+    }
+    
+    public int isOnGround(){
+        return onGround;
+    }
+    
+    public int ground(){
+        onGround = IS_ON_GROUND;
+        return 0;
+    }
+    
+    public static float clampZero(float max, float clamped){
+        if(clamped<0){
+            return 0;
+        }
+        if(clamped>max){
+            return max;
+        }
+        return clamped;
     }
 }
