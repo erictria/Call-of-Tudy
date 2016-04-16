@@ -3,8 +3,10 @@
  * Everything that appears on screen is a spawn.
  * 
  * @author Vincent Haron C. Mamutuk 
- * @version 1.6 April 13, 2016
+ * @version 1.7 April 17, 2016
  * Changelog
+ * VHCM 1.7 - Refactored to become easier to read and added a more comments.
+ *          - Placed all static underneath.
  * VHCM 1.6 - Changed Collision to an actual implementation. Ask me how it works.
  *          - Added rotationSpeed
  * VHCM 1.5 - Added prevXPos and prevYPos.
@@ -41,20 +43,17 @@ public abstract class Spawn
     protected Killable killable;
     //boolean variables
     protected boolean hasSpawned, isAlive = true;
-    //
+    //spriteName
     protected String spriteName = "Box.jpg";
-    
+    //possibly needed in the future, though currently not bein
     public float flySpeed[], jumpSpeed[];
     //shows the type. Will be explored more in the future.
     protected int type, onGround = 0;
-    public final static int IS_ON_GROUND = 1;
-    public final static int IS_PLATFORM = 1;
-    public final static int IS_WALL = 2;
-    public final static int IS_OBSTACLE = 3;
-    public final static int IS_PLAYER = 4;
-    public final static int IS_PROJECTILE = 5;
-    public final static int IS_POWERUP = 6;
 
+    /*
+     * DO NOT OVERRIDE
+     * Look at my input and output when implementing jump.
+     */
     public int jump(int jumpFactor){
         float[] x = jumpable.jump(getSpeed(),jumpFactor,onGround,jumpSpeed);
         if(Math.abs(yPos-x[3])<0.00001||Math.abs(yVel-x[1])<0.00001){
@@ -69,22 +68,11 @@ public abstract class Spawn
         rotationDegrees %= 360;
         return 0;
     }
-    
-    /*
-     * return Values
-     * 0 No Collision
-     * -1 Object is the same
-     * 1 Collision is true
-     * Haven't tested yet. Please Test.
-     */ 
-    public static int checkCollisionWithSpawn(float[] cor,float[] res){
-        if(res[0]==cor[0]&&res[1]==cor[1]&&res[2]==cor[2]&&cor[3]==res[3]&&cor[4]==res[4])
-            return -1;
-        if(res[0]+res[2]>cor[0]&&res[0]<cor[0]+cor[2]&&res[1]+res[3]>cor[1]&&res[1]<cor[1]+cor[3])
-            return 1;
-        return 0;
-    }
 
+    /*
+     * DO NOT OVERRIDE
+     * Look at my input and output when implementing move.
+     */
     public int move(int moveFactor){
         float[] x = movable.move(moveFactor,getSpeed());
         prevXPos = xPos; prevYPos = yPos;
@@ -99,6 +87,10 @@ public abstract class Spawn
         return 0;
     }
 
+    /*
+     * DO NOT OVERRIDE
+     * Look at my input and output when implementing fly.
+     */
     public int fly(int flyFactor){
         float[] x = flyable.fly(getSpeed(),flyFactor,onGround,flySpeed);
         xVel = x[0];
@@ -110,6 +102,10 @@ public abstract class Spawn
         return 0;
     }
 
+    /*
+     * DO NOT OVERRIDE
+     * Look at my input and output when implementing fall.
+     */
     public int fall(float gravity, float terminalVelocity){
         float[] x = fallable.fall(getSpeed(),onGround, gravity, terminalVelocity);
         xVel = x[0];
@@ -121,6 +117,11 @@ public abstract class Spawn
         return 0;
     }
 
+    /*
+     * DO NOT OVERRIDE
+     * Look at my input and output when implementing collision.
+     * The Passive one is better reference
+     */
     public float[] collisionActive(Spawn y){
         float[] x = collisionable.collision(y,getLocation());
         return x;
@@ -131,6 +132,11 @@ public abstract class Spawn
         return 0;*/
     }
     
+    /*
+     * DO NOT OVERRIDE
+     * Look at my input and output when implementing collision.
+     * This method is called with the result of the collisionActive of the Spawn collided with
+     */
     public int collisionPassive(float[] collisionResult){
         if(collisionResult==null)
             return 0;
@@ -144,6 +150,7 @@ public abstract class Spawn
         return 0;
     }
 
+    //Not yet implemented. Subject to change
     public int kill(float killFactor){
         /*
          * Will uncomment when kill is fully implemented. Right now, can't be asked - VHCM
@@ -178,6 +185,7 @@ public abstract class Spawn
         return x;
     }
     
+    //sets location. Input is xPos, yPos, width and height
     public int setLocation(float x, float y, float w, float h){
         xPos = x;
         yPos = y;
@@ -206,6 +214,7 @@ public abstract class Spawn
         return x;
     }
     
+    //returns type
     public int getType(){
         return type;
     }
@@ -221,7 +230,10 @@ public abstract class Spawn
         return spriteName;
     }
     
-    //override to create specific sprite behavior.
+    /*
+     * override to create specific sprite behavior.
+     * Change spriteName in the body to change which sprite is used.
+     */
     public int setSpriteHook(){
         //override
         return 0;
@@ -251,6 +263,9 @@ public abstract class Spawn
         rotationSpeed+=x;
     }
     
+    /*
+     * I use this for drawing the map. Feel free to use this function if you feel that it will serve you somehow.
+     */
     public String[] getLocationPlusSprite(){
         String[] x = new String[6];
         x[0]=xPos+"";
@@ -262,23 +277,13 @@ public abstract class Spawn
         return x;
     }
     
-    /*public float getXPos(){
-        return xPos;
-    }
-    
-    public float getYPos(){
-        return yPos;
-    }
-    
-    /*public float getX(){
-        return xPos;
-    }*/
-    
+    //sets isAlive to false.
     public int setDead(){
         isAlive = false;
         return 0;
     }
     
+    //gets the previous x and y coordinated of object. (The ones in the frame before this one)
     public float[] getPrevCor(){
         float[] x = new float[2];
         x[0] = prevXPos;
@@ -286,6 +291,9 @@ public abstract class Spawn
         return x;
     }
     
+    /*
+     * Input is Spawn.IS_[CLASS_NAME]
+     */
     protected int setType(int x){
         type = x;
         return 0;
@@ -295,6 +303,9 @@ public abstract class Spawn
         return !isAlive;
     }
     
+    /*
+     * if return value is equal to Spawn.IS_ON_GROUND, this spawn is on the ground. Otherwise, it isn't.
+     */
     public int isOnGround(){
         return onGround;
     }
@@ -304,6 +315,37 @@ public abstract class Spawn
         return 0;
     }
     
+    //STATIC STUFF
+    
+    /*
+     * Important stuff here. Use them in other classes so that we don't have to use instanceof.
+     */
+    public final static int IS_ON_GROUND = 1;
+    public final static int IS_PLATFORM = 1;
+    public final static int IS_WALL = 2;
+    public final static int IS_OBSTACLE = 3;
+    public final static int IS_PLAYER = 4;
+    public final static int IS_PROJECTILE = 5;
+    public final static int IS_POWERUP = 6;
+    
+    /*
+     * return Values
+     * 0 No Collision
+     * -1 Object is the same
+     * 1 Collision is true
+     * static method for checking if two spawns are colliding or not.
+     */ 
+    public static int checkCollisionWithSpawn(float[] cor,float[] res){
+        if(res[0]==cor[0]&&res[1]==cor[1]&&res[2]==cor[2]&&cor[3]==res[3]&&cor[4]==res[4])
+            return -1;
+        if(res[0]+res[2]>cor[0]&&res[0]<cor[0]+cor[2]&&res[1]+res[3]>cor[1]&&res[1]<cor[1]+cor[3])
+            return 1;
+        return 0;
+    }
+    
+    /*
+     * static method for clamping
+     */
     public static float clampZero(float max, float clamped){
         if(clamped<0){
             return 0;

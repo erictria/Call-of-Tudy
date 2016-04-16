@@ -9,7 +9,7 @@
 public interface Collisionable
 {
     //NOT VALID COMMENT collisionables comes from Spawn's getLocation Method of all objects in the class.
-    //return null if 
+    //return null if you choose to do nothing
     /*
      * output is an array of integers. Expected output is
      * Index    Corresponds to
