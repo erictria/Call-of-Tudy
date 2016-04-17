@@ -12,6 +12,7 @@
 public class Projectile extends Spawn{
 
 	private String spriteHere;
+	private static int damage;
 
 	/**
 	* constructor for Projectile
@@ -35,6 +36,8 @@ public class Projectile extends Spawn{
 		jumpable = new UnJumpable();
 
 		spriteHere = "Images/Circle.jpg";
+
+		ProjectileCollisionable.setDamage( damage );
 	}
 
 	/**
@@ -53,12 +56,15 @@ public class Projectile extends Spawn{
 		height = h;
 		setType( Spawn.IS_PROJECTILE );
 
+		collisionable = new ProjectileCollisionable();
 		movable = new StandardMovable();
 		fallable = new StandardFallable();
 		flyable = new UnFlyable();
 		jumpable = new UnJumpable();
 
 		spriteHere = sprite;
+
+		ProjectileCollisionable.setDamage( damage );
 	}
 
 	/**

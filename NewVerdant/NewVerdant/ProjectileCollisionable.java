@@ -6,8 +6,16 @@
 */
 
 public class ProjectileCollisionable implements Collisionable{
+
+    protected float damage;
+
     public float[] collision(Spawn collidedWith, float[] location){
-        collidedWith.setDead();
+        collidedWith.kill( damage );
         return location;
+    }
+
+    public int setDamage( float newD ){
+        damage = newD;
+        return 0;
     }
 }
