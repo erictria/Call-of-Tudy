@@ -34,10 +34,10 @@ public class TESTMapVHCM8 extends Map
         //x.add();
     }
 
-    private static void addSpawnRandTestFunc(int x){
+    /*private static void addSpawnRandTestFunc(int x){
         for(int i =0;i!=x;i++){
             map.addSpawn(new TESTSpawnVHCMExample((int)(Math.random()*500+250),(int)(
                         Math.random()*500+100),(int)(Math.random()*50+25),(int)(Math.random()*50+25)));
         }
-    }
+    }*/
 }

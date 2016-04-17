@@ -24,5 +24,5 @@ public interface Movable
      *   2         xPos
      *   3         yPos
      */
-    public float[] move(int moveFactor, float[] speed);
+    public float[] move(int moveFactor, float[] speed, float[] moveSpeed);
 }

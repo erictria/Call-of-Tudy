@@ -40,7 +40,7 @@ public class ShadowMovable implements Movable
         startingDegrees = radians;
     }
     
-    public float[] move(int moveFactor, float[] speed){
+    public float[] move(int moveFactor, float[] speed, float[] moveSpeed){
         float center[] = z.getSpeed();
         //center[4];
         double xVal = xPos;

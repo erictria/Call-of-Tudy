@@ -8,11 +8,13 @@ public class TESTSpawnVHCMExample9 extends Spawn
         height = h;
         rotationSpeed = 0;
         setType(Spawn.IS_PLAYER);
-        movable = new RotatingMovable();
+        movable = new StandardMovable();
         fallable = new StandardFallable();
         flyable = new UnFlyable();
-        jumpable = new UnJumpable();
+        jumpable = new StandardJumpable();
         collisionable = new UnCollisionable();
+        moveSpeed[0] = 2.5f;
+        jumpSpeed[1] = 12;
     }
     public int setSpriteHook(){
         spriteName = "Images\\TestRedBox.png";

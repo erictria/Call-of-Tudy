@@ -20,7 +20,7 @@ public class OrbitingMovable implements Movable
         prevX = center[2];
         prevY = center[3];
     }
-    public float[] move(int moveFactor, float[] speed){
+    public float[] move(int moveFactor, float[] speed, float[] moveSpeed){
         //speed[0] = 1;
         //speed[1] = 1;
         //xPos += speed[0];
