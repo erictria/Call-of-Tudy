@@ -46,7 +46,7 @@ public abstract class Spawn
     //spriteName
     protected String spriteName = "Box.jpg";
     //possibly needed in the future, though currently not bein
-    public float flySpeed[], jumpSpeed[];
+    public float flySpeed[] = new float[2], jumpSpeed[] = new float[2], moveSpeed[] = new float[2];
     //shows the type. Will be explored more in the future.
     protected int type, onGround = 0;
 
@@ -56,7 +56,7 @@ public abstract class Spawn
      */
     public int jump(int jumpFactor){
         float[] x = jumpable.jump(getSpeed(),jumpFactor,onGround,jumpSpeed);
-        if(Math.abs(yPos-x[3])<0.00001||Math.abs(yVel-x[1])<0.00001){
+        if(Math.abs(yPos-x[3])<0.00001||Math.abs(yVel-x[1])<0.00001||Math.abs(xVel-x[0])<0.00001||Math.abs(xPos-x[2])<0.00001){
             onGround--;
         }
         xVel = x[0];
@@ -74,7 +74,7 @@ public abstract class Spawn
      * Look at my input and output when implementing move.
      */
     public int move(int moveFactor){
-        float[] x = movable.move(moveFactor,getSpeed());
+        float[] x = movable.move(moveFactor,getSpeed(),moveSpeed);
         prevXPos = xPos; prevYPos = yPos;
         xVel = x[0];
         yVel = x[1];

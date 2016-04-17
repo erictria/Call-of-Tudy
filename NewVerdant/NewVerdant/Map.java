@@ -28,6 +28,7 @@ public class Map extends Canvas
 {
     protected ArrayList<Spawn> spawns = new ArrayList<Spawn>();
     protected ArrayList<Spawn> players = new ArrayList<Spawn>();
+    protected ArrayList<SpawnController> spawnControllers = new ArrayList<SpawnController>();
     //will be used later Ask Me if curious. -Haron
     protected float widthFactor = 1, heightFactor = 1;
     protected float terminalVelocity = 0, gravity = 0;
@@ -88,6 +89,12 @@ public class Map extends Canvas
         }
         return 0;
     }
+    
+    protected int iterateControllers(){
+        for(SpawnController e: spawnControllers)
+            e.listenHook();
+        return 0;
+    }
 
     protected int iterateSpawns(){
         fallSpawns();
@@ -108,6 +115,7 @@ public class Map extends Canvas
             timeElapsed = System.nanoTime();
             //System.out.println(timeElapsed);
             gameHook();
+            iterateControllers();
             iterateSpawns();
             repaint();
             long timer = System.nanoTime() - timeElapsed;
@@ -128,6 +136,11 @@ public class Map extends Canvas
 
     public int addSpawn(Spawn spawn){
         spawns.add(spawn);
+        return 0;
+    }
+    
+    public int addSpawnController(SpawnController spawn){
+        spawnControllers.add(spawn);
         return 0;
     }
 
@@ -185,7 +198,7 @@ public class Map extends Canvas
                 //System.out.println(sprite);
                 try{
                     i = ImageIO.read(new File(sprite));
-                    //System.out.println(sprite);
+                    System.out.println(sprite);
                     images.add(i);
                     imageNames.add(sprite);
                 }catch(IOException e){

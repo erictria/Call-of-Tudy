@@ -11,40 +11,6 @@ public class TESTMapVHCM7 extends Map
     static Map map;
     static Spawn te;
     public static void main(String args[]){
-        class Listener implements KeyListener{
-            public void keyReleased(KeyEvent e){
-                if(e.getKeyCode()==KeyEvent.VK_W){
-                    te.setYSpeed(0);
-                }
-                if(e.getKeyCode()==KeyEvent.VK_S){
-                    te.setYSpeed(0);
-                }
-                if(e.getKeyCode()==KeyEvent.VK_A){
-                    te.setXSpeed(0);
-                }
-                if(e.getKeyCode()==KeyEvent.VK_D){
-                    te.setXSpeed(0);
-                }
-            }
-
-            public void keyPressed(KeyEvent e){
-                if(e.getKeyCode()==KeyEvent.VK_W){
-                    te.setYSpeed(-4);
-                }
-                if(e.getKeyCode()==KeyEvent.VK_S){
-                    te.setYSpeed(4);
-                }
-                if(e.getKeyCode()==KeyEvent.VK_A){
-                    te.setXSpeed(-4);
-                }
-                if(e.getKeyCode()==KeyEvent.VK_D){
-                    te.setXSpeed(4);
-                }
-            }
-            //public void keyClicked(KeyEvent e);
-            public void keyTyped(KeyEvent e){
-            }
-        }
         JFrame x = new JFrame();
         x.setSize(1050,720);
         x.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -56,7 +22,6 @@ public class TESTMapVHCM7 extends Map
         map.addSpawn(new SpawnExample(450,350,70,100));
          */
         //addSpawnRandTestFunc(20);
-        map.addKeyListener(new Listener());
         map.setCage();
         map.addSpawn(new DefaultPlatform(0,650,1000,50));
         map.addSpawn(new DefaultPlatform(0,350,200,25));
@@ -67,8 +32,11 @@ public class TESTMapVHCM7 extends Map
         te = new TESTSpawnVHCMExample9((int)(Math.random()*500+250),(int)(
                         Math.random()*500+100),(int)(Math.random()*50+25),(int)(Math.random()*50+25));
         map.addSpawn(te);
+        SpawnController spC = new StandardController(te);
+        map.addKeyListener(spC);
+        map.addSpawnController(spC);
         //addSpawnRandTestFunc(1);
-        map.setGravity(0.05f);
+        map.setGravity(.25f);
         map.setTerVel(10);
         map.gameLoop();
         //x.add();

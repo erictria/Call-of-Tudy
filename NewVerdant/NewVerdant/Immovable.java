@@ -7,7 +7,7 @@
  */
 public class Immovable implements Movable
 {
-    public float[] move(int moveFactor, float[] speed){
+    public float[] move(int moveFactor, float[] speed, float moveSpeed[]){
         speed[0] = 0;
         speed[1] = 0;
         /*speed[0] = 1;

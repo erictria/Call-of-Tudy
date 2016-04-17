@@ -32,7 +32,7 @@ public class OrbitingMovable2 implements Movable
         //prevY = center[3];
     }
     //xVel and yVel take different meanings, they are now the radius scaling factors.
-    public float[] move(int moveFactor, float[] speed){
+    public float[] move(int moveFactor, float[] speed, float[] moveSpeed){
         float[] center = node.getSpeed();
         
         double xVal = speed[2] - center[2];
