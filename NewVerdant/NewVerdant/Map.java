@@ -185,11 +185,19 @@ public class Map extends Canvas
                 //System.out.println(sprite);
                 try{
                     i = ImageIO.read(new File(sprite));
-                    //System.out.println(sprite);
+                    System.out.println(sprite);
                     images.add(i);
                     imageNames.add(sprite);
                 }catch(IOException e){
-                    System.out.println("Failed to find " + sprite+".");
+					try{
+						String replaced = sprite.replaceAll( "\\\\","/" );
+						i = ImageIO.read(new File(replaced));
+						System.out.println(replaced);
+						images.add(i);
+	                    imageNames.add(sprite);
+					}catch(IOException e2){
+                    	System.out.println("Failed to find " + sprite+".");
+					}
                 }
             }
 
