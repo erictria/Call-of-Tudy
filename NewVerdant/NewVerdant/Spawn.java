@@ -3,8 +3,9 @@
  * Everything that appears on screen is a spawn.
  * 
  * @author Vincent Haron C. Mamutuk 
- * @version 1.7 April 17, 2016
+ * @version 1.8 April 19, 2016
  * Changelog
+ * VHCM 1.8 - Added KillFunctionalities, including HP
  * VHCM 1.7 - Refactored to become easier to read and added a more comments.
  *          - Placed all static underneath.
  * VHCM 1.6 - Changed Collision to an actual implementation. Ask me how it works.
@@ -40,9 +41,11 @@ public abstract class Spawn
     //dictates how an object is affected by gravity.
     protected Fallable fallable;
     //dictates how an object reacts to death
-    protected Killable killable;
+    protected Killable killable = new StandardKillable();
     //boolean variables
     protected boolean hasSpawned, isAlive = true;
+    //measure of hP
+    protected float hP = 100;
     //spriteName
     protected String spriteName = "Box.jpg";
     //possibly needed in the future, though currently not bein
@@ -156,15 +159,19 @@ public abstract class Spawn
          * Will uncomment when kill is fully implemented. Right now, can't be asked - VHCM
          */
         //float[] x = killable.kill(killFactor);
-        killHook(killFactor);
+        //killHook(killFactor);
+        hP = killable.kill(killFactor,hP);
+        if(hP<0){
+            isAlive = false;
+        }
         return 0;
     }
 
     //override to create specific kill behavior.
-    public int killHook(float killFactor){
+    /*public int killHook(float killFactor){
         //override
         return 0;
-    }
+    }*/
 
     /*
      * gets the speed of the current object in an array of ints

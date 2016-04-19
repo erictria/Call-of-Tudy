@@ -1,5 +1,5 @@
 #BlueJ class context
-comment0.params=killFactor
-comment0.target=float[]\ kill(float)
+comment0.params=killFactor\ currHP
+comment0.target=float\ kill(float,\ float)
 comment0.text=\r\n\r\n\ output\ is\ an\ array\ of\ integers.\ Expected\ output\ is\ dependent\ on\ Killable.\r\n
 numComments=1

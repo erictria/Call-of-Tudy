@@ -2,7 +2,8 @@
  * For players;
  * 
  * @author Eric Tria
- * @version Version 1.0 April 17, 2016
+ * @version Version 1.1 April 19, 2016
+ * VHCM 1.1 Changed to destroy projectiles and Powerups
  */
 public class PlayerCollisionable implements Collisionable
 {
@@ -20,12 +21,13 @@ public class PlayerCollisionable implements Collisionable
             x.setXSpeed(0);
             x.setYSpeed(0);
         }
-        else if(x.getType() == Spawn.IS_PROJECTILE)
+        else if(x.getType() == Spawn.IS_PROJECTILE||x.getType()==Spawn.IS_POWERUP)
         {
-        	pl.setXSpeed(0);
+            x.kill(-1);
+        	/*pl.setXSpeed(0);
             pl.setYSpeed(0);
             x.setXSpeed(0);
-            x.setYSpeed(0);
+            x.setYSpeed(0);*/
         	//pl.damage(x.getDamage()); // waiting for the actual getter method of the projectile.
         }
         /*else if(x.getType() == Spawn.IS_POWERUP)

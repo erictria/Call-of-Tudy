@@ -3,7 +3,7 @@
  * I'm the Map. I hold Everything. Extend me to create specific maps.
  * 
  * @author Vincent Haron C. Mamutuk 
- * @version 1.4 April 13, 2016
+ * @version 1.5 April 19, 2016
  * Changelog
  * VHCM 1.5 - Added Spawn Controllers
  * VHCM 1.4 - Added Collision and Kill

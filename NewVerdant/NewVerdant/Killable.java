@@ -14,5 +14,5 @@ public interface Killable
      *
      * output is an array of integers. Expected output is dependent on Killable.
      */
-    public float[] kill(float killFactor);
+    public float kill(float killFactor, float currHP);
 }
