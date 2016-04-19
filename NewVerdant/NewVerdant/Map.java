@@ -65,6 +65,13 @@ public class Map extends Canvas
         return 0;
     }
     
+    protected int iterateSpawnControllers(){
+        for(SpawnController e: spawnControllers){
+            e.listenHook();
+        }
+        return 0;
+    }
+    
     protected int collideSpawns(){
         for(int i = 0; i!=spawns.size();i++){
             Spawn a = spawns.get(i);
@@ -89,12 +96,6 @@ public class Map extends Canvas
         }
         return 0;
     }
-    
-    protected int iterateControllers(){
-        for(SpawnController e: spawnControllers)
-            e.listenHook();
-        return 0;
-    }
 
     protected int iterateSpawns(){
         fallSpawns();
@@ -109,13 +110,13 @@ public class Map extends Canvas
     public int gameLoop(){
         long timeElapsed = System.nanoTime();
         //System.out.println(timeElapsed);
-        setBackground(Color.BLUE);
+        setBackground(Color.MAGENTA);
         while(true){
             //System.out.println(System.nanoTime()-timeElapsed);
             timeElapsed = System.nanoTime();
             //System.out.println(timeElapsed);
             gameHook();
-            iterateControllers();
+            iterateSpawnControllers();
             iterateSpawns();
             repaint();
             long timer = System.nanoTime() - timeElapsed;
@@ -198,11 +199,19 @@ public class Map extends Canvas
                 //System.out.println(sprite);
                 try{
                     i = ImageIO.read(new File(sprite));
-                    System.out.println(sprite);
+                    //System.out.println(sprite);
                     images.add(i);
                     imageNames.add(sprite);
                 }catch(IOException e){
-                    System.out.println("Failed to find " + sprite+".");
+					try{
+						String replaced = sprite.replaceAll( "\\\\","/" );
+						i = ImageIO.read(new File(replaced));
+						//System.out.println(replaced);
+						images.add(i);
+	                    imageNames.add(sprite);
+					}catch(IOException e2){
+                    	System.out.println("Failed to find " + sprite+".");
+					}
                 }
             }
 

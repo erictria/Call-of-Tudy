@@ -28,7 +28,7 @@ public class PlatformCollisionable implements Collisionable
             else{
                 if(speed[1]<0)
                     speed[1] = speed[1] / -4;
-                System.out.println(speed[1]);
+                //System.out.println(speed[1]);
                 speed[3] = Spawn.clampZero(1000,location[1] + location[3]);
             }
             float[] strike = {speed[0],speed[1],speed[2],speed[3],speed[4],speed[5],0};

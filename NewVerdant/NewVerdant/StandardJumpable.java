@@ -13,7 +13,7 @@ public class StandardJumpable implements Jumpable
         if(onGround!=1){
             return speed;
         }
-        System.out.println("Hi");
+        //System.out.println("Hi");
         speed[1] -= jumpSpeed[1];
         return speed;
     }

@@ -42,9 +42,15 @@ public abstract class Player extends Spawn
     	return 0;
     }
     
-    public int setKill(Killable j)
+    public int setKill(Killable k)
     {
-    	killable = j;
+    	killable = k;
+    	return 0;
+    }
+    
+    public int setCollision(Collisionable c)
+    {
+    	collisionable = c;
     	return 0;
     }
     
@@ -85,25 +91,25 @@ public abstract class Player extends Spawn
     
     public int fire(double angle)
     {
-    	//p.shoot(xPos, yPos, angle); // Assuming that there is a Projectile.shoot() function.
+    	//pro.shoot(xPos, yPos, angle); // Assuming that there is a Projectile.shoot() function.
     								// Will replace with the actual method of Projectile once the Projectile code is posted.
     	return 0;
     }
     
-    //@Override
-    /*
+    /*@Override
+    
     * When a Player collides with an Obstacle, Wall, or fellow Player it stops momentarily. Move factor is 0. 
     *
-    */
-    /*public float collision(Spawn other, float[] location)
+    *
+    public float collision(Spawn other, float[] location)
     {
     	if (other instanceof Powerup)
     	{
-    		other.upgrade(this); //The Powerup does the upgrade on the Player.
+    		//other.upgrade(this); //The Powerup does the upgrade on the Player.
     	}
     	else if (other instanceof Projectile)
     	{
-    		damage(other.damage()); //Calls the Player's damage() method and uses the Projectile's damage as the parameter.
+    		//damage(other.damage()); //Calls the Player's damage() method and uses the Projectile's damage as the parameter.
     								//Assumes that the Projectile has this getter function. Will update to the actual function when Projectile code is posted.
     	}
     	else if (other instanceof Obstacle)
