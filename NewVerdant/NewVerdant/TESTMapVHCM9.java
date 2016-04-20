@@ -29,7 +29,7 @@ public class TESTMapVHCM9 extends Map
         map.addSpawn(new DefaultPlatform(350,100,300,10));
         map.addSpawn(new DefaultPlatform(350,500,300,10));
         map.addSpawn(new MovingPlatform(200,200,150,10));
-        map.addSpawn(new DefaultWall(487,109,26,390));
+        map.addSpawn(new DefaultWall(487,109,26,391));
         te = new ReD((int)(Math.random()*500+250),(int)(
                         Math.random()*500+100));
         map.addSpawn(te);

@@ -6,21 +6,34 @@
  */
 public class StandardPlayerController extends SpawnController
 {
+    Player mySpawnE = (Player) mySpawn;
     public StandardPlayerController(Player e){
         super(e);
     }
     public void listenHook(){
         if(up){
-            mySpawn.jump(1);
+            mySpawnE.jump(1);
         }
         if(left){
-            mySpawn.move(-1);
+            mySpawnE.move(-1);
         }
         if(right){
-            mySpawn.move(1);
+            mySpawnE.move(1);
         }
         if(down){
-            mySpawn.jump(-1);
+            mySpawnE.jump(-1);
+        }
+        if(action1){
+            mySpawnE.action1();
+        }
+        if(action2){
+            mySpawnE.action2();
+        }
+        if(action3){
+            mySpawnE.action3();
+        }
+        if(action4){
+            mySpawnE.action4();
         }
     }
 }

@@ -10,7 +10,8 @@ import java.awt.*;
  * Checks hp
  * 
  * @author Eric Tria
- * @version 1.2 April 16
+ * @version 1.3 April 20, 2016
+ * VHCM 1.3 Added action1 - 4 dir
  */
 public abstract class Player extends Spawn
 {
@@ -142,4 +143,19 @@ public abstract class Player extends Spawn
     */
     public abstract int ultimate();
     
+    public int action1(){
+        return 0;
+    }
+    public int action2(){
+        return 0;
+    }
+    public int action3(){
+        return 0;
+    }
+    public int action4(){
+        return 0;
+    }
+    public int dirFir(int directionFactor){
+        return 0;
+    }
 }
