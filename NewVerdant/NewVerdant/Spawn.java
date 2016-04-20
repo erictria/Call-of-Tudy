@@ -3,8 +3,10 @@
  * Everything that appears on screen is a spawn.
  * 
  * @author Vincent Haron C. Mamutuk 
- * @version 1.8 April 19, 2016
+ * @version 1.9 April 20, 2016
  * Changelog
+ * VHCM 1.9 - Added ProjectileFactory
+ *          - Added CollisionActiveHook method... Specifically so that Migs can do stuff.
  * VHCM 1.8 - Added KillFunctionalities, including HP
  * VHCM 1.7 - Refactored to become easier to read and added a more comments.
  *          - Placed all static underneath.
@@ -48,6 +50,8 @@ public abstract class Spawn
     protected float hP = 100;
     //spriteName
     protected String spriteName = "Box.jpg";
+    //
+    protected ProjectileFactory pF = null;
     //possibly needed in the future, though currently not bein
     public float flySpeed[] = new float[2], jumpSpeed[] = new float[2], moveSpeed[] = new float[2];
     //shows the type. Will be explored more in the future.
@@ -127,12 +131,17 @@ public abstract class Spawn
      */
     public float[] collisionActive(Spawn y){
         float[] x = collisionable.collision(y,getLocation());
+        collisionActiveHook(y);
         return x;
         /*xPos = x[0];
         yPos = x[1];
         killable.kill(x[2]);
         //isAlive = (int) x[2];
         return 0;*/
+    }
+    
+    public int collisionActiveHook(Spawn y){
+        return 0;
     }
     
     /*
@@ -163,15 +172,16 @@ public abstract class Spawn
         hP = killable.kill(killFactor,hP);
         if(hP<0){
             isAlive = false;
+            deathHook();
         }
         return 0;
     }
 
-    //override to create specific kill behavior.
-    /*public int killHook(float killFactor){
+    //override to create specific death behavior.
+    public int deathHook(){
         //override
         return 0;
-    }*/
+    }
 
     /*
      * gets the speed of the current object in an array of ints
@@ -244,6 +254,14 @@ public abstract class Spawn
     public int setSpriteHook(){
         //override
         return 0;
+    }
+    
+    public int setProjectileFactory(ProjectileFactory pF){
+        this.pF = pF;
+    }
+    
+    public ProjectileFactory getProjectileFactory(){
+        return pF;
     }
     
     public void setXSpeed(float x){
@@ -319,6 +337,10 @@ public abstract class Spawn
     
     public int ground(){
         onGround = IS_ON_GROUND;
+        return 0;
+    }
+    
+    public int specialtyHook(Player e){
         return 0;
     }
     

@@ -1,8 +1,18 @@
 import java.awt.*;
 /**
  * Obstacle
+ *
+ * Uses the collision from Spawn.
+ * Structured similarly to the Player class.
+ * In the constructors, speed should be set to 0.
+ * Checks hp
+ * 
+ * Regarding the collision, the only objects that affect the Obstacle would be, and vice versa, would be Player and Projectile.
+ * This is assuming that Obstacles can't be pushed by either Player or Projectiles.
+ * If Obstacles can be pushed then we would have to add collision with other Obstacles.
+ * 
  * @author Migi Ramos
- * @version 1.2 April 16
+ * @version 1.3 April 19
  */
 public abstract class Obstacle extends Spawn
 {
@@ -10,14 +20,44 @@ public abstract class Obstacle extends Spawn
     protected boolean isDead; //If this variable already exists in the Spawn, just remove.
    	
     
-    public int setKill(Killable j)
+    public int setMove(Movable m)
     {
-    	killable = j;
+    	movable = m;
+    	return 0;
+    }
+    
+    public int setFly(Flyable f)
+    {
+    	flyable = f;
+    	return 0;
+    }
+    
+    public int setJump(Jumpable j)
+    {
+    	jumpable = j;
+    	return 0;
+    }
+    
+    public int setFall(Fallable f)
+    {
+    	fallable = f;
+    	return 0;
+    }
+    
+    public int setKill(Killable k)
+    {
+    	killable = k;
+    	return 0;
+    }
+    
+    public int setCollision(Collisionable c)
+    {
+    	collisionable = c;
     	return 0;
     }
     
     /*
-    * When a Projectile collides with a Obstacle, this method is called.
+    * When a Projectile collides with an Obstacle, this method is called.
     *
     */
     public int damage(int x)
@@ -40,47 +80,11 @@ public abstract class Obstacle extends Spawn
     {
     	return isDead;
     }
-    
-    //@Override
-    /*
-    * When a Player collides with an Obstacle, Wall, or fellow Player it stops momentarily. Move factor is 0. 
-    *
-    */
-    /*public float collision(Spawn other, float[] location)
-    {
-    	if (other instanceof Powerup)
-    	{
-    		
-    	}
-    	else if (other instanceof Projectile)
-    	{
-    		damage(other.damage()); //Calls the Obstacle's damage() method and uses the Projectile's damage as the parameter.
-    								//Assumes that the Projectile has this getter function. Will update to the actual function when Projectile code is posted.
-			//some method to make the projectile disappear goes here I guess? Or not?
-    	}
-    	else if (other instanceof Obstacle)
-    	{
-    		 
-    	}
-    	else if (other instanceof Player)
-    	{
-    		
-    	}
-    	else if (other instanceof Platform)
-    	{
-    	}
-    	else if (other instanceof Wall)
-    	{
-    		
-    	}
-    }*/
-    
+
     /*
     * Should be implemented by the concrete players.
     * 
     */
     public abstract int draw(Graphics g);
-    
-    
     
 }
