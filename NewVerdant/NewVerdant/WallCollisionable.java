@@ -1,11 +1,10 @@
 /**
- * For platforms;
+ * For Walls;
  * 
  * @author Vincent Haron C. Mamutuk 
- * @version Version 1.1 April 13, 2016
- * VHCM 1.1 - Added dropping of speed when colliding with platform from underneath.
+ * @version Version 1.0 April 20, 2016
  */
-public class PlatformCollisionable implements Collisionable
+public class WallCollisionable implements Collisionable
 {
     public float[] collision(Spawn x, float[] location){
         if(x.getType()==Spawn.IS_PLAYER||x.getType()==Spawn.IS_OBSTACLE){
@@ -14,15 +13,15 @@ public class PlatformCollisionable implements Collisionable
             float[] loc = x.getLocation();
             //System.out.println(speed[0]+" "+speed[1]+" "+speed[2]+" "+speed[3]
                 //+" "+speed[4]+" "+speed[5]);
-            if(loc[0]+loc[2]<location[0]+4.5f){
+            if(loc[0]+loc[2]<location[0]+10f){
                 speed[2] = location[0]-loc[2] + location[7];
             }
-            else if(loc[0]>location[0]+location[2]-4.5f){
+            else if(loc[0]>location[0]+location[2]-10f){
                 speed[2] = location[0]+location[2] + location[7];
             }
             else if(prev[1]<location[1]){
-                speed[3] = Spawn.clampZero(1000,location[1] - loc[3])+1;
-                speed[2] += location[6];
+                speed[3] = Spawn.clampZero(1000,location[1] - loc[3]);
+                speed[2] += location[6]*2;
                 //System.out.println(speed[3]);
                 speed[1] = 0;
                 x.ground();

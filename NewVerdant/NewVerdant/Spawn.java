@@ -221,13 +221,15 @@ public abstract class Spawn
      *   4         type
      */
     public float[] getLocation(){
-        float[] x = new float[6];
+        float[] x = new float[8];
         x[0] = xPos;
         x[1] = yPos;
         x[2] = width;
         x[3] = height;
         x[4] = type;
         x[5] = rotationDegrees;
+        x[6] = xVel;
+        x[7] = yVel;
         return x;
     }
     
