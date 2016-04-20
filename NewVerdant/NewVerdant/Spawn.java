@@ -258,6 +258,7 @@ public abstract class Spawn
     
     public int setProjectileFactory(ProjectileFactory pF){
         this.pF = pF;
+        return 0;
     }
     
     public ProjectileFactory getProjectileFactory(){
