@@ -130,7 +130,11 @@ public abstract class Spawn
      * The Passive one is better reference
      */
     public float[] collisionActive(Spawn y){
-        float[] x = collisionable.collision(y,getLocation());
+        float[] temp = getLocation();
+        if(y==null){
+            System.out.println("Hello");
+        }
+        float[] x = collisionable.collision(y,temp);
         collisionActiveHook(y);
         return x;
         /*xPos = x[0];
@@ -158,7 +162,7 @@ public abstract class Spawn
         yPos = collisionResult[3];
         rotationDegrees = collisionResult[4];
         rotationSpeed = collisionResult[5];
-        kill(collisionResult[6]);
+        //kill(collisionResult[6]);
         return 0;
     }
 

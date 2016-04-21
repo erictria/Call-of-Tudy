@@ -11,7 +11,7 @@ public interface Collisionable
     //NOT VALID COMMENT collisionables comes from Spawn's getLocation Method of all objects in the class.
     //return null if you choose to do nothing
     /*
-     * output is an array of integers. Expected output is
+     * output is an array of floats in the same format as the result of getSpeed(). Expected output is
      * Index    Corresponds to
      *   0         xVel
      *   1         yVel

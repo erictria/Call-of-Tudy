@@ -56,8 +56,7 @@ public class ObstacleCollisionable implements Collisionable
         //Still To Do
         else if(x.getType() == Spawn.IS_PROJECTILE)
         {
-            x.setXSpeed(0);
-            x.setYSpeed(0);
+            x.kill(-1);
             //ob.damage(x.getDamage()); // waiting for the actual getter method of the projectile.
         }
         return null;
