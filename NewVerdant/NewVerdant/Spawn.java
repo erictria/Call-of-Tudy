@@ -49,7 +49,7 @@ public abstract class Spawn
     //measure of hP
     protected float hP = 100;
     //spriteName
-    protected String spriteName = "Box.jpg";
+    protected String spriteName = "Images\\Box.jpg";
     //
     protected ProjectileFactory pF = null;
     //possibly needed in the future, though currently not bein

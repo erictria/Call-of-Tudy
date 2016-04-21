@@ -38,6 +38,31 @@ public abstract class ProjectileFactory{
     *
     * @param x - current x position
     * @param y - current y position
+    * @param degrees - degrees of fire.
+    *
+    * @return int - This returns 0 if successfully fired, -1 if not
+    */
+    protected int shoot( float x, float y, float degrees ){
+        if( System.nanoTime() - timeElapsed >= fireRate*1000000 ){
+            timeElapsed = System.nanoTime();
+            Projectile bulletFired = createProjectile( x, y );
+            double radians = Math.toRadians(degrees);
+            bulletFired.setYSpeed((float)(Math.sin(radians)*projectileVel));
+            bulletFired.setXSpeed((float)(Math.cos(radians)*projectileVel));
+            currentMap.addSpawn( bulletFired );
+            //System.out.println( "bang!" );
+            return 0;
+        }
+        else{
+            return -1;
+        }
+    }
+    
+    /**
+    * method for shooting
+    *
+    * @param x - current x position
+    * @param y - current y position
     *
     * @return int - This returns 0 if successfully fired, -1 if not
     */
