@@ -51,12 +51,5 @@ public class TESTMapVHCM9 extends Map
     }
     
     public void gameHook(){
-        for(Spawn e: spawns){
-            float[] x = e.getSpeed();
-            if(x[3]>800){
-                e.setLocation((float)(Math.random()*500+250),(float)(
-                        Math.random()*500+100),(float)(Math.random()*50+25),(float)(Math.random()*50+25));
-            }
-        }
     }
 }

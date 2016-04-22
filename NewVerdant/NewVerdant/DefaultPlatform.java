@@ -14,6 +14,7 @@ public class DefaultPlatform extends Spawn
         yPos = y;
         width = w;
         height = h;
+        //xVel = 1;
         setType(Spawn.IS_PLATFORM);
         movable = new Immovable();
         fallable = new UnFallable();

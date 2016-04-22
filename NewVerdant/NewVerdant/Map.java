@@ -65,14 +65,14 @@ public class Map extends Canvas
         }
         return 0;
     }
-    
+
     protected int iterateSpawnControllers(){
         for(SpawnController e: spawnControllers){
             e.listenHook();
         }
         return 0;
     }
-    
+
     protected int collideSpawns(){
         for(int i = 0; i!=spawns.size();i++){
             Spawn a = spawns.get(i);
@@ -86,7 +86,7 @@ public class Map extends Canvas
         }
         return 0;
     }
-    
+
     protected int removeSpawns(){
         for(int i = 0; i!=spawns.size();i++){
             Spawn a = spawns.get(i);
@@ -124,6 +124,7 @@ public class Map extends Canvas
             //System.out.println(timer);
             try{
                 Thread.sleep((17*1000000-timer)/1000000);
+                System.out.println((17*1000000-timer)/1000000);
             }catch(InterruptedException e){
             }
             if(false)
@@ -140,7 +141,7 @@ public class Map extends Canvas
         spawns.add(spawn);
         return 0;
     }
-    
+
     public int addSpawnController(SpawnController spawn){
         spawnControllers.add(spawn);
         return 0;
@@ -175,7 +176,7 @@ public class Map extends Canvas
     public float getGravity(){
         return gravity;
     }
-    
+
     public int setCage(){
         addSpawn(new DefaultPlatform(0,-50,1000,50));
         addSpawn(new Boundary(-1000,-150,2050,50));
@@ -190,59 +191,61 @@ public class Map extends Canvas
     public int prePaint(Graphics g)
     {
         //setBackground(Color.BLACK);
-        for(Spawn a: spawns){
-            String sprite = a.getSprite();
-            BufferedImage i = null;
-            //System.out.println(sprite);
-            for(int counter = 0; counter!=imageNames.size(); counter++){
-                if(imageNames.get(counter).equals(sprite)){
-                    //System.out.println(imageNames.get(counter));
-                    i = images.get(counter);
-                }
-            }
-            if(i==null){
+        try{
+            for(Spawn a: spawns){
+                String sprite = a.getSprite();
+                BufferedImage i = null;
                 //System.out.println(sprite);
-                try{
-                    i = ImageIO.read(new File(sprite));
-                    //System.out.println(sprite);
-                    images.add(i);
-                    imageNames.add(sprite);
-                }catch(IOException e){
-					try{
-						String replaced = sprite.replaceAll( "\\\\","/" );
-						i = ImageIO.read(new File(replaced));
-						//System.out.println(replaced);
-						images.add(i);
-	                    imageNames.add(sprite);
-					}catch(IOException e2){
-                    	System.out.println("Failed to find " + sprite+".");
-					}
+                for(int counter = 0; counter!=imageNames.size(); counter++){
+                    if(imageNames.get(counter).equals(sprite)){
+                        //System.out.println(imageNames.get(counter));
+                        i = images.get(counter);
+                    }
                 }
-            }
+                if(i==null){
+                    //System.out.println(sprite);
+                    try{
+                        i = ImageIO.read(new File(sprite));
+                        //System.out.println(sprite);
+                        images.add(i);
+                        imageNames.add(sprite);
+                    }catch(IOException e){
+                        try{
+                            String replaced = sprite.replaceAll( "\\\\","/" );
+                            i = ImageIO.read(new File(replaced));
+                            //System.out.println(replaced);
+                            images.add(i);
+                            imageNames.add(sprite);
+                        }catch(IOException e2){
+                            System.out.println("Failed to find " + sprite+".");
+                        }
+                    }
+                }
 
-            float[] temp = a.getLocation();
-            float widther = temp[2]*widthFactor/i.getWidth();
-            float heighter = (temp[3]*heightFactor)/i.getHeight();
-            AffineTransform matrix = AffineTransform.getTranslateInstance((int)(temp[0]*widthFactor),
+                float[] temp = a.getLocation();
+                float widther = temp[2]*widthFactor/i.getWidth();
+                float heighter = (temp[3]*heightFactor)/i.getHeight();
+                AffineTransform matrix = AffineTransform.getTranslateInstance((int)(temp[0]*widthFactor),
                         (int)(temp[1]*heightFactor));
-            matrix.scale(widther,heighter);
-            matrix.rotate(Math.toRadians(temp[5]),i.getWidth()/2,i.getHeight()/2);
-            
-            Graphics2D gg = (Graphics2D) g;
-            gg.drawImage(i,matrix,null);
-            /*double rotationRequired = Math.toRadians(temp[5]);
-            double locationX = i.getWidth() / 2;
-            double locationY = i.getHeight() / 2;
-            AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
-            AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-            float widther = temp[2]*widthFactor;
-            float heighter = (temp[3]*heightFactor);
-            //g.drawImage(i,tx,null);
-            g.drawImage(op.filter(i,null),(int)(temp[0]*widthFactor),(int)(temp[1]*heightFactor),(int) 
-            normalize(widther,heighter,rotationRequired,true),(int)normalize(widther,heighter,rotationRequired,false),null);
-            /*g.drawImage(i,(int)(temp[0]*widthFactor),(int)(temp[1]*heightFactor),(int)(
-                    temp[2]*widthFactor),(int)(temp[3]*heightFactor),null);*/          
-        }
+                matrix.scale(widther,heighter);
+                matrix.rotate(Math.toRadians(temp[5]),i.getWidth()/2,i.getHeight()/2);
+
+                Graphics2D gg = (Graphics2D) g;
+                gg.drawImage(i,matrix,null);
+                /*double rotationRequired = Math.toRadians(temp[5]);
+                double locationX = i.getWidth() / 2;
+                double locationY = i.getHeight() / 2;
+                AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
+                AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+                float widther = temp[2]*widthFactor;
+                float heighter = (temp[3]*heightFactor);
+                //g.drawImage(i,tx,null);
+                g.drawImage(op.filter(i,null),(int)(temp[0]*widthFactor),(int)(temp[1]*heightFactor),(int) 
+                normalize(widther,heighter,rotationRequired,true),(int)normalize(widther,heighter,rotationRequired,false),null);
+                /*g.drawImage(i,(int)(temp[0]*widthFactor),(int)(temp[1]*heightFactor),(int)(
+                temp[2]*widthFactor),(int)(temp[3]*heightFactor),null);*/          
+            }
+        }catch(ConcurrentModificationException e){System.out.println("concurrentModification");}
         return 0;
     }
 
@@ -263,7 +266,7 @@ public class Map extends Canvas
         }
         return Math.sqrt(Math.abs(x*x*Math.cos(radians))+Math.abs(y*y*Math.sin(radians)));
     }
-    
+
     public void setSizeRatio(float x, float y){
         widthFactor = x/1000;
         heightFactor = y/700;

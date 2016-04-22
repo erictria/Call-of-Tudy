@@ -4,7 +4,7 @@ public class TESTProjFactVHCM1 extends ProjectileFactory{
     public TESTProjFactVHCM1( Map m ){
         super();
         projectileVel = 10;
-        fireRate = 100;
+        fireRate = 10;
         currentMap = m;
     }
 

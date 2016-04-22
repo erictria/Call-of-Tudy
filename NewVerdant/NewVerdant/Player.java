@@ -16,8 +16,10 @@ import java.awt.*;
 public abstract class Player extends Spawn
 {
     protected int hp;
-    protected boolean isDead; //If this variable already exists in the Spawn, just remove.
-    protected Projectile pro; //The Projectile will be set in the constructor of the concrete players.
+    //protected boolean isAlive; //If this variable already exists in the Spawn, just remove.
+    protected ProjectileFactory pro; //The Projectile will be set in the constructor of the concrete players.
+    protected String bottomSprite, topSprite;
+    protected float topHalf;
    	
     public int setMove(Movable m)
     {
@@ -62,7 +64,7 @@ public abstract class Player extends Spawn
     public int damage(int x)
     {
     	hp -= x;
-    	if(hp <= 0) isDead = true;
+    	if(hp <= 0) isAlive = true;
     	return 0;
     }
     
@@ -87,7 +89,7 @@ public abstract class Player extends Spawn
     */
     public boolean deathCheck()
     {
-    	return isDead;
+    	return isAlive;
     }
     
     public int fire(double angle)
@@ -129,12 +131,6 @@ public abstract class Player extends Spawn
     		move(0);
     	}
     }*/
-    
-    /*
-    * Should be implemented by the concrete players.
-    * 
-    */
-    public abstract int draw(Graphics g);
     
     /*
     * Should be implemented by the concrete players.
