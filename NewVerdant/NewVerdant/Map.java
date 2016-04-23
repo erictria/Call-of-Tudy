@@ -39,8 +39,8 @@ public class Map extends Canvas
     private static Map map;
 
     protected int moveSpawns(){
-        for(Spawn e: spawns){
-            e.move(0);
+        for(int i = 0; i!=spawns.size(); i++){
+            spawns.get(i).move(0);
         }
         return 0;
     }
@@ -60,8 +60,8 @@ public class Map extends Canvas
     }
 
     protected int flySpawns(){
-        for(Spawn e: spawns){
-            e.fly(0);
+        for(int i = 0; i!=spawns.size(); i++){
+            spawns.get(i).fly(0);
         }
         return 0;
     }
@@ -124,7 +124,7 @@ public class Map extends Canvas
             //System.out.println(timer);
             try{
                 Thread.sleep((17*1000000-timer)/1000000);
-                System.out.println((17*1000000-timer)/1000000);
+                //System.out.println((17*1000000-timer)/1000000);
             }catch(InterruptedException e){
             }
             if(false)

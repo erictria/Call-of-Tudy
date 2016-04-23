@@ -7,7 +7,7 @@ public class TESTSpawnVHCMExample6 extends Spawn
         width = w;
         height = h;
         rotationSpeed = 1;
-        movable = new OrbitingMovable2(x,y,1,s);
+        movable = new OrbitingMovable2(x,y,w,h,1,s);
         fallable = new UnFallable();
         flyable = new UnFlyable();
         jumpable = new UnJumpable();

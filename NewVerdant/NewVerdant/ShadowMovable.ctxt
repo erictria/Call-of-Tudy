@@ -1,8 +1,10 @@
 #BlueJ class context
 comment0.params=x\ y\ z
 comment0.target=ShadowMovable(float,\ float,\ Spawn)
-comment1.params=x\ y\ z\ rotate
-comment1.target=ShadowMovable(float,\ float,\ Spawn,\ boolean)
-comment2.params=moveFactor\ speed\ moveSpeed
-comment2.target=float[]\ move(int,\ float[],\ float[])
-numComments=3
+comment1.params=x\ y\ r\ z
+comment1.target=ShadowMovable(float,\ float,\ float,\ Spawn)
+comment2.params=x\ y\ z\ rotate
+comment2.target=ShadowMovable(float,\ float,\ Spawn,\ boolean)
+comment3.params=moveFactor\ speed\ moveSpeed
+comment3.target=float[]\ move(int,\ float[],\ float[])
+numComments=4

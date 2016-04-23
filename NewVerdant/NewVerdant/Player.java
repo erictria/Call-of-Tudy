@@ -139,6 +139,11 @@ public abstract class Player extends Spawn
     */
     public abstract int ultimate();
     
+    public int setProjectileFactory(ProjectileFactory p){
+        pro = p;
+        return 0;
+    }
+    
     public int action1(){
         return 0;
     }

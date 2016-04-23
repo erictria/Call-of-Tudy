@@ -91,6 +91,7 @@ public abstract class Spawn
         rotationSpeed = x[5];
         if(onGround==IS_ON_GROUND)
             onGround=IS_ON_GROUND-1;
+        moveHook();
         return 0;
     }
 
@@ -114,6 +115,7 @@ public abstract class Spawn
      * Look at my input and output when implementing fall.
      */
     public int fall(float gravity, float terminalVelocity){
+        //System.out.println(gravity+" "+terminalVelocity);
         float[] x = fallable.fall(getSpeed(),onGround, gravity, terminalVelocity);
         xVel = x[0];
         yVel = x[1];
@@ -186,6 +188,10 @@ public abstract class Spawn
         //override
         return 0;
     }
+    
+    public int moveHook(){
+        return 0;
+    }
 
     /*
      * gets the speed of the current object in an array of ints
@@ -196,13 +202,15 @@ public abstract class Spawn
      *   3         yPos
      */
     public float[] getSpeed(){
-        float[] x = new float[6];
+        float[] x = new float[8];
         x[0] = xVel;
         x[1] = yVel;
         x[2] = xPos;
         x[3] = yPos;
         x[4] = rotationDegrees;
         x[5] = rotationSpeed;
+        x[6] = width;
+        x[7] = height;
         return x;
     }
     
@@ -363,6 +371,8 @@ public abstract class Spawn
     public final static int IS_PLAYER = 4;
     public final static int IS_PROJECTILE = 5;
     public final static int IS_POWERUP = 6;
+    public final static int IS_BOUNDARY = 0;
+    public final static int IS_MIRROR = 7;
     
     /*
      * return Values

@@ -23,6 +23,14 @@ public class ShadowMovable implements Movable
         startingDegrees = radians;
     }
     
+    public ShadowMovable(float x, float y, float r, Spawn z){
+        this.z = z;
+        xPos = x;
+        yPos = y;
+        radius = Math.sqrt(Math.abs(x*x)+Math.abs(y*y));
+        startingDegrees = Math.toRadians(r);
+    }
+    
     public ShadowMovable(float x, float y, Spawn z, boolean rotate){
         this.z = z;
         xPos = x;

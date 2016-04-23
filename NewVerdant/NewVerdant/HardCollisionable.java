@@ -7,6 +7,8 @@
 public class HardCollisionable implements Collisionable
 {
     public float[] collision(Spawn x, float[] location){
+        if(x.getType()==Spawn.IS_MIRROR)
+            return null;
         x.kill(-1);
         //System.out.println("Out of Bounds.");
         return null;

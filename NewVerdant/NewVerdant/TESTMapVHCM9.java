@@ -9,7 +9,7 @@ import javax.imageio.*;
 public class TESTMapVHCM9 extends Map
 {
     static Map map;
-    static Player te;
+    static ReD te;
     public static void main(String args[]){
         JFrame x = new JFrame();
         x.setSize(1050,720);
@@ -30,8 +30,14 @@ public class TESTMapVHCM9 extends Map
         map.addSpawn(new DefaultPlatform(350,500,300,10));
         map.addSpawn(new MovingPlatform(200,200,150,10));
         map.addSpawn(new DefaultWall(487,109,26,391));
-        te = new ReD((int)(Math.random()*500+250),(int)(
-                        Math.random()*500+100));
+        te = new ReD(20,20);
+        te.setProjectileFactory(new TESTProjectileFactoryCAI1(map));
+        Mirror[] mirrors = new Mirror[4];
+        mirrors[0] = new Mirror(75,40,20,20,0,te,map);
+        mirrors[1] = new Mirror(-25,40,20,20,180,te,map);
+        mirrors[2] = new Mirror(25,90,20,20,270,te,map);
+        mirrors[3] = new Mirror(25,-10,20,20,90,te,map);
+        te.setMirrors(mirrors);
         map.addSpawn(te);
         SpawnController spC = new StandardPlayerController(te);
         map.addKeyListener(spC);

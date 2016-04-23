@@ -5,29 +5,97 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Mirror
+public class Mirror extends Spawn
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class Mirror
-     */
-    public Mirror()
-    {
-        // initialise instance variables
-        x = 0;
+    private boolean daddyMirror = false;
+    public static final float MIRROR_SPEED = 1.25f;
+    public static final int ACTIVATE_LENGTH_FRAMES = 420;
+    public static final int ACTIVATE_COOLDOWN = 840;
+    public static final float MAX_RAD = 3.5f;
+    //private int cd = ACTIVATE_COOLDOWN;
+    private int active = ACTIVATE_COOLDOWN;
+    private Mirror[] mirrorPieces = new Mirror[4]; 
+    public Mirror(float x, float y, float w, float h, float r, ReD s, Map m){
+        xPos = x;
+        yPos = y;
+        width = w;
+        height = h;
+        rotationDegrees = r;
+        rotationSpeed = MIRROR_SPEED;
+        setType(Spawn.IS_MIRROR);
+        movable = new OrbitingMovable2(x,y,w,h,MIRROR_SPEED,s);
+        fallable = new UnFallable();
+        flyable = new UnFlyable();
+        jumpable = new UnJumpable();
+        jumpable = new UnJumpable();
+        setXSpeed(MIRROR_SPEED);
+        setYSpeed(MIRROR_SPEED);
+        //System.out.println(r);
+        double radians = Math.toRadians(r);
+        //System.out.println((Math.cos(radians)*w*0.6)+" "+(Math.sin(radians)*w*0.6));
+        /*mirrorPieces[0] = new Mirror((float)(Math.cos(radians)*w*0.6),
+            (float)(Math.sin(radians)*w*0.6),w,h,r,this);
+        mirrorPieces[1] = new Mirror((float)(Math.cos(radians)*w*1.2),
+            (float)(Math.sin(radians)*w*1.2),w,h,r,this);
+        radians = Math.toRadians(r+180);
+        System.out.println((Math.cos(radians)*w*0.6)+" "+(Math.sin(radians)*w*0.6));
+        mirrorPieces[2] = new Mirror((float)(Math.cos(radians)*w*0.6),
+            (float)(Math.sin(radians)*w*0.6),w,h,r+180,this);
+        mirrorPieces[3] = new Mirror(w*1.2,
+            (float)(Math.sin(radians)*w*1.2),w,h,r,this);*/
+        //System.out.println(r);
+        mirrorPieces[0] = new Mirror(w*0.6f,0,w,h,90,this);
+        mirrorPieces[1] = new Mirror(w*1.2f,0,w,h,90,this);
+        mirrorPieces[2] = new Mirror(w*0.6f,0,w,h,270,this);
+        mirrorPieces[3] = new Mirror(w*1.2f,0,w,h,270,this);
+        m.addSpawn(this);
+        m.addSpawn(mirrorPieces[1]);
+        m.addSpawn(mirrorPieces[0]);
+        m.addSpawn(mirrorPieces[2]);
+        m.addSpawn(mirrorPieces[3]);
+        daddyMirror = true;
+        collisionable = new UnCollisionable();
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
+    
+    public Mirror(float x, float y, float w, float h, float r, Spawn s){
+        setType(Spawn.IS_MIRROR);
+        xPos = x;
+        yPos = y;
+        width = w;
+        height = h;
+        movable = new ShadowMovable(x,y,r,s);
+        fallable = new UnFallable();
+        flyable = new UnFlyable();
+        jumpable = new UnJumpable();
+        collisionable = new UnCollisionable();
+    }
+    
+    public int activate(){
+        if(active==ACTIVATE_COOLDOWN)
+            active = 0;
+        return 0;
+    }
+    
+    public int activated(){
+        return 0;
+    }
+    
+    public int setSpriteHook(){
+        if(active<ACTIVATE_LENGTH_FRAMES){
+            if(xVel<MAX_RAD){
+                addXSpeed(0.05f);
+                addYSpeed(0.05f);
+            }
+        }
+        else{
+            if(xVel>1){
+                addXSpeed(-0.05f);
+                addYSpeed(-0.05f);
+            }
+        }
+        if(active<ACTIVATE_COOLDOWN)
+            active++;
+        spriteName = "Images\\TestPinkishBox.jpg";
+        return 0;
     }
 }

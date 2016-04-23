@@ -10,7 +10,8 @@ public class TESTMapVHCM6 extends Map
 {
     static Map map;
     static Map mapper;
-    static Spawn te, re, pe ,fe, ReD;
+    static Spawn te, re, pe ,fe;
+    static ReD ReD;
     static int m1, m2, m3, m4;
     static float xRad1 = 0, xRad2 = 0, xRad3 = 0, xRad4 = 0;
     public static void main(String args[]){
@@ -89,9 +90,16 @@ public class TESTMapVHCM6 extends Map
 
         x.add(map);
         x.addComponentListener(new Resizer(map));
-        ReD = new TESTSpawnVHCMExample5(500,350,50,50);
+        ReD = new ReD(500,350);
+        ReD.setProjectileFactory(new TESTProjectileFactoryCAI1(map));
         map.addSpawn(ReD);
-        te = new TESTSpawnVHCMExample6(550,350,50,50,ReD);
+        te = new Mirror(555,370,20,20,0,ReD,map);
+        re = new Mirror(455,370,20,20,180,ReD,map);
+        pe = new Mirror(505,420,20,20,270,ReD,map);
+        fe = new Mirror(505,320,20,20,90,ReD,map);
+        map.setTerVel(0);
+        map.setGravity(0);
+        /*te = new TESTSpawnVHCMExample6(550,350,50,50,ReD);
         map.addSpawn(te);
         //te.setXSpeed(4); te.setYSpeed(4);
         map.addSpawn(new TESTSpawnVHCMExample4(0,30,50,50,te,false));
@@ -115,7 +123,7 @@ public class TESTMapVHCM6 extends Map
         map.addSpawn(new TESTSpawnVHCMExample4(30,0,50,50,fe,false));
         map.addSpawn(new TESTSpawnVHCMExample4(60,0,50,50,fe,false));
         map.addSpawn(new TESTSpawnVHCMExample4(-30,0,50,50,fe,false));
-        map.addSpawn(new TESTSpawnVHCMExample4(-60,0,50,50,fe,false));
+        map.addSpawn(new TESTSpawnVHCMExample4(-60,0,50,50,fe,false));*/
         /*for(int i =0;i!=20;i++){
             map.addSpawn(new TESTSpawnVHCMExample3((int)(Math.random()*500+250),(int)(
                         Math.random()*500+100),(int)(Math.random()*50+25),(int)(Math.random()*50+25),te));
@@ -124,8 +132,8 @@ public class TESTMapVHCM6 extends Map
         map.addSpawn(new SpawnExample(450,350,70,100));
          */
         //addSpawnRandTestFunc(20);
-        map.setGravity(0.05f);
-        map.setTerVel(10);
+        /*map.setGravity(0.05f);
+        map.setTerVel(10);*/
         map.gameLoop();
         //x.add();
     }
