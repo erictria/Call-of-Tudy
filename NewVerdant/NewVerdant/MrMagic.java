@@ -22,7 +22,7 @@ public class MrMagic extends Player
     }
     public MrMagic(float x, float y)
     {
-        //pro = new Projectile(0, 0, 0, 0, "");
+        pro = new MagicFactory(null);
         setMove(new StandardMovable());
         setFly(new UnFlyable());
         setJump(new StandardJumpable());
@@ -34,10 +34,24 @@ public class MrMagic extends Player
         yVel = 0;
         xPos = x;
         yPos = y;
-        width = 75;
-        height = 75;
-        moveSpeed[0] = 2.5f; jumpSpeed[1] = 25;
-        spriteName = "Images\\shark.png";
+        width = 30;
+        height = 60;
+        moveSpeed[0] = 2.5f; jumpSpeed[1] = 15;
+        spriteName = "Images\\MrMagic.png";
+    }
+    
+    @Override
+    public int fire(double angle)
+    {
+        if(hp <= (ogHp/2))
+        {
+            pro.projectileVel *= 2;
+            pro.fireRate /= 2;
+        }
+        
+        pro.createProjectile(xPos, yPos);
+        pro.shoot(xPos+60, yPos);
+        return 0;
     }
     
     public int draw(Graphics g)
@@ -47,6 +61,11 @@ public class MrMagic extends Player
     
     public int ultimate()
     {
+        setFall(new StandardFallable());
+        setCollision(new UltimateSharkCollisionable(this));
+        spriteName = "Images\\MrShark.png";
+        jumpSpeed[1] = 5;
+        moveSpeed[0] = 4.25f;
         return 0;
     }
 
