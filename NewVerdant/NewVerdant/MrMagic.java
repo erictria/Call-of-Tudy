@@ -64,7 +64,7 @@ public class MrMagic extends Player
         setFall(new StandardFallable());
         setCollision(new UltimateSharkCollisionable(this));
         spriteName = "Images\\MrShark.png";
-        jumpSpeed[1] = 5;
+        jumpSpeed[1] = 9;
         moveSpeed[0] = 4.25f;
         return 0;
     }

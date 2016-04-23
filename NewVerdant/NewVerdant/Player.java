@@ -16,6 +16,7 @@ import java.awt.*;
 public abstract class Player extends Spawn
 {
     protected int hp;
+    protected int ogHp;
     //protected boolean isAlive; //If this variable already exists in the Spawn, just remove.
     protected ProjectileFactory pro; //The Projectile will be set in the constructor of the concrete players.
     protected String bottomSprite, topSprite;

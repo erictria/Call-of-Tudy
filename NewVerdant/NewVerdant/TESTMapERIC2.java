@@ -34,10 +34,10 @@ public class TESTMapERIC2 extends Map
         map.addSpawn(new DefaultPlatform(350,100,300,25));
         map.addSpawn(new DefaultPlatform(350,500,300,25));
         map.addSpawn(new DefaultWall(480,125,40,375));
-        map.setGravity(0.05f);
+        map.setGravity(0.25f);
         map.setTerVel(10);
         Player xx = new MrMagic(10, 10);
-        Player xy = new ReD(200, 100);
+        Spawn xy = new TESTSpawnVHCMExample9(200, 100, 30, 60);
         xx.ultimate();
         Obstacle cc = new Cube("Images\\companion.png", 100, 600, 50, 50);
         map.addSpawn(xx);
