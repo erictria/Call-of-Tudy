@@ -12,6 +12,7 @@ public class Mirror extends Spawn
     public static final int ACTIVATE_LENGTH_FRAMES = 420;
     public static final int ACTIVATE_COOLDOWN = 840;
     public static final float MAX_RAD = 3.5f;
+    private static Collisionable[] stack = new Collisionable[2];
     //private int cd = ACTIVATE_COOLDOWN;
     private int active = ACTIVATE_COOLDOWN;
     private Mirror[] mirrorPieces = new Mirror[4]; 
@@ -55,6 +56,8 @@ public class Mirror extends Spawn
         m.addSpawn(mirrorPieces[3]);
         daddyMirror = true;
         collisionable = new UnCollisionable();
+        stack[0] = new UnCollisionable();
+        stack[1] = new MirrorCollisionable();
     }
     
     public Mirror(float x, float y, float w, float h, float r, Spawn s){
@@ -71,8 +74,15 @@ public class Mirror extends Spawn
     }
     
     public int activate(){
-        if(active==ACTIVATE_COOLDOWN)
+        if(active==ACTIVATE_COOLDOWN){
+            if(daddyMirror){
+                for(Mirror e: mirrorPieces){
+                    e.activate();
+                }
+            }
+            collisionable = stack[1];
             active = 0;
+        }
         return 0;
     }
     
@@ -88,6 +98,7 @@ public class Mirror extends Spawn
             }
         }
         else{
+            collisionable = stack[0];
             if(xVel>1){
                 addXSpeed(-0.05f);
                 addYSpeed(-0.05f);

@@ -49,6 +49,7 @@ public class OrbitingMovable implements Movable
         if(xVal<0){
             radians=Math.toRadians(180)-radians;
         }
+        System.out.println(radians);
         radians += Math.toRadians(orbitingFactor);
         float xValue = center[2]+(float)((float)radius*(float)Math.cos(radians));
         float yValue = center[3]+(float)((float)radius*(float)Math.sin(radians));

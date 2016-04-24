@@ -26,7 +26,7 @@ public class OrbitingMovable2 implements Movable
         double yVal = y+h/2-center[1]-center[3]/2;
         //System.out.println(center[1]+center[3]/2);
         //System.out.println(yVal);
-        System.out.println(xVal+" "+yVal);
+        //System.out.println(xVal+" "+yVal);
         radius = Math.sqrt(Math.abs(xVal*xVal)+Math.abs(yVal*yVal));
         this.node = node;
         radians = Math.asin(yVal/radius);
