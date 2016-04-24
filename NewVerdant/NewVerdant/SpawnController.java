@@ -61,6 +61,7 @@ public abstract class SpawnController implements KeyListener
             dirRight = false;
         else if(e.getKeyCode() == buttonKeys[i++])
             dirDown = false;
+        //System.out.println(e.getKeyCode());
     }
     
     public void keyPressed(KeyEvent e){
