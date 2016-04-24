@@ -31,7 +31,7 @@ public class TESTMapVHCM9 extends Map
         map.addSpawn(new MovingPlatform(200,200,150,10));
         map.addSpawn(new DefaultWall(487,109,26,391));
         te = new ReD(20,20);
-        te.setProjectileFactory(new TESTProjectileFactoryCAI1(map));
+        te.setProjectileFactory(new ReDFactory(map));
         Mirror[] mirrors = new Mirror[4];
         mirrors[0] = new Mirror(75,40,20,20,0,te,map);
         mirrors[1] = new Mirror(-25,40,20,20,180,te,map);

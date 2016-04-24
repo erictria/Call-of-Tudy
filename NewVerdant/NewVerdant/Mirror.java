@@ -109,4 +109,10 @@ public class Mirror extends Spawn
         spriteName = "Images\\TestPinkishBox.jpg";
         return 0;
     }
+    
+    public int deathHook(){
+        for(Mirror e: mirrorPieces)
+            e.setDead();
+        return 0;
+    }
 }

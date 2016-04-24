@@ -47,7 +47,7 @@ public abstract class ProjectileFactory{
             timeElapsed = System.nanoTime();
             Projectile bulletFired = createProjectile( x, y );
             double radians = Math.toRadians(degrees);
-            bulletFired.setYSpeed((float)(Math.sin(radians)*projectileVel));
+            bulletFired.setYSpeed(-(float)(Math.sin(radians)*projectileVel));
             bulletFired.setXSpeed((float)(Math.cos(radians)*projectileVel));
             currentMap.addSpawn( bulletFired );
             //System.out.println( "bang!" );

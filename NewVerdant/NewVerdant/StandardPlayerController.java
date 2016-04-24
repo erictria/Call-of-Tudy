@@ -35,5 +35,19 @@ public class StandardPlayerController extends SpawnController
         if(action4){
             mySpawnE.action4();
         }
+        int dirFir = 1;
+        if(dirUp){
+            dirFir*=2;
+        }
+        if(dirRight){
+            dirFir*=3;
+        }
+        if(dirLeft){
+            dirFir*=5;
+        }
+        if(dirDown){
+            dirFir*=7;
+        }
+        mySpawnE.dirFir(dirFir);
     }
 }
