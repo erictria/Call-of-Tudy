@@ -9,6 +9,9 @@ public class ReDBullet extends Projectile
 {
     public ReDBullet( float x, float y){
         super( x, y, 20, 20, "Images\\Circle.png" );
+        ProjectileCollisionable pj = new ProjectileCollisionable();
+        pj.setDamage(10);
+        collisionable = pj;
         /*collisionable = new UnCollisionable();
         setType(Spawn.IS_PLATFORM);*/
     }

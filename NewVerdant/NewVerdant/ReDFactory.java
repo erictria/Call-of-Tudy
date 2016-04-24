@@ -10,7 +10,7 @@ public class ReDFactory extends ProjectileFactory
     public ReDFactory(Map m){
         super();
         projectileVel = 8;
-        fireRate = 600;
+        fireRate = 500;
         currentMap = m;
     }
     

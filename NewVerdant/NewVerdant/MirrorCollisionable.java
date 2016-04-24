@@ -29,6 +29,8 @@ public class MirrorCollisionable implements Collisionable
             speed[4] = (float)newDegrees;
             speed[0] = (float)(radius*Math.cos(Math.toRadians(newDegrees)));
             speed[1] = (float)(radius*Math.sin(Math.toRadians(newDegrees)));
+            speed[2]+= speed[0];
+            speed[3]+= speed[1];
             return speed;
         }
         return null;

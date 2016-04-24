@@ -10,21 +10,18 @@
 */
 
 public class ProjectileCollisionable implements Collisionable{
-
-    protected float damage;
-
+    float damage = -1;
     public float[] collision(Spawn collidedWith, float[] location){
         if( collidedWith.getType() == Spawn.IS_PLAYER ){
-            collidedWith.kill( -1 );
+            collidedWith.kill( damage );
         }
         else if( collidedWith.getType() == Spawn.IS_OBSTACLE){
-            collidedWith.kill( -1 );
+            collidedWith.kill( damage );
         }
         return collidedWith.getSpeed();
     }
-
-    public int setDamage( float newD ){
-        damage = newD;
+    public int setDamage(float damage){
+        this.damage = damage;
         return 0;
     }
 }

@@ -145,11 +145,11 @@ public abstract class Spawn
         //isAlive = (int) x[2];
         return 0;*/
     }
-    
+
     public int collisionActiveHook(Spawn y){
         return 0;
     }
-    
+
     /*
      * DO NOT OVERRIDE
      * Look at my input and output when implementing collision.
@@ -176,6 +176,8 @@ public abstract class Spawn
         //float[] x = killable.kill(killFactor);
         //killHook(killFactor);
         hP = killable.kill(killFactor,hP);
+        if(type==IS_PLAYER)
+            System.out.println(hP);
         if(hP<0){
             isAlive = false;
             deathHook();
@@ -188,7 +190,7 @@ public abstract class Spawn
         //override
         return 0;
     }
-    
+
     public int moveHook(){
         return 0;
     }
@@ -213,7 +215,7 @@ public abstract class Spawn
         x[7] = height;
         return x;
     }
-    
+
     //sets location. Input is xPos, yPos, width and height
     public int setLocation(float x, float y, float w, float h){
         xPos = x;
@@ -244,23 +246,23 @@ public abstract class Spawn
         x[7] = yVel;
         return x;
     }
-    
+
     //returns type
     public int getType(){
         return type;
     }
-    
+
     public int setSprite(){
         spriteName = "Images\\Box.jpg";
         setSpriteHook();
         return 0;
     }
-    
+
     public String getSprite(){
         setSpriteHook();
         return spriteName;
     }
-    
+
     /*
      * override to create specific sprite behavior.
      * Change spriteName in the body to change which sprite is used.
@@ -269,40 +271,40 @@ public abstract class Spawn
         //override
         return 0;
     }
-    
+
     public int setProjectileFactory(ProjectileFactory pF){
         this.pF = pF;
         return 0;
     }
-    
+
     public ProjectileFactory getProjectileFactory(){
         return pF;
     }
-    
+
     public void setXSpeed(float x){
         xVel=x;
     }
-    
+
     public void setYSpeed(float x){
         yVel=x;
     }
-    
+
     public void addXSpeed(float x){
         xVel+=x;
     }
-    
+
     public void addYSpeed(float x){
         yVel+=x;
     }
-    
+
     public void setRotSpeed(float x){
         rotationDegrees=x;
     }
-    
+
     public void addRotSpeed(float x){
         rotationSpeed+=x;
     }
-    
+
     /*
      * I use this for drawing the map. Feel free to use this function if you feel that it will serve you somehow.
      */
@@ -316,13 +318,13 @@ public abstract class Spawn
         x[5]=rotationDegrees+"";
         return x;
     }
-    
+
     //sets isAlive to false.
     public int setDead(){
         isAlive = false;
         return 0;
     }
-    
+
     //gets the previous x and y coordinated of object. (The ones in the frame before this one)
     public float[] getPrevCor(){
         float[] x = new float[2];
@@ -330,7 +332,7 @@ public abstract class Spawn
         x[1] = prevYPos;
         return x;
     }
-    
+
     /*
      * Input is Spawn.IS_[CLASS_NAME]
      */
@@ -338,29 +340,29 @@ public abstract class Spawn
         type = x;
         return 0;
     }
-    
+
     public boolean isDead(){
         return !isAlive;
     }
-    
+
     /*
      * if return value is equal to Spawn.IS_ON_GROUND, this spawn is on the ground. Otherwise, it isn't.
      */
     public int isOnGround(){
         return onGround;
     }
-    
+
     public int ground(){
         onGround = IS_ON_GROUND;
         return 0;
     }
-    
+
     public int specialtyHook(Player e){
         return 0;
     }
-    
+
     //STATIC STUFF
-    
+
     /*
      * Important stuff here. Use them in other classes so that we don't have to use instanceof.
      */
@@ -373,7 +375,7 @@ public abstract class Spawn
     public final static int IS_POWERUP = 6;
     public final static int IS_BOUNDARY = 0;
     public final static int IS_MIRROR = 7;
-    
+
     /*
      * return Values
      * 0 No Collision
@@ -388,7 +390,7 @@ public abstract class Spawn
             return 1;
         return 0;
     }
-    
+
     /*
      * static method for clamping
      */

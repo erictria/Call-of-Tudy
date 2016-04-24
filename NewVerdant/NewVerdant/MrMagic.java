@@ -59,6 +59,13 @@ public class MrMagic extends Player
         return 0;
     }
     
+    public int moveHook(){
+        if(hP<21){
+            ultimate();
+        }
+        return 0;
+    }
+    
     public int ultimate()
     {
         setFall(new StandardFallable());

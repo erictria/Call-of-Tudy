@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
-public class TESTMapVHCM9 extends Map
+public class TESTMapVHCM11 extends Map
 {
     static Map map;
     static ReD te;
@@ -15,7 +15,7 @@ public class TESTMapVHCM9 extends Map
         x.setSize(1050,720);
         x.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         x.setVisible(true);
-        map = new TESTMapVHCM9();
+        map = new TESTMapVHCM11();
         x.add(map);
         x.addComponentListener(new Resizer(map));
         /*map.addSpawn(new SpawnExample(0,0,20,20));
@@ -48,6 +48,17 @@ public class TESTMapVHCM9 extends Map
         map.addSpawnController(spC);
         Obstacle cc = new Cube("Images\\companion.png", 100, 600, 50, 50);
         map.addSpawn(cc);
+        Player xx = new MrMagic(900, 10);
+        //Spawn xy = new TESTSpawnVHCMExample9(200, 100, 30, 60);
+        //xx.ultimate();
+        //Obstacle cc = new Cube("Images\\companion.png", 100, 600, 50, 50);
+        map.addSpawn(xx);
+        //map.addSpawn(xy);
+        // map.addSpawn(cc);
+        ProjectileFactory pf = new MagicFactory(map);
+        SpawnController sp = new PlayerController(xx, pf);
+        map.addKeyListener(sp);
+        map.addSpawnController(sp);
         //addSpawnRandTestFunc(1);
         map.setGravity(.25f);
         map.setTerVel(10);

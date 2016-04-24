@@ -83,7 +83,24 @@ public class ReD extends Player
 
     public int dirFir(int directionFactor){
         if(directionFactor!=1){
-            float directionTemp1;
+            if(directionFactor%6==0){
+                direction = 45;
+            }else if(directionFactor%10==0){
+                direction = 135;
+            }else if(directionFactor%35==0){
+                direction = 225;
+            }else if(directionFactor%21==0){
+                direction = 315;
+            }else if(directionFactor%2==0){
+                direction = 90;
+            }else if(directionFactor%3==0){
+                direction = 0;
+            }else if(directionFactor%5==0){
+                direction = 180;
+            }else if(directionFactor%7==0){
+                direction = 270;
+            }
+            /*float directionTemp1;
             float directionTemp2;
             float idealDirection = 0;
             int divideBy = 0;
@@ -104,6 +121,10 @@ public class ReD extends Player
                 divideBy++;
             }
             idealDirection/=divideBy;
+            if(direction>180){
+                if(idealDirection<10)
+                    idealDirection = 360;
+            }
             directionTemp1 = direction+changeDir;
             directionTemp2 = direction-changeDir;
             directionTemp1%=360;
@@ -116,7 +137,7 @@ public class ReD extends Player
                 direction = directionTemp2;
             }
             System.out.println(direction);
-            return 0;
+            return 0;*/
         }
         return 0;
     }
