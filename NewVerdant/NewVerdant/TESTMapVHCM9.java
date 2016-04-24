@@ -30,7 +30,7 @@ public class TESTMapVHCM9 extends Map
         map.addSpawn(new DefaultPlatform(350,500,300,10));
         map.addSpawn(new MovingPlatform(200,200,150,10));
         map.addSpawn(new DefaultWall(487,109,26,391));
-        te = new ReD(20,20);
+        /*te = new ReD(20,20);
         te.setProjectileFactory(new ReDFactory(map));
         Mirror[] mirrors = new Mirror[4];
         mirrors[0] = new Mirror(75,40,15,15,0,te,map);
@@ -42,8 +42,11 @@ public class TESTMapVHCM9 extends Map
         mirrors[3] = new Mirror(25,-10,15,15,90,te,map);
         mirrors[3].setNumber(3);
         te.setMirrors(mirrors);
-        map.addSpawn(te);
+        map.addSpawn(te);*/
         SpawnController spC = new StandardPlayerController(te);
+        PlayerFactory redPF = new ReDPlayerFactory(20,20,map,spC);
+        map.addPlayer(redPF.playerSpawn());
+        map.addPlayerFactory(redPF);
         map.addKeyListener(spC);
         map.addSpawnController(spC);
         Obstacle cc = new Cube("Images\\companion.png", 100, 600, 50, 50);

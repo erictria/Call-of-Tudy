@@ -10,6 +10,9 @@ public class StandardPlayerController extends SpawnController
     public StandardPlayerController(Player e){
         super(e);
     }
+    public void setSpawn(Spawn e){
+        mySpawnE = (Player) e;
+    }
     public void listenHook(){
         if(up){
             mySpawnE.jump(1);

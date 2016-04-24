@@ -9,6 +9,7 @@ public class MagicFactory extends ProjectileFactory
 {
     // instance variables - replace the example below with your own
     private int x;
+    private float lastX = 0, lastY = 0;
     public MagicFactory(Map m){
         super();
         projectileVel = 10;
@@ -20,7 +21,7 @@ public class MagicFactory extends ProjectileFactory
         Projectile sample = new Magic( x, y, 40, 40 );
         return sample;
     }
-    
+
     public int setMap(Map m)
     {
         currentMap = m;

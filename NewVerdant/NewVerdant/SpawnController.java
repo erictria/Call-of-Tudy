@@ -11,6 +11,14 @@ public abstract class SpawnController implements KeyListener
     //Override to make it actually do something.
     public abstract void listenHook();
     
+    public void changeKeys(int[] buttonKeys){
+        this.buttonKeys = buttonKeys;
+    }
+    
+    public int[] getKeys(){
+        return buttonKeys;
+    }
+    
     protected Spawn mySpawn;
     protected boolean up = false, down = false, left = false, right = false, action1 = false, 
         action2 = false, action3 = false, action4 = false, dirUp = false, dirLeft = false, 
@@ -33,6 +41,9 @@ public abstract class SpawnController implements KeyListener
         buttonKeys[i++] = KeyEvent.VK_A;
         buttonKeys[i++] = KeyEvent.VK_D;
         buttonKeys[i++] = KeyEvent.VK_S;
+    }
+    public void setSpawn(Spawn e){
+        mySpawn = e;
     }
     
     public void keyReleased(KeyEvent e){

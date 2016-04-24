@@ -72,7 +72,7 @@ public abstract class ProjectileFactory{
             Projectile bulletFired = createProjectile( x, y );
             bulletFired.setVelocity( projectileVel );
             currentMap.addSpawn( bulletFired );
-            System.out.println( "bang!" );
+            //System.out.println( "bang!" );
             return 0;
         }
         else{

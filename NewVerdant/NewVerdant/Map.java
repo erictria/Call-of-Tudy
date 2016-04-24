@@ -30,9 +30,11 @@ public class Map extends Canvas
     protected ArrayList<Spawn> spawns = new ArrayList<Spawn>();
     protected ArrayList<Spawn> players = new ArrayList<Spawn>();
     protected ArrayList<SpawnController> spawnControllers = new ArrayList<SpawnController>();
+    ArrayList<PlayerFactory> playerFactories = new ArrayList<PlayerFactory>();
     //will be used later Ask Me if curious. -Haron
     protected float widthFactor = 1, heightFactor = 1;
     protected float terminalVelocity = 0, gravity = 0;
+    protected int slowDownTime = 1;
     public float flyFactor = 0,jumpFactor = 0;
     private ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
     private ArrayList<String> imageNames = new ArrayList<String>();
@@ -88,6 +90,21 @@ public class Map extends Canvas
     }
 
     protected int removeSpawns(){
+        for(int i = 0; i<players.size();i++){
+            Spawn a = players.get(i);
+            if(a.isDead()){
+                if(playerFactories.get(i).getLives()>=0){
+                    players.set(i,spawn(i));
+                    //System.out.println(players.size());
+                }else{
+                    players.remove(i);
+                    //System.out.println("hi");
+                    if(players.size()<2){
+                        finish();
+                    }
+                }
+            }
+        }
         for(int i = 0; i!=spawns.size();i++){
             Spawn a = spawns.get(i);
             if(a.isDead()){
@@ -95,6 +112,11 @@ public class Map extends Canvas
                 i--;
             }
         }
+        return 0;
+    }
+
+    private int finish(){
+        slowDownTime = 3;
         return 0;
     }
 
@@ -106,6 +128,10 @@ public class Map extends Canvas
         collideSpawns();
         removeSpawns();
         return 0;
+    }
+
+    protected Player spawn(int i){
+        return playerFactories.get(i).playerSpawn();
     }
 
     public int gameLoop(){
@@ -123,7 +149,9 @@ public class Map extends Canvas
             long timer = System.nanoTime() - timeElapsed;
             //System.out.println(timer);
             try{
-                Thread.sleep((17*1000000-timer)/1000000);
+                long x = (17*slowDownTime*1000000-timer)/1000000;
+                if(x>0)
+                    Thread.sleep(x);
                 //System.out.println((17*1000000-timer)/1000000);
             }catch(InterruptedException e){
             }
@@ -139,6 +167,16 @@ public class Map extends Canvas
 
     public int addSpawn(Spawn spawn){
         spawns.add(spawn);
+        return 0;
+    }
+
+    public int addPlayer(Spawn spawn){
+        players.add(spawn);
+        return 0;
+    }
+
+    public int addPlayerFactory(PlayerFactory pf){
+        playerFactories.add(pf);
         return 0;
     }
 
@@ -192,7 +230,8 @@ public class Map extends Canvas
     {
         //setBackground(Color.BLACK);
         try{
-            for(Spawn a: spawns){
+            for(int it = 0; it<spawns.size(); it++){
+                Spawn a = spawns.get(it);
                 String sprite = a.getSprite();
                 BufferedImage i = null;
                 //System.out.println(sprite);

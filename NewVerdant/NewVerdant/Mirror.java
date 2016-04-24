@@ -55,6 +55,7 @@ public class Mirror extends Spawn
         m.addSpawn(mirrorPieces[0]);
         m.addSpawn(mirrorPieces[2]);
         m.addSpawn(mirrorPieces[3]);
+        //m.addSpawn(this);
         daddyMirror = true;
         collisionable = new UnCollisionable();
         stack[0] = new UnCollisionable();

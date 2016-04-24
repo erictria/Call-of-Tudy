@@ -9,5 +9,8 @@ public class Magic extends Projectile
 {
     public Magic( float x, float y, float w, float h ){
         super( x, y, w, h, "Images\\sharkfin.png" );
+        ProjectileCollisionable pj = new ProjectileCollisionable();
+        pj.setDamage(13);
+        collisionable = pj;
     }
 }

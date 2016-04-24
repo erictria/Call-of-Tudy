@@ -24,6 +24,7 @@ public abstract class Player extends Spawn
    	
     public int setMove(Movable m)
     {
+        invinciTime = 300;
     	movable = m;
     	return 0;
     }

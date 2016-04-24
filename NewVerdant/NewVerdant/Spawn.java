@@ -28,6 +28,7 @@
  */
 public abstract class Spawn
 {
+    protected int invinciTime = 0;
     // xPos = X-Coordinate. yPos = Y-Coordinate 
     protected float xPos, yPos, width, height, prevXPos, prevYPos;
     // xVel = X Velocity. yVel = yVelocity
@@ -89,6 +90,9 @@ public abstract class Spawn
         yPos = x[3];
         rotationDegrees = x[4];
         rotationSpeed = x[5];
+        if(invinciTime!=0){
+            invinciTime--;
+        }
         if(onGround==IS_ON_GROUND)
             onGround=IS_ON_GROUND-1;
         moveHook();
@@ -175,12 +179,19 @@ public abstract class Spawn
          */
         //float[] x = killable.kill(killFactor);
         //killHook(killFactor);
-        hP = killable.kill(killFactor,hP);
-        if(type==IS_PLAYER)
-            System.out.println(hP);
-        if(hP<0){
-            isAlive = false;
-            deathHook();
+        if(invinciTime==0){
+            float oldHp = hP;
+            hP = killable.kill(killFactor,hP);
+            if(!(Math.abs(oldHp-hP)<1)){
+                System.out.println(0);
+                invinciTime = 4;
+            }
+            if(type==IS_PLAYER)
+                System.out.println(hP);
+            if(hP<0){
+                isAlive = false;
+                deathHook();
+            }
         }
         return 0;
     }
@@ -260,6 +271,9 @@ public abstract class Spawn
 
     public String getSprite(){
         setSpriteHook();
+        if(invinciTime%4==1||invinciTime%4==2){
+            return "Images\\Box.jpg";
+        }
         return spriteName;
     }
 
@@ -315,6 +329,9 @@ public abstract class Spawn
         x[2]=width+"";
         x[3]=height+"";
         x[4]=spriteName;
+        if(invinciTime%4==1||invinciTime%4==2){
+            x[4] = "Images\\Box.jpg";
+        }
         x[5]=rotationDegrees+"";
         return x;
     }

@@ -1,6 +1,8 @@
 import java.awt.*;
 public class MrMagic extends Player
 {
+    private boolean firePlus = true;
+    private boolean transFormed = false;
     public MrMagic(String s, float x, float y, float w, float h)
     {
         //pro = new Projectile(0, 0, 0, 0, "");
@@ -17,9 +19,10 @@ public class MrMagic extends Player
         yPos = y;
         width = w;
         height = h;
-        moveSpeed[0] = 2.5f; jumpSpeed[1] = 25;
+        moveSpeed[0] = 1.5f; jumpSpeed[1] = 20;
         spriteName = s;
     }
+
     public MrMagic(float x, float y)
     {
         pro = new MagicFactory(null);
@@ -36,36 +39,47 @@ public class MrMagic extends Player
         yPos = y;
         width = 30;
         height = 60;
-        moveSpeed[0] = 2.5f; jumpSpeed[1] = 15;
+        moveSpeed[0] = 1.85f; jumpSpeed[1] = 7;
         spriteName = "Images\\MrMagic.png";
     }
-    
+
     @Override
     public int fire(double angle)
     {
-        if(hp <= (ogHp/2))
+        if(hP <= (100/2)&&firePlus&&!transFormed)
         {
-            pro.projectileVel *= 2;
-            pro.fireRate /= 2;
+            firePlus=false;
+            pro.projectileVel *= 1.5;
+            pro.fireRate /= 1.5;
+            moveSpeed[0] = 3f; jumpSpeed[1] = 5f;
         }
-        
-        pro.createProjectile(xPos, yPos);
-        pro.shoot(xPos+60, yPos);
+
+        //pro.createProjectile(xPos, yPos);
+        //if(prevXPos<=xPos)
+            pro.shoot(xPos+35, yPos);
+        //else
+            //pro.shoot(xPos-20, yPos, 0);
         return 0;
     }
-    
+
     public int draw(Graphics g)
     {
         return 0;
     }
-    
+
+    public int action4(){
+        if(!transFormed)
+            fire(0);
+        return 0;
+    }
+
     public int moveHook(){
         if(hP<21){
             ultimate();
         }
         return 0;
     }
-    
+
     public int ultimate()
     {
         setFall(new StandardFallable());
@@ -73,6 +87,7 @@ public class MrMagic extends Player
         spriteName = "Images\\MrShark.png";
         jumpSpeed[1] = 9;
         moveSpeed[0] = 4.25f;
+        transFormed = true;
         return 0;
     }
 

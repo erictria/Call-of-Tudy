@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
-public class TESTMapVHCM11 extends Map
+public class TESTMapVHCM12 extends Map
 {
     static Map map;
     static ReD te;
@@ -15,7 +15,7 @@ public class TESTMapVHCM11 extends Map
         x.setSize(1050,720);
         x.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         x.setVisible(true);
-        map = new TESTMapVHCM11();
+        map = new TESTMapVHCM12();
         x.add(map);
         x.addComponentListener(new Resizer(map));
         /*map.addSpawn(new SpawnExample(0,0,20,20));
@@ -37,7 +37,7 @@ public class TESTMapVHCM11 extends Map
         bk[2] = KeyEvent.VK_H;
         bk[3] = KeyEvent.VK_K;
         spC.changeKeys(bk);
-        PlayerFactory redPF = new ReDPlayerFactory(20,20,map,spC);
+        PlayerFactory redPF = new MrMagicPlayerFactory(20,20,map,spC);
         map.addPlayer(redPF.playerSpawn());
         map.addPlayerFactory(redPF);
         map.addKeyListener(spC);
