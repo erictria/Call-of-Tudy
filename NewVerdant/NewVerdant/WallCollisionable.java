@@ -36,6 +36,10 @@ public class WallCollisionable implements Collisionable
             float[] strike = {speed[0],speed[1],speed[2],speed[3],speed[4],speed[5],0};
             return strike;
         }
+        if(x.getType() == Spawn.IS_PROJECTILE)
+        {
+            x.kill(-1);
+        }
         return null;
     }
 }

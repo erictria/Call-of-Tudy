@@ -183,7 +183,7 @@ public abstract class Spawn
             float oldHp = hP;
             hP = killable.kill(killFactor,hP);
             if(!(Math.abs(oldHp-hP)<1)){
-                System.out.println(0);
+                //System.out.println(0);
                 invinciTime = 4;
             }
             if(type==IS_PLAYER)
