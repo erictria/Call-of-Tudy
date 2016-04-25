@@ -1,4 +1,4 @@
-//JUST A TEST. Expected output is a bunch of pinkRed boxes that are platforms that disappear after a while
+//JUST A TEST. Expected output is a player and an obstacle.
 import javax.swing.*;
 import java.util.*;
 import java.awt.*;
@@ -6,7 +6,13 @@ import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
-public class TESTMapMAD1 extends Map
+/**
+ * Write a description of class TESTMapERIC2 here.
+ * 
+ * @author Migs
+ * @version April 25, 2016
+ */
+public class TESTMapMAD2 extends Map
 {
     static Map map;
     public static void main(String args[]){
@@ -14,7 +20,7 @@ public class TESTMapMAD1 extends Map
         x.setSize(1050,720);
         x.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         x.setVisible(true);
-        map = new TESTMapMAD1();
+        map = new TESTMapMAD2();
         x.add(map);
         x.addComponentListener(new Resizer(map));
         /*map.addSpawn(new SpawnExample(0,0,20,20));
@@ -28,21 +34,22 @@ public class TESTMapMAD1 extends Map
         map.addSpawn(new DefaultPlatform(350,100,300,25));
         map.addSpawn(new DefaultPlatform(350,500,300,25));
         map.addSpawn(new DefaultWall(480,125,40,375));
-        map.setGravity(0.05f);
+        map.setGravity(0.25f);
         map.setTerVel(10);
-        //Player xx = new MrMagic("Images\\shark.png", 10, 10, 100, 100);
-        Player xx = new MrButch(100,100);
-        //Powerup powerup = new Hamburger("
-        map.addSpawn(xx);
-        
+        Player xx = new MrButch(100, 100);
+        Obstacle cc = new Cube("Images\\companion.png", 100, 600, 50, 50);
         PowerupFactory upFactory = new PowerupFactory();
-        Powerup testPowerup1 = upFactory.createPowerup("Hamburger", 200, 200, 100, 100);
-        Powerup testPowerup2 = upFactory.createPowerup("Hemlock", 350, 400, 100, 100);
+        Powerup testPowerup1 = upFactory.createPowerup("Hamburger", 450, 0, 100, 100);
+        //Powerup testPowerup2 = upFactory.createPowerup("Hemlock", 350, 400, 100, 100);
         Powerup testPowerup3 = upFactory.createPowerup("Ultimate", 600, 550, 100, 100); 
+        
         map.addSpawn(testPowerup1);
-        map.addSpawn(testPowerup2);
+        //map.addSpawn(testPowerup2);
         map.addSpawn(testPowerup3);
-        SpawnController sp = new StandardController(xx);
+        map.addSpawn(xx);
+        map.addSpawn(cc);
+        ProjectileFactory pf = new MeatballFactory(map);
+        SpawnController sp = new PlayerController(xx, pf);
         map.addKeyListener(sp);
         map.addSpawnController(sp);
         map.gameLoop();

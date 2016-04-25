@@ -10,7 +10,7 @@ public class Hemlock extends Powerup
 	public Player upgradePlayer(Player player)
 	{
 		player.hp = player.hp - damgAmt;
-		player.kill(1000);
+		player.kill(100);
 		return player;
 	}
 	
