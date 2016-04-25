@@ -3,6 +3,7 @@ public class MrMagic extends Player
 {
     private boolean firePlus = true;
     private boolean transFormed = false;
+    private boolean forward = true;
     public MrMagic(String s, float x, float y, float w, float h)
     {
         //pro = new Projectile(0, 0, 0, 0, "");
@@ -56,7 +57,14 @@ public class MrMagic extends Player
 
         //pro.createProjectile(xPos, yPos);
         //if(prevXPos<=xPos)
-            pro.shoot(xPos+35, yPos);
+        if(forward)
+        {
+            pro.shoot(xPos+35, yPos, forward);
+        }
+        else 
+        {
+            pro.shoot(xPos-45, yPos, forward);
+        }
         //else
             //pro.shoot(xPos-20, yPos, 0);
         return 0;
@@ -86,8 +94,18 @@ public class MrMagic extends Player
         setCollision(new UltimateSharkCollisionable(this));
         spriteName = "Images\\MrShark.png";
         jumpSpeed[1] = 9;
-        moveSpeed[0] = 4.25f;
+        moveSpeed[0] = 5f;
         transFormed = true;
+        return 0;
+    }
+    
+    public int dirFir (int something)
+    {
+        if(something%5 == 0) 
+        {
+            forward = false;
+        }
+        if(something%3 == 0) forward = true;
         return 0;
     }
 

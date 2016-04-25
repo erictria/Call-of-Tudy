@@ -17,7 +17,7 @@ public class MagicFactory extends ProjectileFactory
         currentMap = m;
     }
 
-    protected Projectile createProjectile( float x, float y){
+    protected Projectile createProjectile( float x, float y ){
         Projectile sample = new Magic( x, y, 40, 40 );
         return sample;
     }

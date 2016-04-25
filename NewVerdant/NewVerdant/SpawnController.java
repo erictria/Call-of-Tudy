@@ -47,6 +47,7 @@ public abstract class SpawnController implements KeyListener
     }
     
     public void keyReleased(KeyEvent e){
+        //System.out.println(e.getKeyCode());
         int i = 0;
         if(e.getKeyCode() == buttonKeys[i++])
             up = false;

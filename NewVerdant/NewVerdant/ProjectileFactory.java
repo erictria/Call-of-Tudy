@@ -79,6 +79,29 @@ public abstract class ProjectileFactory{
             return -1;
         }
     }
+    
+    /**
+    * method for shooting
+    *
+    * @param x - current x position
+    * @param y - current y position
+    *
+    * @return int - This returns 0 if successfully fired, -1 if not
+    */
+    protected int shoot( float x, float y, boolean bool ){
+        if( System.nanoTime() - timeElapsed >= fireRate*1000000 ){
+            timeElapsed = System.nanoTime();
+            Projectile bulletFired = createProjectile( x, y );
+            if(bool) bulletFired.setVelocity( projectileVel );
+            else bulletFired.setVelocity(-projectileVel); 
+            currentMap.addSpawn( bulletFired );
+            //System.out.println( "bang!" );
+            return 0;
+        }
+        else{
+            return -1;
+        }
+    }
 
     /**
     * method for setting new fire rate
