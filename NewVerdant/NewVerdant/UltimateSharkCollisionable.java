@@ -19,7 +19,7 @@ public class UltimateSharkCollisionable implements Collisionable
             pl.setYSpeed(0);
             x.setXSpeed(0);
             x.setYSpeed(0);*/
-            x.kill(-1);
+            x.kill(4);
         }
         else if(x.getType() == Spawn.IS_PROJECTILE||x.getType()==Spawn.IS_POWERUP)
         {

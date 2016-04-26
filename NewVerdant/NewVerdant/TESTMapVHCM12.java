@@ -46,7 +46,14 @@ public class TESTMapVHCM12 extends Map
         map.addSpawn(cc);
         SpawnController sp = new StandardPlayerController(null);
         bk = sp.getKeys();
-        bk[7] = KeyEvent.VK_NUMPAD1;
+        bk[7] = KeyEvent.VK_NUMPAD7;
+        bk[6] = KeyEvent.VK_NUMPAD9;
+        bk[5] = KeyEvent.VK_NUMPAD3;
+        bk[4] = KeyEvent.VK_NUMPAD1;
+        bk[8] = KeyEvent.VK_NUMPAD8;
+        bk[9] = KeyEvent.VK_NUMPAD4;
+        bk[10] = KeyEvent.VK_NUMPAD6;
+        bk[11] = KeyEvent.VK_NUMPAD5;
         sp.changeKeys(bk);
         PlayerFactory mrMagicPF = new MrMagicPlayerFactory(800,20,map,sp);
         map.addPlayer(mrMagicPF.playerSpawn());

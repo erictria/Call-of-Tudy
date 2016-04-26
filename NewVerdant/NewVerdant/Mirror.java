@@ -8,7 +8,7 @@
 public class Mirror extends Spawn
 {
     private boolean daddyMirror = false;
-    public static final float MIRROR_SPEED = 1.25f;
+    public static final float MIRROR_SPEED = .25f;
     public static final int ACTIVATE_LENGTH_FRAMES = 420;
     public static final int ACTIVATE_COOLDOWN = 840;
     public static final float MAX_RAD = 3.5f;
@@ -30,8 +30,8 @@ public class Mirror extends Spawn
         flyable = new UnFlyable();
         jumpable = new UnJumpable();
         jumpable = new UnJumpable();
-        setXSpeed(MIRROR_SPEED);
-        setYSpeed(MIRROR_SPEED);
+        setXSpeed(1);
+        setYSpeed(1);
         //System.out.println(r);
         double radians = Math.toRadians(r);
         //System.out.println((Math.cos(radians)*w*0.6)+" "+(Math.sin(radians)*w*0.6));
