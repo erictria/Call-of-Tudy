@@ -53,21 +53,32 @@ public class ReD extends Player
     }
 
     public int setSpriteHook(){
-        //pro.shoot(xPos+width, yPos);
+        /*if(pro!=null)
+            shoot();*/
+        return 0;
+    }
+    
+    public int fireHook(){
+        if(pro!=null)
+            shoot();
         return 0;
     }
     
     private void shoot(){
         float xCenter = xPos+width/2;
         float yCenter = yPos+height/2;
-        xCenter+=(Math.cos(Math.toRadians(direction))*(width+10))-10;
-        yCenter-=(Math.sin(Math.toRadians(direction))*(height+10))+10;
-        pro.shoot(xCenter,yCenter,direction);
+        //System.out.println(xCenter);
+        xCenter+=Spawn.clamp(width/2+10 + xVel,-width/2-10-xVel,(float)(Math.cos(Math.toRadians(direction))*(100)));
+        //System.out.println(xCenter);
+        yCenter-=Spawn.clamp(height/2+10 + 5,-height/2-10 - 5,(float)(Math.sin(Math.toRadians(direction))*(100)));
+        //System.out.println(xCenter);
+        //System.out.println(yCenter);
+        pro.shoot(xCenter-10,yCenter-10,direction);
     }
 
     public int moveHook(){
-        if(pro!=null)
-            shoot();
+        /*if(pro!=null)
+            shoot();*/
         return 0;
     }
 

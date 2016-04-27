@@ -1,7 +1,7 @@
 import java.awt.*;
 public class Hemlock extends Powerup
 {
-	int damgAmt = 100;
+	int damgAmt = 101;
 	public Hemlock(String s, float x, float y, float w, float h)
 	{
 		super(s, x, y, w, h);
@@ -10,7 +10,7 @@ public class Hemlock extends Powerup
 	public Player upgradePlayer(Player player)
 	{
 		player.hp = player.hp - damgAmt;
-		player.kill(100);
+		player.kill(damgAmt);
 		return player;
 	}
 	

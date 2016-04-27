@@ -8,6 +8,15 @@
 public class PlatformCollisionable implements Collisionable
 {
     public float[] collision(Spawn x, float[] location){
+        if(x.getType() == Spawn.IS_PROJECTILE||x.getType()==Spawn.IS_POWERUP)
+        {
+            x.kill(-1);
+        	/*pl.setXSpeed(0);
+            pl.setYSpeed(0);
+            x.setXSpeed(0);
+            x.setYSpeed(0);*/
+        	//pl.damage(x.getDamage()); // waiting for the actual getter method of the projectile.
+        }
         if(x.getType()==Spawn.IS_PLAYER||x.getType()==Spawn.IS_OBSTACLE){
             float[] prev = x.getPrevCor();
             float[] speed = x.getSpeed();

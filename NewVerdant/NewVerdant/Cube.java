@@ -6,7 +6,7 @@ public class Cube extends Obstacle
 	    setMove(new Immovable());
 		setFly(new UnFlyable());
 		setJump(new UnJumpable());
-		setFall(new UnFallable());
+		setFall(new StandardFallable());
 		setCollision(new ObstacleCollisionable(this));
 		setType(Spawn.IS_OBSTACLE);
 		//setKill(new StandardKillable());

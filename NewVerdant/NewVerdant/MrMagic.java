@@ -4,6 +4,7 @@ public class MrMagic extends Player
     private boolean firePlus = true;
     private boolean transFormed = false;
     private boolean forward = true;
+    private boolean fire = false;
     public MrMagic(String s, float x, float y, float w, float h)
     {
         //pro = new Projectile(0, 0, 0, 0, "");
@@ -47,14 +48,6 @@ public class MrMagic extends Player
     @Override
     public int fire(double angle)
     {
-        if(hP <= (100/2)&&firePlus&&!transFormed)
-        {
-            firePlus=false;
-            pro.projectileVel *= 1.5;
-            pro.fireRate /= 1.5;
-            moveSpeed[0] = 3f; jumpSpeed[1] = 5f;
-        }
-
         //pro.createProjectile(xPos, yPos);
         //if(prevXPos<=xPos)
         if(forward)
@@ -69,6 +62,13 @@ public class MrMagic extends Player
             //pro.shoot(xPos-20, yPos, 0);
         return 0;
     }
+    
+    public int fireHook(){
+        if(fire)
+            fire(0);
+        fire = false;
+        return 0;
+    }
 
     public int draw(Graphics g)
     {
@@ -77,11 +77,18 @@ public class MrMagic extends Player
 
     public int action4(){
         if(!transFormed)
-            fire(0);
+            fire = true;
         return 0;
     }
 
     public int moveHook(){
+        if(hP <= (100/2)&&firePlus&&!transFormed)
+        {
+            firePlus=false;
+            pro.projectileVel *= 1.5;
+            pro.fireRate /= 1.5;
+            moveSpeed[0] = 3f; jumpSpeed[1] = 5f;
+        }
         if(hP<21){
             ultimate();
         }

@@ -74,11 +74,18 @@ public class Map extends Canvas
         }
         return 0;
     }
+    
+    protected int fireSpawns(){
+        for(int i = 0; i!=spawns.size(); i++){
+            spawns.get(i).fireHook();
+        }
+        return 0;
+    }
 
     protected int collideSpawns(){
-        for(int i = 0; i!=spawns.size();i++){
+        for(int i = spawns.size()-1; i!=-1;i--){
             Spawn a = spawns.get(i);
-            for(int j = i+1; j!=spawns.size(); j++){
+            for(int j = i-1; j!=-1; j--){
                 Spawn b = spawns.get(j);
                 if(Spawn.checkCollisionWithSpawn(a.getLocation(),b.getLocation())==1){
                     b.collisionPassive(a.collisionActive(b));
@@ -125,6 +132,7 @@ public class Map extends Canvas
         jumpSpawns();
         flySpawns();
         moveSpawns();
+        fireSpawns();
         collideSpawns();
         removeSpawns();
         return 0;

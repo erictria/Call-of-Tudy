@@ -31,9 +31,15 @@ public class TESTMapMAD1 extends Map
         map.setGravity(0.05f);
         map.setTerVel(10);
         //Player xx = new MrMagic("Images\\shark.png", 10, 10, 100, 100);
-        Player xx = new MrButch(100,100);
+        MrButch xx = new MrButch(100,100);
         //Powerup powerup = new Hamburger("
         map.addSpawn(xx);
+        ProjectileFactory pf = new MeatballFactory(map);
+        ProjectileFactory[] pj = new ProjectileFactory[2];
+        pj[0] = new MeatballFactory(map);
+        pj[1] = new SuperMeatballFactory(map);
+        //te.setProjectileFactory(new MeatballFactory(map));
+        xx.setProjFacts(pj);
         
         PowerupFactory upFactory = new PowerupFactory();
         Powerup testPowerup1 = upFactory.createPowerup("Hamburger", 200, 200, 100, 100);

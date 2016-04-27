@@ -30,8 +30,8 @@ public class TESTMapVHCM14 extends Map
         map.addSpawn(new DefaultPlatform(350,100,300,10));
         map.addSpawn(new DefaultPlatform(350,500,300,10));
         map.addSpawn(new MovingPlatform(200,200,150,10));
-        map.addSpawn(new DefaultWall(495,109,10,100));
-        map.addSpawn(new DefaultWall(495,300,10,200));
+        map.addSpawn(new DefaultWall(495,69,10,140));
+        map.addSpawn(new DefaultWall(495,300,10,100));
         SpawnController spC = new StandardPlayerController(te);
         int[] bk = spC.getKeys();
         bk[0] = KeyEvent.VK_U;
@@ -44,8 +44,10 @@ public class TESTMapVHCM14 extends Map
         map.addPlayerFactory(redPF);
         map.addKeyListener(spC);
         map.addSpawnController(spC);
-        Obstacle cc = new Cube("Images\\companion.png", 100, 600, 50, 50);
+        Obstacle cc = new Cube("Images\\companion.png", 475, 450, 50, 50);
         map.addSpawn(cc);
+        Obstacle cD = new Cube("Images\\companion.png", 475, 400, 50, 50);
+        map.addSpawn(cD);
         SpawnController sp = new StandardPlayerController(null);
         bk = sp.getKeys();
         bk[7] = KeyEvent.VK_NUMPAD7;

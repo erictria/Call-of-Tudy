@@ -377,6 +377,11 @@ public abstract class Spawn
     public int specialtyHook(Player e){
         return 0;
     }
+    
+    //for firing, also for stuff in general after moving everything.
+    public int fireHook(){
+        return 0;
+    }
 
     //STATIC STUFF
 
@@ -414,6 +419,16 @@ public abstract class Spawn
     public static float clampZero(float max, float clamped){
         if(clamped<0){
             return 0;
+        }
+        if(clamped>max){
+            return max;
+        }
+        return clamped;
+    }
+    
+    public static float clamp(float max, float min, float clamped){
+        if(clamped<min){
+            return min;
         }
         if(clamped>max){
             return max;

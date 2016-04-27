@@ -32,6 +32,10 @@ public abstract class ProjectileFactory{
     *
     */
     protected abstract Projectile createProjectile( float x, float y );
+    
+    public Map getMap(){
+        return currentMap;
+    }
 
     /**
     * method for shooting

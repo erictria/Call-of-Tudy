@@ -36,7 +36,8 @@ public class TESTMapMAD2 extends Map
         map.addSpawn(new DefaultWall(480,125,40,375));
         map.setGravity(0.25f);
         map.setTerVel(10);
-        Player xx = new MrButch(100, 100);
+        MrButch xx = new MrButch(100, 100);
+        //xx.setProjFacts();
         Obstacle cc = new Cube("Images\\companion.png", 100, 600, 50, 50);
         PowerupFactory upFactory = new PowerupFactory();
         Powerup testPowerup1 = upFactory.createPowerup("Hamburger", 450, 0, 100, 100);
@@ -49,6 +50,11 @@ public class TESTMapMAD2 extends Map
         map.addSpawn(xx);
         map.addSpawn(cc);
         ProjectileFactory pf = new MeatballFactory(map);
+        ProjectileFactory[] pj = new ProjectileFactory[2];
+        pj[0] = new MeatballFactory(map);
+        pj[1] = new SuperMeatballFactory(map);
+        //te.setProjectileFactory(new MeatballFactory(map));
+        xx.setProjFacts(pj);
         SpawnController sp = new PlayerController(xx, pf);
         map.addKeyListener(sp);
         map.addSpawnController(sp);
