@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
-public class TESTMapVHCM14 extends Map
+public class TESTMapVHCM14 extends BattleMap
 {
     static Map map;
     static ReD te;
@@ -64,6 +64,14 @@ public class TESTMapVHCM14 extends Map
         map.addPlayerFactory(mrMagicPF);
         map.addKeyListener(sp);
         map.addSpawnController(sp);
+        PowerupFactory upFactory = new PowerupFactory();
+        Powerup testPowerup1 = upFactory.createPowerup("Hamburger", 450, 0, 100, 100);
+        Powerup testPowerup2 = upFactory.createPowerup("Hemlock", 350, 400, 100, 100);
+        Powerup testPowerup3 = upFactory.createPowerup("Ultimate", 600, 550, 100, 100); 
+        
+        map.addSpawn(testPowerup1);
+        map.addSpawn(testPowerup2);
+        map.addSpawn(testPowerup3);
         //Player xx = new MrMagic(900, 10);
         //Spawn xy = new TESTSpawnVHCMExample9(200, 100, 30, 60);
         //xx.ultimate();

@@ -6,7 +6,7 @@ import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
 import javax.imageio.*;
-public class TESTMapVHCM12 extends Map
+public class TESTMapVHCM12 extends BattleMap
 {
     static Map map;
     static ReD te;
