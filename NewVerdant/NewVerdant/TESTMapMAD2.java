@@ -53,9 +53,10 @@ public class TESTMapMAD2 extends Map
         ProjectileFactory[] pj = new ProjectileFactory[2];
         pj[0] = new MeatballFactory(map);
         pj[1] = new SuperMeatballFactory(map);
+        xx.setProjectileFactory(pj[0]);
         //te.setProjectileFactory(new MeatballFactory(map));
         xx.setProjFacts(pj);
-        SpawnController sp = new PlayerController(xx, pf);
+        SpawnController sp = new StandardPlayerController(xx);
         map.addKeyListener(sp);
         map.addSpawnController(sp);
         map.gameLoop();

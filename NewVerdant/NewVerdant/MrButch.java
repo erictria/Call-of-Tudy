@@ -12,6 +12,7 @@ public class MrButch extends Player
     private boolean forward = true;
     private ProjectileFactory projFacts[];
     private float degrees = 0;
+    private boolean fire = false;
    
     public MrButch(float x, float y)
     {
@@ -49,16 +50,6 @@ public class MrButch extends Player
     @Override
     public int fire(double angle)
     {
-        if(hP <= (100/2)&&firePlus&&!transFormed)
-        {
-            firePlus=false;
-            pro.projectileVel *= 1.5;
-            pro.fireRate /= 1.5;
-            moveSpeed[0] = 3f; jumpSpeed[1] = 5f;
-        }
-
-        //pro.createProjectile(xPos, yPos);
-        //if(prevXPos<=xPos)
         if(transFormed){
             degrees-=14;
             degrees%=360;
@@ -84,7 +75,7 @@ public class MrButch extends Player
 
     public int action4(){
         if(!transFormed)
-            fire(0);
+            fire = true;
         return 0;
     }
 
@@ -115,7 +106,10 @@ public class MrButch extends Player
     
     public int fireHook(){
         if(transFormed)
+            fire = true;
+        if(fire)
             fire(0);
+        fire = false;
         return 0;
     }
     

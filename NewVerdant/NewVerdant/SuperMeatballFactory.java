@@ -17,8 +17,12 @@ public class SuperMeatballFactory extends ProjectileFactory
         currentMap = m;
     }
 
+    protected int shoot( float x, float y ){
+        return 0;
+    }
+
     protected Projectile createProjectile( float x, float y ){
-        Projectile sample = new SuperMeatball( x, y, 40, 40 );
+        Projectile sample = new SuperMeatball( x, y, 25, 25 );
         return sample;
     }
 
