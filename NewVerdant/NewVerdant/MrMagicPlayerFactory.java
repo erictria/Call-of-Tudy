@@ -10,6 +10,7 @@ public class MrMagicPlayerFactory extends PlayerFactory
     public MrMagicPlayerFactory(float x, float y, Map m, SpawnController sp){
         super(x,y,m,sp);
     }
+
     public Player addPlayer(){
         float x = xPos, y = yPos;
         MrMagic te = new MrMagic(x,y);
@@ -25,7 +26,8 @@ public class MrMagicPlayerFactory extends PlayerFactory
         mirrors[3].setNumber(3);
         te.setMirrors(mirrors);*/
         map.addSpawn(te);
-        sp.setSpawn(te);
+        if(sp!=null)
+            sp.setSpawn(te);
         //SpawnController spC = new StandardPlayerController(te);
         return te;
     }

@@ -51,6 +51,8 @@ public abstract class Spawn
     protected float hP = 100;
     //spriteName
     protected String spriteName = "Images\\Box.jpg";
+
+    protected boolean hasSpriteHooked = false;
     //
     protected ProjectileFactory pF = null;
     //possibly needed in the future, though currently not bein
@@ -270,7 +272,11 @@ public abstract class Spawn
     }
 
     public String getSprite(){
+        //if(!hasSpriteHooked){
+        hasSpriteHooked = true;
         setSpriteHook();
+        //hasSpriteHooked = true;
+        //}
         if(invinciTime%4==1||invinciTime%4==2){
             return "Images\\Box.jpg";
         }
@@ -323,6 +329,8 @@ public abstract class Spawn
      * I use this for drawing the map. Feel free to use this function if you feel that it will serve you somehow.
      */
     public String[] getLocationPlusSprite(){
+        if(!hasSpriteHooked)
+        setSpriteHook();
         String[] x = new String[6];
         x[0]=xPos+"";
         x[1]=yPos+"";
@@ -377,7 +385,7 @@ public abstract class Spawn
     public int specialtyHook(Player e){
         return 0;
     }
-    
+
     //for firing, also for stuff in general after moving everything.
     public int fireHook(){
         return 0;
@@ -425,7 +433,7 @@ public abstract class Spawn
         }
         return clamped;
     }
-    
+
     public static float clamp(float max, float min, float clamped){
         if(clamped<min){
             return min;

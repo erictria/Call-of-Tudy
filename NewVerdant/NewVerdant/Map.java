@@ -28,7 +28,7 @@ import java.awt.geom.*;
 public class Map extends Canvas
 {
     protected ArrayList<Spawn> spawns = new ArrayList<Spawn>();
-    protected ArrayList<Spawn> players = new ArrayList<Spawn>();
+    protected ArrayList<Player> players = new ArrayList<Player>();
     protected ArrayList<SpawnController> spawnControllers = new ArrayList<SpawnController>();
     ArrayList<PlayerFactory> playerFactories = new ArrayList<PlayerFactory>();
     //will be used later Ask Me if curious. -Haron
@@ -36,8 +36,8 @@ public class Map extends Canvas
     protected float terminalVelocity = 0, gravity = 0;
     protected int slowDownTime = 1;
     public float flyFactor = 0,jumpFactor = 0;
-    private ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
-    private ArrayList<String> imageNames = new ArrayList<String>();
+    protected ArrayList<BufferedImage> images = new ArrayList<BufferedImage>();
+    protected ArrayList<String> imageNames = new ArrayList<String>();
     private static Map map;
 
     protected int moveSpawns(){
@@ -74,7 +74,7 @@ public class Map extends Canvas
         }
         return 0;
     }
-    
+
     protected int fireSpawns(){
         for(int i = 0; i!=spawns.size(); i++){
             spawns.get(i).fireHook();
@@ -178,7 +178,7 @@ public class Map extends Canvas
         return 0;
     }
 
-    public int addPlayer(Spawn spawn){
+    public int addPlayer(Player spawn){
         players.add(spawn);
         return 0;
     }
@@ -301,10 +301,32 @@ public class Map extends Canvas
         for(int i = 0; i!=spawns.size(); i++){
             returnValue[i] = spawns.get(i).getLocationPlusSprite();
         }
-        for(int i = 0; i!=players.size(); i++){
-            returnValue[i+spawns.size()] = players.get(i).getLocationPlusSprite();
-        }
+        /*for(int i = 0; i!=players.size(); i++){
+        returnValue[i+spawns.size()] = players.get(i).getLocationPlusSprite();
+        }*/
         return returnValue;
+    }
+
+    public int receiveControls(int i, int[] controlsReceived){
+        int j = 0;
+        if(controlsReceived[j++]==1)
+            players.get(i).jump(1);
+        if(controlsReceived[j++]==1)
+            players.get(i).jump(-1);
+        if(controlsReceived[j++]==1)
+            players.get(i).move(1);
+        if(controlsReceived[j++]==1)
+            players.get(i).move(-1);
+        if(controlsReceived[j++]==1)
+            players.get(i).action1();
+        if(controlsReceived[j++]==1)
+            players.get(i).action2();
+        if(controlsReceived[j++]==1)
+            players.get(i).action3();
+        if(controlsReceived[j++]==1)
+            players.get(i).action4();
+        players.get(i).dirFir(controlsReceived[j]);
+        return 0;
     }
 
     public static double normalize(float x, float y, double radians, boolean isX){
