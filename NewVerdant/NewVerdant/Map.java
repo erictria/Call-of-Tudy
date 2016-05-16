@@ -226,7 +226,7 @@ public class Map extends Canvas
     public int setCage(){
         addSpawn(new DefaultPlatform(0,-50,1000,50));
         addSpawn(new Boundary(-1000,-150,2050,50));
-        addSpawn(new Boundary(-1000,950,2050,50));
+        addSpawn(new Boundary(-1000,950,2050,2000));
         addSpawn(new Boundary(-500,-100,100,1000));
         addSpawn(new Boundary(1500,-100,100,1000));
         addSpawn(new DefaultWall(-50,0,50,700));
