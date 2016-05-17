@@ -67,7 +67,7 @@ public abstract class Obstacle extends Spawn
     	return 0;
     }
     
-    public int getHP()
+    public float getHP()
     {
     	return hp;
     }

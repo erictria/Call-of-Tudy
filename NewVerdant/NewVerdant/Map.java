@@ -31,6 +31,7 @@ public class Map extends Canvas
     protected ArrayList<Player> players = new ArrayList<Player>();
     protected ArrayList<SpawnController> spawnControllers = new ArrayList<SpawnController>();
     ArrayList<PlayerFactory> playerFactories = new ArrayList<PlayerFactory>();
+    protected ArrayList<PlayerHUD> playerHUDs = new ArrayList<PlayerHUD>();
     //will be used later Ask Me if curious. -Haron
     protected float widthFactor = 1, heightFactor = 1;
     protected float terminalVelocity = 0, gravity = 0;
@@ -98,12 +99,20 @@ public class Map extends Canvas
 
     protected int removeSpawns(){
         for(int i = 0; i<players.size();i++){
-            Spawn a = players.get(i);
+            Player a = players.get(i);
             if(a.isDead()){
-                if(playerFactories.get(i).getLives()>=0){
-                    players.set(i,spawn(i));
+                int temp = -1;
+                for(int iv = 0; iv!= playerFactories.size(); iv++){
+                    if(playerFactories.get(iv).getNumber()==a.getNumber()){
+                        temp = iv;
+                        break;
+                    }
+                }
+                if(playerFactories.get(temp).getLives()>=0){
+                    players.set(i,spawn(temp));
                     //System.out.println(players.size());
                 }else{
+                    //players.set(i,spawn(i));
                     players.remove(i);
                     //System.out.println("hi");
                     if(players.size()<2){
@@ -188,6 +197,11 @@ public class Map extends Canvas
         return 0;
     }
 
+    public int addPlayerHUD(PlayerHUD ph){
+        playerHUDs.add(ph);
+        return 0;
+    }
+
     public int addSpawnController(SpawnController spawn){
         spawnControllers.add(spawn);
         return 0;
@@ -240,40 +254,41 @@ public class Map extends Canvas
         try{
             for(int it = 0; it<spawns.size(); it++){
                 Spawn a = spawns.get(it);
-                String sprite = a.getSprite();
+                drawSpawn(a,g);
+                /*String sprite = a.getSprite();
                 BufferedImage i = null;
                 //System.out.println(sprite);
                 for(int counter = 0; counter!=imageNames.size(); counter++){
-                    if(imageNames.get(counter).equals(sprite)){
-                        //System.out.println(imageNames.get(counter));
-                        i = images.get(counter);
-                    }
+                if(imageNames.get(counter).equals(sprite)){
+                //System.out.println(imageNames.get(counter));
+                i = images.get(counter);
+                }
                 }
                 if(i==null){
-                    //System.out.println(sprite);
-                    try{
-                        i = ImageIO.read(new File(sprite));
-                        //System.out.println(sprite);
-                        images.add(i);
-                        imageNames.add(sprite);
-                    }catch(IOException e){
-                        try{
-                            String replaced = sprite.replaceAll( "\\\\","/" );
-                            i = ImageIO.read(new File(replaced));
-                            //System.out.println(replaced);
-                            images.add(i);
-                            imageNames.add(sprite);
-                        }catch(IOException e2){
-                            System.out.println("Failed to find " + sprite+".");
-                        }
-                    }
+                //System.out.println(sprite);
+                try{
+                i = ImageIO.read(new File(sprite));
+                //System.out.println(sprite);
+                images.add(i);
+                imageNames.add(sprite);
+                }catch(IOException e){
+                try{
+                String replaced = sprite.replaceAll( "\\\\","/" );
+                i = ImageIO.read(new File(replaced));
+                //System.out.println(replaced);
+                images.add(i);
+                imageNames.add(sprite);
+                }catch(IOException e2){
+                System.out.println("Failed to find " + sprite+".");
+                }
+                }
                 }
 
                 float[] temp = a.getLocation();
                 float widther = temp[2]*widthFactor/i.getWidth();
                 float heighter = (temp[3]*heightFactor)/i.getHeight();
                 AffineTransform matrix = AffineTransform.getTranslateInstance((int)(temp[0]*widthFactor),
-                        (int)(temp[1]*heightFactor));
+                (int)(temp[1]*heightFactor));
                 matrix.scale(widther,heighter);
                 matrix.rotate(Math.toRadians(temp[5]),i.getWidth()/2,i.getHeight()/2);
 
@@ -292,8 +307,46 @@ public class Map extends Canvas
                 /*g.drawImage(i,(int)(temp[0]*widthFactor),(int)(temp[1]*heightFactor),(int)(
                 temp[2]*widthFactor),(int)(temp[3]*heightFactor),null);*/          
             }
+            drawHUDs(g);
         }catch(ConcurrentModificationException e){System.out.println("concurrentModification");}
         return 0;
+    }
+
+    public void drawSpawn(Spawn a, Graphics g){
+        String sprite = a.getSprite();
+        BufferedImage i = null;
+        for(int counter = 0; counter!=imageNames.size(); counter++){
+            if(imageNames.get(counter).equals(sprite)){
+                i = images.get(counter);
+            }
+        }
+        if(i==null){
+            try{
+                i = ImageIO.read(new File(sprite));
+                images.add(i);
+                imageNames.add(sprite);
+            }catch(IOException e){
+                try{
+                    String replaced = sprite.replaceAll( "\\\\","/" );
+                    i = ImageIO.read(new File(replaced));
+                    images.add(i);
+                    imageNames.add(sprite);
+                }catch(IOException e2){
+                    System.out.println("Failed to find " + sprite+".");
+                }
+            }
+        }
+
+        float[] temp = a.getLocation();
+        float widther = temp[2]*widthFactor/i.getWidth();
+        float heighter = (temp[3]*heightFactor)/i.getHeight();
+        AffineTransform matrix = AffineTransform.getTranslateInstance((int)(temp[0]*widthFactor),
+                (int)(temp[1]*heightFactor));
+        matrix.scale(widther,heighter);
+        matrix.rotate(Math.toRadians(temp[5]),i.getWidth()/2,i.getHeight()/2);
+
+        Graphics2D gg = (Graphics2D) g;
+        gg.drawImage(i,matrix,null);
     }
 
     public String[][] giveMap(){
@@ -334,6 +387,31 @@ public class Map extends Canvas
             radians-=Math.toRadians(90);
         }
         return Math.sqrt(Math.abs(x*x*Math.cos(radians))+Math.abs(y*y*Math.sin(radians)));
+    }
+
+    public void drawHUDs(Graphics g){
+        //System.out.println("WE ARE HERE!!!");
+        for(int i = 0; i!=playerHUDs.size(); i++){
+            for(int iv = 0; iv!=players.size(); iv++){
+                playerHUDs.get(i).setHP(0);
+                if(playerHUDs.get(i).getNumber()==players.get(iv).getNumber()){
+                    playerHUDs.get(i).setHP(players.get(iv).getHP());
+                    break;
+                }
+            }
+            for(int iv = 0; iv!=playerFactories.size(); iv++){
+                if(playerHUDs.get(i).getNumber()==playerFactories.get(iv).getNumber()){
+                    playerHUDs.get(i).setLives(playerFactories.get(iv).getLives());
+                    break;
+                }
+            }
+            Spawn[] temp = playerHUDs.get(i).myNodes();
+            for(int j = 0; j!= temp.length; j++){
+                float[] iv = temp[j].getLocation();
+                //System.out.println(iv[0]+" "+iv[1]+" "+iv[2]+" "+iv[3]);
+                drawSpawn(temp[j],g);
+            }
+        }
     }
 
     public void setSizeRatio(float x, float y){

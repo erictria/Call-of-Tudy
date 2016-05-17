@@ -10,11 +10,16 @@ public class MrMagicPlayerFactory extends PlayerFactory
     public MrMagicPlayerFactory(float x, float y, Map m, SpawnController sp){
         super(x,y,m,sp);
     }
+    
+    public MrMagicPlayerFactory(float x, float y, int l, int t, Map m, SpawnController sp){
+        super(x,y,l,t,m,sp);
+    }
 
     public Player addPlayer(){
         float x = xPos, y = yPos;
         MrMagic te = new MrMagic(x,y);
         te.setProjectileFactory(new MagicFactory(map));
+        te.setNumber(playerNumber);
         /*Mirror[] mirrors = new Mirror[4];
         mirrors[0] = new Mirror(x+55,y+20,15,15,0,te,map);
         mirrors[0].setNumber(0);

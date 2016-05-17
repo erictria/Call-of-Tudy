@@ -17,6 +17,7 @@ public abstract class Player extends Spawn
 {
     protected int hp;
     protected int ogHp;
+    protected int playerNumber;
     //protected boolean isAlive; //If this variable already exists in the Spawn, just remove.
     protected ProjectileFactory pro; //The Projectile will be set in the constructor of the concrete players.
     protected String bottomSprite, topSprite;
@@ -33,6 +34,14 @@ public abstract class Player extends Spawn
     {
     	flyable = f;
     	return 0;
+    }
+    
+    public void setNumber(int x){
+        playerNumber = x;
+    }
+    
+    public int getNumber(){
+        return playerNumber;
     }
     
     public int setJump(Jumpable j)
@@ -80,7 +89,7 @@ public abstract class Player extends Spawn
     	return 0;
     }
     
-    public int getHP()
+    /*public float getHP()
     {
     	return hp;
     }

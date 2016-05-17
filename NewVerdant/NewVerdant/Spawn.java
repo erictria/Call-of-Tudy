@@ -188,8 +188,8 @@ public abstract class Spawn
                 //System.out.println(0);
                 invinciTime = 4;
             }
-            if(type==IS_PLAYER)
-                System.out.println(hP);
+            /*if(type==IS_PLAYER)
+                System.out.println(hP);*/
             if(hP<0){
                 isAlive = false;
                 deathHook();
@@ -258,6 +258,10 @@ public abstract class Spawn
         x[6] = xVel;
         x[7] = yVel;
         return x;
+    }
+    
+    public void setWidth(double x){
+        width = (float)x;
     }
 
     //returns type
@@ -432,6 +436,10 @@ public abstract class Spawn
             return max;
         }
         return clamped;
+    }
+    
+    public float getHP(){
+        return hP;
     }
 
     public static float clamp(float max, float min, float clamped){
