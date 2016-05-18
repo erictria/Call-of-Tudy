@@ -94,7 +94,7 @@ public class Chase extends Player{
     }
 
     public int action3(){
-        ultimate();
+        //ultimate();
         return 0;
     }
 

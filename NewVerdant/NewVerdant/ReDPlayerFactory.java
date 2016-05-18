@@ -33,6 +33,7 @@ public class ReDPlayerFactory extends PlayerFactory
         map.addSpawn(te);
         if(sp!=null)
             sp.setSpawn(te);
+        //te.ultimate();
         //SpawnController spC = new StandardPlayerController(te);
         return te;
     }

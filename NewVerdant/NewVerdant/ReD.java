@@ -89,6 +89,8 @@ public class ReD extends Player
 
     public int ultimate()
     {
+        for(Mirror e: mirrors)
+            e.ult();
         return 0;
     }
 

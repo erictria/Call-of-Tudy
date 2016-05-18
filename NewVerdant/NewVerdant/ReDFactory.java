@@ -16,6 +16,7 @@ public class ReDFactory extends ProjectileFactory
     
     protected Projectile createProjectile( float x, float y){
         Projectile sample = new ReDBullet( x, y);
+        //sample.ultimate();
         return sample;
     }
 }

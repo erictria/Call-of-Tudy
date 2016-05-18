@@ -133,6 +133,7 @@ public class Map extends Canvas
 
     private int finish(){
         slowDownTime = 3;
+        //drawText(10);
         return 0;
     }
 
@@ -211,6 +212,7 @@ public class Map extends Canvas
     {
         Image buffer = createImage((int)(1000*widthFactor),(int)(700*heightFactor));
         Graphics gg = buffer.getGraphics();
+        //g.setFont(new Font("System",Font.BOLD,200));
         prePaint(gg);
         g.drawImage(buffer, 0 , 0, this);
     }
@@ -308,6 +310,12 @@ public class Map extends Canvas
                 temp[2]*widthFactor),(int)(temp[3]*heightFactor),null);*/          
             }
             drawHUDs(g);
+            if(slowDownTime>2.5){
+                g.setColor(Color.WHITE);
+                g.setFont(new Font("System",Font.BOLD,200));
+                g.drawString("GAME",200,200);
+                g.drawString("OVER",200,400);
+            }
         }catch(ConcurrentModificationException e){System.out.println("concurrentModification");}
         return 0;
     }

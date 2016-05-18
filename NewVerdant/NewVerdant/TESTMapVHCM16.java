@@ -31,12 +31,12 @@ public class TESTMapVHCM16 extends BattleMap
         map.addSpawn(new DefaultWall(495,69,10,140));
         map.addSpawn(new DefaultWall(495,300,10,100));
         SpawnController spC = new StandardPlayerController(null);
-        PlayerFactory redPF = new ChasePlayerFactory(20,20,3,1,map,spC);
+        PlayerFactory redPF = new MrMagicPlayerFactory(20,20,3,1,map,spC);
         map.addPlayer(redPF.playerSpawn());
         map.addPlayerFactory(redPF);
         map.addKeyListener(spC);
         map.addSpawnController(spC);
-        map.addPlayerHUD(new PlayerHUD(3,1,100,"Images\\Chase.png"));
+        map.addPlayerHUD(new PlayerHUD(3,1,100,"Images\\MrMagic.png"));
         Obstacle cc = new Cube("Images\\companion.png", 475, 450, 50, 50);
         map.addSpawn(cc);
         Obstacle cD = new Cube("Images\\companion.png", 475, 400, 50, 50);

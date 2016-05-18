@@ -120,6 +120,16 @@ public class Mirror extends Spawn
         //spriteName = "Images\\TestPinkishBox.jpg";
         return 0;
     }
+    
+    public void ult(){
+        activate();
+        active=-50000000;
+        if(daddyMirror){
+            for(Mirror e: mirrorPieces){
+                e.ult();
+            }
+        }
+    }
 
     public int setNumber(int number){
         if(daddyMirror){

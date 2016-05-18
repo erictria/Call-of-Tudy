@@ -89,7 +89,7 @@ public class MrButch extends Player
     public void setProjFacts(ProjectileFactory[] pj){
         projFacts[0] = pj[0];
         projFacts[1] = pj[1];
-        System.out.println("Got You!!!");
+        //System.out.println("Got You!!!");
     }
 
     public int ultimate()
