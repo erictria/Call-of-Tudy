@@ -35,7 +35,7 @@ public class OnlineGameSetup extends GameSetup
                                         public void run(){
                                             try{
                                                 PrintWriter pw = new PrintWriter(a.getOutputStream());
-                                                final Scanner sc = new Scanner(a.getInputStream()).useDelimiter("\\\\\\");
+                                                final Scanner sc = new Scanner(a.getInputStream()).useDelimiter("\\\\{3}");
                                                 new Thread(grover, new Runnable(){
                                                         public void run(){
                                                             while(!hasStarted){
@@ -81,7 +81,7 @@ public class OnlineGameSetup extends GameSetup
                                                     int livesChosen = Integer.parseInt( livesTextField.getText());
                                                     pw.write(livesChosen+"\\\\"+mapChosen+"\\\\"
                                                         +player1Type+"\\\\"+player2Type+"\\\\"
-                                                        +"\\\\"+player3Type+"\\\\"+player4Type+"\\\\\\");
+                                                        +player3Type+"\\\\"+player4Type+"\\\\\\");
                                                     pw.flush();
                                                     //System.out.println("Got em");
                                                 }
