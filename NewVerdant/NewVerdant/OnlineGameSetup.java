@@ -56,16 +56,20 @@ public class OnlineGameSetup extends GameSetup
                                                                 }
                                                             }
                                                             while(true){
-                                                                String tempo = sc.next();
-                                                                String[] tempor = tempo.split("\\\\"); 
-                                                                if(tempor.length<4){
-                                                                    continue;
-                                                                }
-                                                                int[] xer = new int[9];
-                                                                for(int ij = 0; ij!=9; ij++){
-                                                                    xer[ij] = Integer.parseInt(tempor[ij]);
-                                                                }
-                                                                at.map.addControls(playNum-1,xer);
+                                                                try{
+                                                                    String tempo = sc.next();
+                                                                    String[] tempor = tempo.split("\\\\"); 
+                                                                    if(tempor.length<4){
+                                                                        continue;
+                                                                    }
+                                                                    int[] xer = new int[9];
+                                                                    for(int ij = 0; ij!=9; ij++){
+                                                                        try{
+                                                                            xer[ij] = Integer.parseInt(tempor[ij]);
+                                                                        }catch(NumberFormatException e){}
+                                                                    }
+                                                                    at.map.addControls(playNum-1,xer);
+                                                                }catch(NoSuchElementException e){}
                                                             }
                                                         }
                                                     }).start();
@@ -78,28 +82,41 @@ public class OnlineGameSetup extends GameSetup
                                                     String player3Type = (String) player3ComboBox.getSelectedItem();
                                                     String player4Type = (String) player4ComboBox.getSelectedItem();
                                                     String mapChosen = (String) mapsComboBox.getSelectedItem();
-                                                    int livesChosen = Integer.parseInt( livesTextField.getText());
+                                                    int livesChosen;
+                                                    if(livesTextField.getText().equals("")){livesChosen = 0;}
+                                                    else livesChosen = Integer.parseInt( livesTextField.getText());
                                                     pw.write(livesChosen+"\\\\"+mapChosen+"\\\\"
                                                         +player1Type+"\\\\"+player2Type+"\\\\"
                                                         +player3Type+"\\\\"+player4Type+"\\\\\\");
                                                     pw.flush();
+                                                    try{
+                                                        Thread.sleep(60);
+                                                    }catch(InterruptedException e){}
                                                     //System.out.println("Got em");
                                                 }
                                                 pw.write("GO!"+"\\\\\\");
-                                                while(GameStarter.runMe){
-                                                    String[][] temp = at.map.giveMap();
-                                                    for(int i = 0; i!= temp.length; i++){
-                                                        for(int j = 0; j!= temp.length; j++){
-                                                            pw.write(temp[i][j]);
-                                                            if(i==0&&j==0){
-                                                                pw.write("\\\\");
+                                                pw.flush();
+                                                try{
+                                                    Thread.sleep(60);
+                                                }catch(InterruptedException e){}
+                                                while(true){
+                                                    try{
+                                                        String[][] temp = at.map.giveMap();
+                                                        for(int i = 0; i!= temp.length; i++){
+                                                            for(int j = 0; j!= temp[0].length; j++){
+                                                                pw.write(temp[i][j]+"\\\\");
+                                                                System.out.print(temp[i][j]+"\\\\");
                                                             }
                                                         }
-                                                    }
-                                                    pw.write("\\");
-                                                    pw.flush();
+                                                        pw.write("\\");
+                                                        System.out.println("\\");
+                                                        pw.flush();
+                                                        try{
+                                                            Thread.sleep(30);
+                                                        }catch(InterruptedException e){}
+                                                    }catch(NullPointerException e){}
                                                 }
-                                                pw.close();
+                                                //pw.close();
                                             }catch(IOException e){
                                             }
                                         }

@@ -359,7 +359,7 @@ public class Map extends Canvas
 
     public String[][] giveMap(){
         String[][] returnValue = new String[spawns.size()+players.size()][6];
-        for(int i = 0; i!=spawns.size(); i++){
+        for(int i = 0; i<spawns.size(); i++){
             returnValue[i] = spawns.get(i).getLocationPlusSprite();
         }
         /*for(int i = 0; i!=players.size(); i++){
