@@ -23,12 +23,18 @@ public class MrSharkAnimated extends AnimatedPlayer{
         spriteSetRight[1] = new String[]{ "Images\\MrShark\\Player\\Right\\MrSharkJumping-1.png" };
         spriteSetRight[2] = new String[]{ "Images\\MrShark\\Player\\Right\\MrSharkWalking-1.png",
                                           "Images\\MrShark\\Player\\Right\\MrSharkWalking-2.png"};
+        spriteSetRight[3] = new String[]{ "Images\\MrShark\\Player\\Right\\MrSharkWalking-1.png",
+                                          "Images\\MrShark\\Player\\Right\\MrSharkWalking-2.png"};
+
 
         spriteSetLeft = new String[5][3];
         spriteSetLeft[0] = new String[]{ "Images\\MrShark\\Player\\Left\\MrSharkBase.png" };
         spriteSetLeft[1] = new String[]{ "Images\\MrShark\\Player\\Left\\MrSharkJumping-1.png" };
         spriteSetLeft[2] = new String[]{ "Images\\MrShark\\Player\\Left\\MrSharkWalking-1.png",
                                          "Images\\MrShark\\Player\\Left\\MrSharkWalking-2.png"};
+        spriteSetLeft[2] = new String[]{ "Images\\MrShark\\Player\\Left\\MrSharkWalking-1.png",
+                                         "Images\\MrShark\\Player\\Left\\MrSharkWalking-2.png"};
+
 
         delay = 70;
     }

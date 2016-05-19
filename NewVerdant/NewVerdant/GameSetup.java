@@ -13,20 +13,21 @@ import java.awt.event.*;
  */
 public class GameSetup extends javax.swing.JFrame {
     public JFrame GS = this;
-    private JComboBox playerAmount;
-    public String[] noOfPlayers = {"2","3","4"};
-    public String[] playerList = {"AI","Mr Magic", "Mr Butch", "ReD", "Chase"};
-    public String[] playerList2 = {"Mr Magic", "Mr Butch", "ReD", "Chase"};
-    public String[] mapList = {"Classic", "Spicy", "Sky Dive", "Factory"};
-    public String[] gameType = {"Deathmatch"};
+    protected JComboBox playerAmount;
+    protected String[] noOfPlayers = {"2","3","4"};
+    protected String[] playerList = {"AI","Mr Magic", "Mr Butch", "ReD", "Chase"};
+    protected String[] playerList2 = {"Mr Magic", "Mr Butch", "ReD", "Chase"};
+    protected String[] mapList = {"Classic", "Spicy", "Sky Dive", "Factory"};
+    protected String[] gameType = {"Deathmatch"};
+    protected GameStarter at;
     //public String[] gameType = {"Deathmatch", "Team Deathmatch", "Tag"};
     //public String[] 
-    public String imagePath = "Images\\";
-    String ip = "";
-    String port = ""; 
-    String name = "";
-    JFrame frame = this;
-    boolean isLocal = false;
+    protected String imagePath = "Images\\";
+    protected String ip = "";
+    protected String port = ""; 
+    protected String name = "";
+    protected JFrame frame = this;
+    protected boolean isLocal = false;
     public GameSetup(String ip, String port, String name) {
         this.ip = ip;
         this.port = port;
@@ -49,7 +50,7 @@ public class GameSetup extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
-        addWindowListener(new OpenMain());
+        addWindowListener(new OpenMain(this));
         livesLabel = new javax.swing.JLabel();
         livesTextField = new javax.swing.JTextField();
         portLabel = new javax.swing.JLabel();
@@ -163,8 +164,9 @@ public class GameSetup extends javax.swing.JFrame {
                     playersChosen = new String[]{player1Type, player2Type, player3Type, player4Type};
                 }
                 
+                OnlineGameSetup.hasStarted = true;
                 //String gameType = (String) 
-                GameStarter a = new GameStarter(mapChosen,livesChosen, players,
+                at = new GameStarter(mapChosen,livesChosen, players,
                               playersChosen, isLocal);
              }
           });
@@ -466,31 +468,31 @@ public class GameSetup extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton confirmButton;
-    private javax.swing.JButton gameStartButton;
-    private javax.swing.JComboBox mapsComboBox;
-    private javax.swing.JComboBox gameTypeComboBox;
-    private javax.swing.JComboBox player1ComboBox;
-    private javax.swing.JComboBox player2ComboBox;
-    private javax.swing.JComboBox player3ComboBox;
-    private javax.swing.JComboBox player4ComboBox;
-    private javax.swing.JLabel livesLabel;
-    private javax.swing.JLabel player4ActualImage;
-    private javax.swing.JLabel livesLabel1;
-    private javax.swing.JLabel livesLabel2;
-    private javax.swing.JLabel player1Image;
-    private javax.swing.JLabel player2Image;
-    private javax.swing.JLabel player3Image;
-    private javax.swing.JLabel player4Image;
-    private javax.swing.JLabel mapsLabel;
-    private javax.swing.JLabel portLabel;
-    private javax.swing.JLabel playersLabel;
-    private javax.swing.JLabel gameTypeLabel;
-    private javax.swing.JLabel ipLabel;
-    private javax.swing.JLabel player1ActualImage;
-    private javax.swing.JLabel player2ActualImage;
-    private javax.swing.JLabel player3ActualImage;
-    private javax.swing.JTextField livesTextField;
+    protected javax.swing.JButton confirmButton;
+    protected javax.swing.JButton gameStartButton;
+    protected javax.swing.JComboBox mapsComboBox;
+    protected javax.swing.JComboBox gameTypeComboBox;
+    protected javax.swing.JComboBox player1ComboBox;
+    protected javax.swing.JComboBox player2ComboBox;
+    protected javax.swing.JComboBox player3ComboBox;
+    protected javax.swing.JComboBox player4ComboBox;
+    protected javax.swing.JLabel livesLabel;
+    protected javax.swing.JLabel player4ActualImage;
+    protected javax.swing.JLabel livesLabel1;
+    protected javax.swing.JLabel livesLabel2;
+    protected javax.swing.JLabel player1Image;
+    protected javax.swing.JLabel player2Image;
+    protected javax.swing.JLabel player3Image;
+    protected javax.swing.JLabel player4Image;
+    protected javax.swing.JLabel mapsLabel;
+    protected javax.swing.JLabel portLabel;
+    protected javax.swing.JLabel playersLabel;
+    protected javax.swing.JLabel gameTypeLabel;
+    protected javax.swing.JLabel ipLabel;
+    protected javax.swing.JLabel player1ActualImage;
+    protected javax.swing.JLabel player2ActualImage;
+    protected javax.swing.JLabel player3ActualImage;
+    protected javax.swing.JTextField livesTextField;
     //private javax.swing.JTextField playerAmount;
     // End of variables declaration               
 

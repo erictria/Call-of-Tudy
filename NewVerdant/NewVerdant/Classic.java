@@ -21,8 +21,8 @@ public class Classic extends BattleGameFactory
         x.setVisible(true);
         BattleGameFactory map = new Classic();
         x.add(map);
-        map.createMap(3,new boolean[]{true,false,false,false},
-            new String[]{"ReD","Chase","Mr Butch","Mr Magic"}, true);
+        map.createMap(3,new boolean[]{true,true,true,true},
+            new String[]{"ReD","Chase","Mr Butch","Mr Magic"}, false);
         //x.add(map);
         x.addComponentListener(new Resizer(map));
         Rectangle newSize = x.getBounds();

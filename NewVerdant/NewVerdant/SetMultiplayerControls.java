@@ -181,7 +181,7 @@ public class SetMultiplayerControls extends JFrame
             p.add(jb[j]);
         }
 
-        addWindowListener(new OpenMain());
+        addWindowListener(new OpenMain(x));
         x.setSize(1050,720);
         x.setLayout(new BorderLayout());
         //x.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

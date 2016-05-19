@@ -3,8 +3,9 @@ import javax.swing.*;
 import java.awt.event.*;
 public class GameStarter extends JFrame
 {
-    private BattleGameFactory map;
+    public BattleGameFactory map;
     static ThreadGroup hello = new ThreadGroup("Hello");
+    static boolean runMe = true;
     public static void main(String[] args){
         GameStarter a = new GameStarter("Factory",3,new boolean[]{true,false,false,false},
                 new String[]{"ReD","Chase","Mr Butch","Mr Magic"}, true);
@@ -15,7 +16,7 @@ public class GameStarter extends JFrame
         setSize(1050,720);
         //addKeyListener(new OpenMain());
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        addWindowListener(new OpenMain());
+        addWindowListener(new OpenMain(this));
         setVisible(true);
         map = null;
         if(mapName.equals("Classic"))
@@ -41,6 +42,28 @@ public class GameStarter extends JFrame
     }
 
     public void loop(){
-        map.gameLoop();
+        long timeElapsed = System.nanoTime();
+        //System.out.println(timeElapsed);
+        setBackground(Color.MAGENTA);
+        while(runMe){
+            /*if(Thread.currentThread().interrupted()){
+                break;
+            }*/
+            timeElapsed = System.nanoTime();
+            map.gameHook();
+            map.iterateSpawnControllers();
+            map.iterateSpawns();
+            map.repaint();
+            long timer = System.nanoTime() - timeElapsed;
+            //System.out.println(timer);
+            try{
+                long x = (17*map.slowDownTime*1000000-timer)/1000000;
+                if(x>0)
+                    Thread.sleep(x);
+                //System.out.println((17*1000000-timer)/1000000);
+            }catch(InterruptedException e){
+            }
+        }
+        runMe = true;
     }
 }

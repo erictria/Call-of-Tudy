@@ -331,28 +331,30 @@ public class Map extends Canvas
                 i = ImageIO.read(new File(sprite));
                 images.add(i);
                 imageNames.add(sprite);
-            }catch(IOException e){
+            }catch(IOException|NullPointerException e){
                 try{
                     String replaced = sprite.replaceAll( "\\\\","/" );
                     i = ImageIO.read(new File(replaced));
                     images.add(i);
                     imageNames.add(sprite);
-                }catch(IOException e2){
+                }catch(IOException|NullPointerException e2){
                     System.out.println("Failed to find " + sprite+".");
                 }
             }
         }
+        try{
+            float[] temp = a.getLocation();
+            float widther = temp[2]*widthFactor/i.getWidth();
+            float heighter = (temp[3]*heightFactor)/i.getHeight();
+            AffineTransform matrix = AffineTransform.getTranslateInstance((int)(temp[0]*widthFactor),
+                    (int)(temp[1]*heightFactor));
+            matrix.scale(widther,heighter);
+            matrix.rotate(Math.toRadians(temp[5]),i.getWidth()/2,i.getHeight()/2);
 
-        float[] temp = a.getLocation();
-        float widther = temp[2]*widthFactor/i.getWidth();
-        float heighter = (temp[3]*heightFactor)/i.getHeight();
-        AffineTransform matrix = AffineTransform.getTranslateInstance((int)(temp[0]*widthFactor),
-                (int)(temp[1]*heightFactor));
-        matrix.scale(widther,heighter);
-        matrix.rotate(Math.toRadians(temp[5]),i.getWidth()/2,i.getHeight()/2);
-
-        Graphics2D gg = (Graphics2D) g;
-        gg.drawImage(i,matrix,null);
+            Graphics2D gg = (Graphics2D) g;
+            gg.drawImage(i,matrix,null);
+        }catch(NullPointerException e){
+        }
     }
 
     public String[][] giveMap(){

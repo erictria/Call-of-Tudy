@@ -28,19 +28,19 @@ public class AnimatedPlayer extends AnimatedSpawn{
         String[] currentFrameSet;
 
         if( p.getShooting() ){
-            System.out.println( "Shooting" );
+            //System.out.println( "Shooting" );
             currentFrameSet = currentSet[3];
         }
         else if( p.isOnGround() != Spawn.IS_ON_GROUND ){
-            System.out.println( "Jumping/Falling" );
+            //System.out.println( "Jumping/Falling" );
             currentFrameSet = currentSet[1];
         }
         else if( p.getWalking() ){
-            System.out.println( "Walking" );
+            //System.out.println( "Walking" );
             currentFrameSet = currentSet[2];
         }
         else{
-            System.out.println( "Idle" );
+            //System.out.println( "Idle" );
             currentFrameSet = currentSet[0];
         }
 
