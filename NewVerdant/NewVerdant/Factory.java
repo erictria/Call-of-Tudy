@@ -24,7 +24,7 @@ public class Factory extends BattleGameFactory
         BattleGameFactory map = new Factory();
         x.add(map);
         map.createMap(3,new boolean[]{true,false,false,false},
-            new String[]{"Mr Magic","Mr Magic","Chase","Chase"}, true);
+            new String[]{"Mr Magic","ReD","Mr Butch","Chase"}, true);
         //x.add(map);
         x.addComponentListener(new Resizer(map));
         Rectangle newSize = x.getBounds();

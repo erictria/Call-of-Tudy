@@ -15,8 +15,8 @@ public class GameSetup extends javax.swing.JFrame {
     public JFrame GS = this;
     private JComboBox playerAmount;
     public String[] noOfPlayers = {"2","3","4"};
-    public String[] playerList = {"Mr Magic", "Mr Butch", "ReD", "Chase", "Torchwick", "AI"};
-    public String[] playerList2 = {"Mr Magic", "Mr Butch", "ReD", "Chase", "Torchwick"};
+    public String[] playerList = {"AI","Mr Magic", "Mr Butch", "ReD", "Chase"};
+    public String[] playerList2 = {"Mr Magic", "Mr Butch", "ReD", "Chase"};
     public String[] mapList = {"Classic", "Spicy", "Sky Dive", "Factory"};
     public String[] gameType = {"Deathmatch"};
     //public String[] gameType = {"Deathmatch", "Team Deathmatch", "Tag"};
@@ -121,6 +121,35 @@ public class GameSetup extends javax.swing.JFrame {
                 String player3Type = (String) player3ComboBox.getSelectedItem();
                 String player4Type = (String) player4ComboBox.getSelectedItem();
                 
+                if ( player1Type.equals("AI"))
+                {
+                    players[0] = false;
+                    int randomPlayer = (int)(Math.random()*playerList2.length);
+                    String random = (playerList2[randomPlayer]);
+                    player1Type = random;
+                }
+                if (player2Type.equals("AI"))
+                {
+                    players[1] = false;
+                    int randomPlayer = (int)(Math.random()*playerList2.length);
+                    String random = (playerList2[randomPlayer]);
+                    player2Type = random;
+                }
+                if ( player3Type.equals("AI"))
+                {
+                    players[2] = false;
+                    int randomPlayer = (int)(Math.random()*playerList2.length);
+                    String random = (playerList2[randomPlayer]);
+                    player3Type = random;
+                }
+                if ( player4Type.equals("AI"))
+                {
+                    players[3] = false;
+                    int randomPlayer = (int)(Math.random()*playerList2.length);
+                    String random = (playerList2[randomPlayer]);
+                    player4Type = random;
+                }
+                
                 if (numberOfPlayers == 2)
                 {
                     playersChosen = new String[]{player1Type, player2Type};
@@ -132,35 +161,6 @@ public class GameSetup extends javax.swing.JFrame {
                 else if (numberOfPlayers == 4)
                 {
                     playersChosen = new String[]{player1Type, player2Type, player3Type, player4Type};
-                }
-                
-                if ( player1Type.equals("AI"))
-                {
-                    players[0] = false;
-                    int randomPlayer = new Random().nextInt(playerList2.length);
-                    String random = (playerList2[randomPlayer]);
-                    player1Type = random;
-                }
-                if (player2Type.equals("AI"))
-                {
-                    players[1] = false;
-                    int randomPlayer = new Random().nextInt(playerList2.length);
-                    String random = (playerList2[randomPlayer]);
-                    player2Type = random;
-                }
-                if ( player3Type.equals("AI"))
-                {
-                    players[2] = false;
-                    int randomPlayer = new Random().nextInt(playerList2.length);
-                    String random = (playerList2[randomPlayer]);
-                    player3Type = random;
-                }
-                if ( player4Type.equals("AI"))
-                {
-                    players[3] = false;
-                    int randomPlayer = new Random().nextInt(playerList2.length);
-                    String random = (playerList2[randomPlayer]);
-                    player4Type = random;
                 }
                 
                 //String gameType = (String) 

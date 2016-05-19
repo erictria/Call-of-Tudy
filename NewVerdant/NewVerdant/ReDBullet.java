@@ -1,8 +1,8 @@
 
 /**
  * ReDBullet
- * 
- * @author Vincent Haron C. Mamutuk 
+ *
+ * @author Vincent Haron C. Mamutuk
  * @version 1.0 April 24, 2016
  */
 public class ReDBullet extends Projectile
@@ -12,6 +12,7 @@ public class ReDBullet extends Projectile
         ProjectileCollisionable pj = new ProjectileCollisionable();
         pj.setDamage(9);
         collisionable = pj;
+        ap = new RedAnimatedProjectile( this );
         /*collisionable = new UnCollisionable();
         setType(Spawn.IS_PLATFORM);*/
     }

@@ -1,7 +1,7 @@
 
 /**
  * ReD!!! Starting right now.
- * 
+ *
  * @author Vincent Haron C. Mamutuk
  * @version 1.0 April 20, 2016
  */
@@ -24,7 +24,9 @@ public class ReD extends Player
         setType(Spawn.IS_PLAYER);
         moveSpeed[0] = 2.00f;
         jumpSpeed[1] = 12;
-        spriteName = "Images\\TestRed.png";
+        spriteName = "Images\\ReD\\Player\\Right\\ReDBase.png";
+
+        ap = new RedAnimated( this );
     }
 
     public int action1(){
@@ -53,17 +55,18 @@ public class ReD extends Player
     }
 
     public int setSpriteHook(){
+        super.setSpriteHook();
         /*if(pro!=null)
-            shoot();*/
+        shoot();*/
         return 0;
     }
-    
+
     public int fireHook(){
         if(pro!=null)
             shoot();
         return 0;
     }
-    
+
     private void shoot(){
         float xCenter = xPos+width/2;
         float yCenter = yPos+height/2;
@@ -74,11 +77,13 @@ public class ReD extends Player
         //System.out.println(xCenter);
         //System.out.println(yCenter);
         pro.shoot(xCenter-10,yCenter-10,direction);
+        shootReverseHook();
     }
 
     public int moveHook(){
+        super.moveHook();
         /*if(pro!=null)
-            shoot();*/
+        shoot();*/
         return 0;
     }
 
@@ -118,25 +123,25 @@ public class ReD extends Player
             float idealDirection = 0;
             int divideBy = 0;
             if(directionFactor%2==0){
-                idealDirection += 90;
-                divideBy++;
+            idealDirection += 90;
+            divideBy++;
             }
             if(directionFactor%3==0){
-                idealDirection += 0;
-                divideBy++;
+            idealDirection += 0;
+            divideBy++;
             }
             if(directionFactor%5==0){
-                idealDirection += 180;
-                divideBy++;
+            idealDirection += 180;
+            divideBy++;
             }
             if(directionFactor%7==0){
-                idealDirection += 270;
-                divideBy++;
+            idealDirection += 270;
+            divideBy++;
             }
             idealDirection/=divideBy;
             if(direction>180){
-                if(idealDirection<10)
-                    idealDirection = 360;
+            if(idealDirection<10)
+            idealDirection = 360;
             }
             directionTemp1 = direction+changeDir;
             directionTemp2 = direction-changeDir;
@@ -144,10 +149,10 @@ public class ReD extends Player
             directionTemp2%=360;
             direction%=360;
             if(Math.abs(direction-idealDirection)>Math.abs(directionTemp1-idealDirection)){
-                direction = directionTemp1;
+            direction = directionTemp1;
             }
             if(Math.abs(direction-idealDirection)>Math.abs(directionTemp2-idealDirection)){
-                direction = directionTemp2;
+            direction = directionTemp2;
             }
             System.out.println(direction);
             return 0;*/

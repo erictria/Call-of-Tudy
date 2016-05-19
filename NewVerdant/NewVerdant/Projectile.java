@@ -84,6 +84,7 @@ public class Projectile extends Spawn{
 	*/
 	@Override
     public int setSpriteHook(){
+        if(ap!=null)
         spriteName = ap.animate();
         return 0;
     }
