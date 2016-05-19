@@ -1,8 +1,8 @@
 
 /**
  * Write a description of class Magic here.
- * 
- * @author Eric Tria 
+ *
+ * @author Eric Tria
  * @version 1.0 Apr 22, 2016
  */
 public class Magic extends Projectile
@@ -12,5 +12,6 @@ public class Magic extends Projectile
         ProjectileCollisionable pj = new ProjectileCollisionable();
         pj.setDamage(13);
         collisionable = pj;
+        ap = new MrMagicAnimatedProjectile( this );
     }
 }

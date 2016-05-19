@@ -1,8 +1,8 @@
 
 /**
  * Write a description of class MagicFactory here.
- * 
- * @author Eric Tria 
+ *
+ * @author Eric Tria
  * @version 1.0 Apr 22, 2016
  */
 public class MagicFactory extends ProjectileFactory

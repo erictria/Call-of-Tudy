@@ -1,25 +1,20 @@
 /**
 *   ChaseProjectile
 *
-*   @author Chris Angelo Isidro
-*   @version 1.0 April 26, 2016
+*   @author     Chris Angelo Isidro
+*   @version    1.2 May 18, 2016
+*   Changelog
+*   CAI 1.2 - Transfered overriding to projectile instead
+*   CAI 1.1 - Added animations by overriding setSpriteHook()
 */
 public class ChaseProjectile extends Projectile{
-
-    ChaseAnimatedProjectile cap;
 
     public ChaseProjectile( float x, float y ){
         super( x, y, 15, 15, "Images\\Circle.png" );
         ProjectileCollisionable pj = new ProjectileCollisionable();
         pj.setDamage( 7 );
         collisionable = pj;
-        cap = new ChaseAnimatedProjectile(  );
-    }
-
-    @Override
-    public int setSpriteHook(){
-        spriteName = cap.animate();
-        return 0;
+        ap = new ChaseAnimatedProjectile( this );
     }
 
 }

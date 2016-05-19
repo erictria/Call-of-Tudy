@@ -23,6 +23,8 @@ public class MrMagic extends Player
         height = h;
         moveSpeed[0] = 1.5f; jumpSpeed[1] = 20;
         spriteName = s;
+
+        ap = new MrMagicAnimated( this );
     }
 
     public MrMagic(float x, float y)
@@ -43,6 +45,8 @@ public class MrMagic extends Player
         height = 60;
         moveSpeed[0] = 1.85f; jumpSpeed[1] = 7;
         spriteName = "Images\\MrMagic.png";
+
+        ap = new MrMagicAnimated( this );
     }
 
     @Override
@@ -52,17 +56,18 @@ public class MrMagic extends Player
         //if(prevXPos<=xPos)
         if(forward)
         {
-            pro.shoot(xPos+35, yPos, forward);
+            pro.shoot(xPos+35, yPos+10, forward);
         }
-        else 
+        else
         {
-            pro.shoot(xPos-45, yPos, forward);
+            pro.shoot(xPos-45, yPos+10, forward);
         }
         //else
             //pro.shoot(xPos-20, yPos, 0);
+        shootReverseHook();
         return 0;
     }
-    
+
     public int fireHook(){
         if(fire)
             fire(0);
@@ -92,6 +97,7 @@ public class MrMagic extends Player
         if(hP<21){
             ultimate();
         }
+        super.moveHook();
         return 0;
     }
 
@@ -105,10 +111,10 @@ public class MrMagic extends Player
         transFormed = true;
         return 0;
     }
-    
+
     public int dirFir (int something)
     {
-        if(something%5 == 0) 
+        if(something%5 == 0)
         {
             forward = false;
         }

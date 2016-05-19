@@ -2,40 +2,27 @@
 *   Implementation of Chase animated projectile
 *
 *   @author     Chris Angelo Isidro
-*   @version    1.0 May 13, 2016
+*   @version    1.1 May 18, 2016
+*   Changelog
+*   CAI 1.1     - Moved animate() function to AnimatedProjectile instead
 */
 public class ChaseAnimatedProjectile extends AnimatedProjectile{
 
-    long delay;
-    long startTime;
+    public ChaseAnimatedProjectile( Projectile p ){
+        super( p );
+        
+        spriteSetRight = new String[1][4];
+        spriteSetRight[0] = new String[]{ "Images\\Chase\\Projectile\\Right\\ChaseProjectile-1.png",
+                                          "Images\\Chase\\Projectile\\Right\\ChaseProjectile-2.png",
+                                          "Images\\Chase\\Projectile\\Right\\ChaseProjectile-3.png",
+                                          "Images\\Chase\\Projectile\\Right\\ChaseProjectile-4.png"};
 
-    int currentFrame;
-
-    boolean playedOnce;
-
-    public ChaseAnimatedProjectile( ){
-        spriteSet = new String[1][4];
-        spriteSet[0] = new String[]{ "Images\\ChaseProjectile-1.png",
-                                     "Images\\ChaseProjectile-2.png",
-                                     "Images\\ChaseProjectile-3.png",
-                                     "Images\\ChaseProjectile-4.png"};
+        spriteSetLeft = new String[1][4];
+        spriteSetLeft[0] = new String[]{ "Images\\Chase\\Projectile\\Left\\ChaseProjectile-1.png",
+                                         "Images\\Chase\\Projectile\\Left\\ChaseProjectile-2.png",
+                                         "Images\\Chase\\Projectile\\Left\\ChaseProjectile-3.png",
+                                         "Images\\Chase\\Projectile\\Left\\ChaseProjectile-4.png"};
         delay = 50;
-        startTime = System.nanoTime();
-        currentFrame = 0;
-        playedOnce = false;
     }
-    public String animate(){
-        long elapsed = (System.nanoTime()-startTime)/1000000;
 
-        if(elapsed > delay){
-            currentFrame++;
-            startTime = System.nanoTime();
-        }
-        if(currentFrame == spriteSet[0].length){
-            currentFrame = 0;
-            playedOnce = true;
-        }
-
-        return spriteSet[0][currentFrame];
-    }
 }

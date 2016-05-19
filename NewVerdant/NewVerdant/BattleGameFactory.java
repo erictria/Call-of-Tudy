@@ -5,6 +5,8 @@
  * @author Vincent Haron C. Mamutuk
  * @version 1.0 May 18, 2016
  */
+import java.io.*;
+import java.util.*;
 public abstract class BattleGameFactory extends BattleMap
 {
     protected float[] spawnX = new float[4], spawnY = new float[4];
@@ -18,7 +20,9 @@ public abstract class BattleGameFactory extends BattleMap
         spawnY[2] = f;
         spawnY[3] = h;
     }
+
     public abstract void setup();
+
     public void createMap(int numLives, boolean[] isPlayer, String[] playerNames, boolean isLocal){
         setCage();
         setup();
@@ -27,6 +31,20 @@ public abstract class BattleGameFactory extends BattleMap
             SpawnController sp = new AIController(null);
             if(isPlayer[i]){
                 sp = new StandardPlayerController(null);
+                String controlName = "Controller " + (i+1);
+                int[] buttonKeys = new int[12];
+                try{
+                    FileReader fr = new FileReader(controlName);
+                    Scanner sc = new Scanner(fr);
+                    String namer = sc.nextLine();
+                    String[] split = namer.split("\\s");
+                    //System.out.println(split.length);
+                    for(String x:split)
+                    //System.out.println(x);
+                        for(int iv = 0; iv!=buttonKeys.length; iv++)
+                            buttonKeys[iv] = Integer.parseInt(split[iv]);
+                    sp.changeKeys(buttonKeys);
+                }catch(IOException ioe){}
                 addKeyListener(sp);
             }
             if(playerNames[i].equals("ReD")){

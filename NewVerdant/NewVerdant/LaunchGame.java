@@ -18,10 +18,10 @@ public class LaunchGame extends JFrame
     JPanel subpanel;
     JMenuBar mb;
     JMenuItem help;
-	String ip,girl,boy;
-	//Map map,map1;
-	Clip clip;
-	LaunchGame lg;
+    String ip,girl,boy;
+    //Map map,map1;
+    Clip clip;
+    LaunchGame lg;
     public LaunchGame()
     {
         lg = this;
@@ -51,7 +51,7 @@ public class LaunchGame extends JFrame
                 String name = JOptionPane.showInputDialog(lg, "What is your name?");
                 //System.out.println("Port: " + port + "\nName: " + name);
                 JFrame next = new GameSetup("localhost", port, name);
-				lg.setVisible(false);
+                lg.setVisible(false);
             }
             
             
@@ -66,8 +66,8 @@ public class LaunchGame extends JFrame
                 String name = JOptionPane.showInputDialog(lg, "What is your name?");
                 //System.out.println("Port: " + port + "\nIP Address: " + IP + "\nName: " + name);
                 JFrame next = new GameSetup(IP, port, name);
-				lg.setVisible(false);
-				
+                lg.setVisible(false);
+                
             }
     
         });
@@ -76,12 +76,20 @@ public class LaunchGame extends JFrame
         {
             public void actionPerformed(ActionEvent ae)
             {
-                JFrame next = new GameSetup("localhost", "0", "NeVi");
-				lg.setVisible(false);
+                JFrame next = new GameSetup("Nevi");
+                lg.setVisible(false);
             }
     
         });
         four = new JButton("Set Controls");
+        four.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                JFrame setControls = new SetMultiplayerControls();
+            }
+    
+        });
         five = new JButton("Quit Game");
         canvasBackground cb = new canvasBackground();
         panel.add("Center", cb);
@@ -114,24 +122,24 @@ public class LaunchGame extends JFrame
     public static void main(String[] args) throws Exception
     {
         JFrame f = new LaunchGame();
-		
+        
     }
     
     class button implements ActionListener
+{
+        public void actionPerformed(ActionEvent a)
+        {
+           
+        }
+    
+    }
+    class quit implements ActionListener
     {
         public void actionPerformed(ActionEvent a)
         {
-
-		}
-    
-	}
-	class quit implements ActionListener
-	{
-		public void actionPerformed(ActionEvent a)
-		{
-			lg.dispose();
-		}
-	}
+            lg.dispose();
+        }
+    }
 }
 class canvasBackground extends Canvas
 {

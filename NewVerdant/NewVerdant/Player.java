@@ -8,10 +8,12 @@ import java.awt.*;
  * The projectile will also be set in the constructors of the concrete players.
  * In the constructors, speed should be set to 0.
  * Checks hp
- * 
+ *
  * @author Eric Tria
- * @version 1.3 April 20, 2016
- * VHCM 1.3 Added action1 - 4 dir
+ * @version 1.4 May 19, 2016
+ * CAI  1.4     Added AnimatedPlayer attribute
+ *              Added stuff for animations
+ * VHCM 1.3     Added action1 - 4 dir
  */
 public abstract class Player extends Spawn
 {
@@ -22,52 +24,62 @@ public abstract class Player extends Spawn
     protected ProjectileFactory pro; //The Projectile will be set in the constructor of the concrete players.
     protected String bottomSprite, topSprite;
     protected float topHalf;
-   	
+    protected AnimatedPlayer ap;
+
+    //Some things for direction
+    int dir = 0;
+    public final static int LEFT = 0;
+    public final static int RIGHT = 1;
+
+    //Some things for animations
+    boolean walking = false;
+    boolean shooting = false;
+
     public int setMove(Movable m)
     {
         invinciTime = 300;
     	movable = m;
     	return 0;
     }
-    
+
     public int setFly(Flyable f)
     {
     	flyable = f;
     	return 0;
     }
-    
+
     public void setNumber(int x){
         playerNumber = x;
     }
-    
+
     public int getNumber(){
         return playerNumber;
     }
-    
+
     public int setJump(Jumpable j)
     {
     	jumpable = j;
     	return 0;
     }
-    
+
     public int setFall(Fallable f)
     {
     	fallable = f;
     	return 0;
     }
-    
+
     public int setKill(Killable k)
     {
     	killable = k;
     	return 0;
     }
-    
+
     public int setCollision(Collisionable c)
     {
     	collisionable = c;
     	return 0;
     }
-    
+
     /*
     * When a Projectile collides with a Player, this method is called.
     *
@@ -78,7 +90,7 @@ public abstract class Player extends Spawn
     	if(hp <= 0) isAlive = true;
     	return 0;
     }
-    
+
     /*
     * Possible to use this when a Player picks up a Powerup.
     *
@@ -88,12 +100,12 @@ public abstract class Player extends Spawn
     	hp += x;
     	return 0;
     }
-    
+
     /*public float getHP()
     {
     	return hp;
     }
-    
+
     /*
     * If this already exists in the Spawn just remove.
     *
@@ -102,17 +114,17 @@ public abstract class Player extends Spawn
     {
     	return isAlive;
     }
-    
+
     public int fire(double angle)
     {
     	//pro.shoot(xPos, yPos, angle); // Assuming that there is a Projectile.shoot() function.
     								// Will replace with the actual method of Projectile once the Projectile code is posted.
     	return 0;
     }
-    
+
     /*@Override
-    
-    * When a Player collides with an Obstacle, Wall, or fellow Player it stops momentarily. Move factor is 0. 
+
+    * When a Player collides with an Obstacle, Wall, or fellow Player it stops momentarily. Move factor is 0.
     *
     *
     public float collision(Spawn other, float[] location)
@@ -128,7 +140,7 @@ public abstract class Player extends Spawn
     	}
     	else if (other instanceof Obstacle)
     	{
-    		move(0); 
+    		move(0);
     	}
     	else if (other instanceof Player)
     	{
@@ -142,19 +154,19 @@ public abstract class Player extends Spawn
     		move(0);
     	}
     }*/
-    
+
     /*
     * Should be implemented by the concrete players.
     * Different for every player.
     *
     */
     public abstract int ultimate();
-    
+
     public int setProjectileFactory(ProjectileFactory p){
         pro = p;
         return 0;
     }
-    
+
     public int action1(){
         return 0;
     }
@@ -168,6 +180,55 @@ public abstract class Player extends Spawn
         return 0;
     }
     public int dirFir(int directionFactor){
+        return 0;
+    }
+
+    //Methods added for animations below
+    public int getDir(){
+        return dir;
+    }
+
+    public boolean getWalking(){
+        return walking;
+    }
+
+    public int shootReverseHook(){
+        shooting = true;
+        return 0;
+    }
+
+    public boolean getShooting(){
+        return shooting;
+    }
+
+    @Override
+    public int setSpriteHook(){
+        spriteName = ap.animate();
+        return 0;
+    }
+
+    @Override
+    public int moveHook(){
+        if( this.getLocation()[0] > this.getPrevCor()[0] ){
+            dir = RIGHT;
+            walking = true;
+        }
+        else if( this.getLocation()[0] < this.getPrevCor()[0] ){
+            dir = LEFT;
+            walking = true;
+        }
+        if( shooting ){
+            if( ap.played() ){
+                shooting = false;
+                ap.resetPlay();
+            }
+        }
+        if( walking ){
+            if( ap.played() ){
+                ap.resetPlay();
+                walking = false;
+            }
+        }
         return 0;
     }
 }

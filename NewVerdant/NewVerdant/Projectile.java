@@ -2,9 +2,10 @@
  * Projectile
  *
  * @author Chris Angelo Isidro
- * @version 1.2 April 21, 2016
+ * @version 1.3 May 19, 2016
  *
  * Changelog
+ * CAI v1.3 - Added AnimatedProjectile attribute
  * CAI v1.2 - changed StandardFallable to UnFallable
  * CAI v1.1	- Added setVelocity
  *
@@ -13,6 +14,7 @@
 public class Projectile extends Spawn{
 
 	private String spriteHere;
+	protected AnimatedProjectile ap;
 
 	/**
 	* constructor for Projectile
@@ -28,7 +30,7 @@ public class Projectile extends Spawn{
 		width = w;
 		height = h;
 		setType( Spawn.IS_PROJECTILE );
-		
+
 		collisionable = new ProjectileCollisionable();
 		movable = new StandardMovable();
 		fallable = new UnFallable();
@@ -80,9 +82,10 @@ public class Projectile extends Spawn{
 	*
 	* @return int - 0 if successful
 	*/
-	public int setSpriteHook(){
-		spriteName = spriteHere;
+	@Override
+    public int setSpriteHook(){
+        spriteName = ap.animate();
         return 0;
-	}
+    }
 
 }

@@ -2,9 +2,10 @@
 *   The Chase is on
 *
 *   @author     Chris Angelo Isidro
-*   @version    1.1 April 29, 2016
+*   @version    1.2 May 19, 2016
 *
 *   Changelog
+*   CAI 1.2 - Added animation attribute
 *   CAI 1.1 - Combined blink cooldown for left and right blink
 *           - Changed blink cooldown from 2s to 2.5s
 *           - Changed blink cooldown on ultimate from 0.5s to 0.75s
@@ -32,12 +33,9 @@ public class Chase extends Player{
         setType( Spawn.IS_PLAYER );
         moveSpeed[0] = 4.0f;
         jumpSpeed[1] = 0;
-        spriteName = "Images\\Chase.png";
+        spriteName = "Images\\Chase\\Player\\Right\\ChaseBase.png";
 
-    }
-
-    public int setSpriteHook(){
-        return 0;
+        ap = new ChaseAnimated( this );
     }
 
     public int dirFir( int directionFactor ){
@@ -69,6 +67,7 @@ public class Chase extends Player{
         xCenter+=(Math.cos(Math.toRadians(direction))*(width+10))-10;
         yCenter-=(Math.sin(Math.toRadians(direction))*(height+10))+10;
         pro.shoot(xCenter,yCenter,direction);
+        shootReverseHook();
     }
 
     public int action1(){

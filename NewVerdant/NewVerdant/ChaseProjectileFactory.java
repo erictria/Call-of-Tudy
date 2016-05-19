@@ -1,8 +1,10 @@
 /**
 *   ChaseProjectileFactory
 *
-*   @author Chris Angelo Isidro
-*   @version April 26, 2016
+*   @author     Chris Angelo Isidro
+*   @version    1.1 May 16, 2016
+*   Changelog
+*   CAI 1.1     - Changed projectileVel to 10 from 15
 */
 public class ChaseProjectileFactory extends ProjectileFactory{
 

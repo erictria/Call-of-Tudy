@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.util.*;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -13,22 +14,30 @@ import java.awt.event.*;
 public class GameSetup extends javax.swing.JFrame {
     private JComboBox playerAmount;
     public String[] noOfPlayers = {"2","3","4"};
-    public String[] playerList = {"MrMagic", "MrButch", "ReD", "Chase", "Torchwick", "AI"};
-    public String[] mapList = {"Arena 1", "Arena 2", "Arena 3"};
-    public String[] gameType = {"Deathmatch", "Team Deathmatch", "Tag"};
+    public String[] playerList = {"Mr Magic", "Mr Butch", "ReD", "Chase", "Torchwick", "AI"};
+    public String[] playerList2 = {"Mr Magic", "Mr Butch", "ReD", "Chase", "Torchwick"};
+    public String[] mapList = {"Classic", "Spicy", "Sky Dive", "Factory"};
+    public String[] gameType = {"Deathmatch"};
+    //public String[] gameType = {"Deathmatch", "Team Deathmatch", "Tag"};
     //public String[] 
     public String imagePath = "Images\\";
     String ip = "";
     String port = ""; 
     String name = "";
     JFrame frame = this;
+    boolean isLocal = false;
     public GameSetup(String ip, String port, String name) {
         this.ip = ip;
         this.port = port;
         this.name = name;
         initComponents();
     }
-
+    public GameSetup(String name)
+    {
+        this.name = name;
+        isLocal = true;
+        initComponents();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,6 +53,7 @@ public class GameSetup extends javax.swing.JFrame {
         mapsLabel = new javax.swing.JLabel();
         playersLabel = new javax.swing.JLabel();
         playerAmount = new javax.swing.JComboBox();
+        
         gameTypeLabel = new javax.swing.JLabel();
         ipLabel = new javax.swing.JLabel();
         gameStartButton = new javax.swing.JButton();
@@ -71,13 +81,14 @@ public class GameSetup extends javax.swing.JFrame {
 
         livesTextField.setText("3");
 
-        mapsLabel.setText("Map (Default: Arena)");
+        mapsLabel.setText("Map (Default: Classic)");
 
         portLabel.setText("Port");
 
-        playersLabel.setText("Number of Players (Default: 2)");
+        playersLabel.setText("Number of Players (Default: 4)");
 
         playerAmount.setModel(new JComboBox<>(noOfPlayers).getModel());
+        playerAmount.setSelectedItem("4");
         playerAmount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playerAmountActionPerformed(evt);
@@ -93,11 +104,65 @@ public class GameSetup extends javax.swing.JFrame {
         {
             public void actionPerformed(ActionEvent ae)
             {
-                //START GAME HERE
-                JFrame arena = new JFrame();
-                arena.setSize(1050,720);
-                arena.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    
+                frame.dispose();
+                String[] playersChosen = null;
+                int numberOfPlayers = Integer.parseInt( (String) playerAmount.getSelectedItem());
+                
+                 
+                String mapChosen = (String) mapsComboBox.getSelectedItem();
+                int livesChosen = Integer.parseInt( livesTextField.getText());
+                boolean[] players = {true, true, true, true};
+                
+                String player1Type = (String) player1ComboBox.getSelectedItem();
+                String player2Type = (String) player2ComboBox.getSelectedItem();
+                String player3Type = (String) player3ComboBox.getSelectedItem();
+                String player4Type = (String) player4ComboBox.getSelectedItem();
+                
+                if (numberOfPlayers == 2)
+                {
+                    playersChosen = new String[]{player1Type, player2Type};
+                }
+                else if (numberOfPlayers == 3)
+                {
+                    playersChosen = new String[]{player1Type, player2Type, player3Type};
+                }
+                else if (numberOfPlayers == 4)
+                {
+                    playersChosen = new String[]{player1Type, player2Type, player3Type};
+                }
+                
+                if ( player1Type.equals("AI"))
+                {
+                    players[0] = false;
+                    int randomPlayer = new Random().nextInt(playerList2.length);
+                    String random = (playerList2[randomPlayer]);
+                    player1Type = random;
+                }
+                if (player2Type.equals("AI"))
+                {
+                    players[1] = false;
+                    int randomPlayer = new Random().nextInt(playerList2.length);
+                    String random = (playerList2[randomPlayer]);
+                    player2Type = random;
+                }
+                if ( player3Type.equals("AI"))
+                {
+                    players[2] = false;
+                    int randomPlayer = new Random().nextInt(playerList2.length);
+                    String random = (playerList2[randomPlayer]);
+                    player3Type = random;
+                }
+                if ( player4Type.equals("AI"))
+                {
+                    players[3] = false;
+                    int randomPlayer = new Random().nextInt(playerList2.length);
+                    String random = (playerList2[randomPlayer]);
+                    player4Type = random;
+                }
+                
+                //String gameType = (String) 
+                GameStarter a = new GameStarter(mapChosen,livesChosen, players,
+                              playersChosen, isLocal);
              }
           });
 
