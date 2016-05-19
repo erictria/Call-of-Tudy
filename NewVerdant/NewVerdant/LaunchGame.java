@@ -109,6 +109,8 @@ public class LaunchGame extends JFrame
         start.addActionListener(new button());
         five.addActionListener(new quit());
         
+        
+        
         /*try
         {
             URL url = this.getClass().getClassLoader().getResource("best.au");

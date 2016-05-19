@@ -1,7 +1,7 @@
 
 /**
  * Write a description of class MrButchPlayerFactory here.
- * 
+ *
  * @author Migs
  * @version April 25, 2016
  */

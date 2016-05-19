@@ -1,8 +1,8 @@
 
 /**
  * Write a description of class Meatball here.
- * 
- * @author (your name) 
+ *
+ * @author (your name)
  * @version (a version number or a date)
  */
 public class Meatball extends Projectile
@@ -13,5 +13,6 @@ public class Meatball extends Projectile
         pj.setDamage(10);
         collisionable = pj;
         fallable = new StandardFallable();
+        ap = new MrButchAnimatedProjectile(this);
     }
 }

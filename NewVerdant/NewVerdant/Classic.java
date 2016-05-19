@@ -31,7 +31,7 @@ public class Classic extends BattleGameFactory
         map.gameLoop();
     }
     public Classic(){
-        super(20,20,800,20,100,400,950,400);
+        super(20,20,800,20,100,400,920,400);
     }
     public void setup(){
         //taken from http://opengameart.org/content/2d-space-background

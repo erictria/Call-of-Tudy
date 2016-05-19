@@ -1,6 +1,6 @@
 /**
  * Write a description of class MrButchPlayerFactory here.
- * 
+ *
  * @author Migs
  * @version April 25, 2016
  */
@@ -13,10 +13,10 @@ public class MrButch extends Player
     private ProjectileFactory projFacts[];
     private float degrees = 0;
     private boolean fire = false;
-   
+
     public MrButch(float x, float y)
     {
-        pro = new MagicFactory(null);
+        pro = new MeatballFactory(null);
         setMove(new StandardMovable());
         setFly(new UnFlyable());
         setJump(new StandardJumpable());
@@ -33,8 +33,10 @@ public class MrButch extends Player
         moveSpeed[0] = 1.85f; jumpSpeed[1] = 11;
         spriteName = "Images\\pudge.png";
         projFacts = new ProjectileFactory[2];
+
+        ap = new MrButchAnimated( this );
     }
-    
+
     private void shoot(){
         float xCenter = xPos+width/2;
         float yCenter = yPos+height/2;
@@ -57,14 +59,15 @@ public class MrButch extends Player
         }
         else if(forward)
         {
-            pro.shoot(xPos+35, yPos, forward);
+            pro.shoot(xPos+85, yPos, forward);
         }
-        else 
+        else
         {
             pro.shoot(xPos-45, yPos, forward);
         }
         //else
             //pro.shoot(xPos-20, yPos, 0);
+        shootReverseHook();
         return 0;
     }
 
@@ -80,22 +83,23 @@ public class MrButch extends Player
     }
 
     public int moveHook(){
+        super.moveHook();
         if(hP<21){
             ultimate();
         }
         return 0;
     }
-    
+
     public void setProjFacts(ProjectileFactory[] pj){
         projFacts[0] = pj[0];
         projFacts[1] = pj[1];
-        //System.out.println("Got You!!!");
+        System.out.println("Got You!!!");
     }
 
     public int ultimate()
-    {      
+    {
         spriteName = "Images\\ramsay.jpg";
-        
+
         //Map m = pro.getMap();
         //m.iterateSpawns();
         //pro = new SuperMeatballFactory(m);
@@ -103,7 +107,7 @@ public class MrButch extends Player
         transFormed = true;
         return 0;
     }
-    
+
     public int fireHook(){
         if(transFormed)
             fire = true;
@@ -112,10 +116,10 @@ public class MrButch extends Player
         fire = false;
         return 0;
     }
-    
+
     public int dirFir (int something)
     {
-        if(something%5 == 0) 
+        if(something%5 == 0)
         {
             forward = false;
         }

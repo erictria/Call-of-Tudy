@@ -12,6 +12,7 @@ import java.awt.event.*;
  * @author Migs
  */
 public class GameSetup extends javax.swing.JFrame {
+    public JFrame GS = this;
     private JComboBox playerAmount;
     public String[] noOfPlayers = {"2","3","4"};
     public String[] playerList = {"Mr Magic", "Mr Butch", "ReD", "Chase", "Torchwick", "AI"};
@@ -128,7 +129,7 @@ public class GameSetup extends javax.swing.JFrame {
                 }
                 else if (numberOfPlayers == 4)
                 {
-                    playersChosen = new String[]{player1Type, player2Type, player3Type};
+                    playersChosen = new String[]{player1Type, player2Type, player3Type, player4Type};
                 }
                 
                 if ( player1Type.equals("AI"))
@@ -390,6 +391,15 @@ public class GameSetup extends javax.swing.JFrame {
         pack();
         confirmButton.setVisible(false);
         setVisible(true);
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+            KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "Cancel"); 
+        getRootPane().getActionMap().put("Cancel", new AbstractAction(){ 
+            public void actionPerformed(ActionEvent e)
+            {
+                GS.dispose();
+                JFrame frame = new LaunchGame();
+            }
+        });
     }// </editor-fold>                        
 
     private void playerAmountActionPerformed(java.awt.event.ActionEvent evt) {                                            
