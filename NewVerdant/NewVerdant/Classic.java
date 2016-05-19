@@ -35,7 +35,7 @@ public class Classic extends BattleGameFactory
     }
     public void setup(){
         //taken from http://opengameart.org/content/2d-space-background
-        addSpawn(new BackGround("Images//1.png"));
+        addSpawn(new BackGround("Images\\1.png"));
         addSpawn(new DefaultPlatform(0,650,1000,50));
         addSpawn(new DefaultPlatform(0,350,200,10));
         addSpawn(new DefaultPlatform(800,350,200,10));

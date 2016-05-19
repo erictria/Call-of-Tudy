@@ -19,7 +19,7 @@ public class MapReader extends Map
     private boolean up,down, left, right, action1, action2, action3, action4;
     private int dirFir = 1;
     /*public MapReader(){
-        super(null);
+    super(null);
     }*/
     public int prePaint(Graphics g)
     {
@@ -60,9 +60,13 @@ public class MapReader extends Map
 
                 float[] temp = new float[5];
                 for(int j = 0; j!=4; j++){
-                    temp[j] = Float.parseFloat(drawMe[it][j]);
+                    try{
+                        temp[j] = Float.parseFloat(drawMe[it][j]);
+                    }catch(NumberFormatException e){}
                 }
-                temp[4] = Float.parseFloat(drawMe[it][5]);
+                try{
+                    temp[4] = Float.parseFloat(drawMe[it][5]);
+                }catch(NumberFormatException e){}
                 float widther = temp[2]*widthFactor/i.getWidth();
                 float heighter = (temp[3]*heightFactor)/i.getHeight();
                 AffineTransform matrix = AffineTransform.getTranslateInstance((int)(temp[0]*widthFactor),
@@ -76,12 +80,15 @@ public class MapReader extends Map
         }catch(ConcurrentModificationException|NullPointerException e){};//System.out.println("concurrentModification");}
         return 0;
     }
+
     public int getMap(String[][] x){
         drawMe = x;
         return 0;
     }
+
     public void gameHook(){
     }
+
     public int[] sendInput(){
         int[] temp = new int[9];
         temp[0] = (up? 1 : 0);
@@ -95,30 +102,39 @@ public class MapReader extends Map
         temp[8] = dirFir;
         return temp;
     }
+
     public void setUp(boolean in){
         up = in;
     }
+
     public void setDown(boolean in){
         down = in;
     }
+
     public void setRight(boolean in){
         right = in;
     }
+
     public void setLeft(boolean in){
         left = in;
     }
+
     public void setAction1(boolean in){
         action1 = in;
     }
+
     public void setAction2(boolean in){
         action2 = in;
     }
+
     public void setAction3(boolean in){
         action3 = in;
     }
+
     public void setAction4(boolean in){
         action4 = in;
     }
+
     public void setDirFir(int in){
         dirFir = in;
     }

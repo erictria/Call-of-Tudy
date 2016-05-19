@@ -58,7 +58,7 @@ public class OnlineGameSetee extends GameSetup
                                         livesTextField.setText(y[0]);
                                         int z = y[1].equals("Classic")? 0 :
                                             y[1].equals("Spicy")? 1 : 
-                                            y[1].equals("Spicy")? 2 : 3;
+                                            y[1].equals("Sky Dive")? 2 : 3;
                                         mapsComboBox.setSelectedIndex(z);
                                         String tempo;
                                         tempo = y[2];
@@ -80,43 +80,45 @@ public class OnlineGameSetee extends GameSetup
                                         else me = 0;
                                         if(myNumber!=2)
                                             player2ComboBox.setSelectedIndex(me);
-                                        if(y.length>4){
-                                            tempo = y[4];
-                                            me = 0;
-                                            if(tempo.equals("AI"))me = 0;
-                                            else if(tempo.equals("Mr Magic"))me = 1;
-                                            else if(tempo.equals("Mr Butch"))me = 2;
-                                            else if(tempo.equals("ReD"))me = 3;
-                                            else if(tempo.equals("Chase"))me = 4;
-                                            else me = 0;
-                                            if(myNumber!=3)
-                                                player3ComboBox.setSelectedIndex(me);
-                                            tempo = y[5];
-                                            me = 0;
-                                            if(tempo.equals("AI"))me = 0;
-                                            else if(tempo.equals("Mr Magic"))me = 1;
-                                            else if(tempo.equals("Mr Butch"))me = 2;
-                                            else if(tempo.equals("ReD"))me = 3;
-                                            else if(tempo.equals("Chase"))me = 4;
-                                            else me = 0;
-                                            if(myNumber!=4)
-                                                player4ComboBox.setSelectedIndex(me);
-                                        }
+                                        tempo = y[4];
+                                        me = 0;
+                                        if(tempo.equals("AI"))me = 0;
+                                        else if(tempo.equals("Mr Magic"))me = 1;
+                                        else if(tempo.equals("Mr Butch"))me = 2;
+                                        else if(tempo.equals("ReD"))me = 3;
+                                        else if(tempo.equals("Chase"))me = 4;
+                                        else me = 0;
+                                        if(myNumber!=3)
+                                            player3ComboBox.setSelectedIndex(me);
+                                        tempo = y[5];
+                                        me = 0;
+                                        if(tempo.equals("AI"))me = 0;
+                                        else if(tempo.equals("Mr Magic"))me = 1;
+                                        else if(tempo.equals("Mr Butch"))me = 2;
+                                        else if(tempo.equals("ReD"))me = 3;
+                                        else if(tempo.equals("Chase"))me = 4;
+                                        else me = 0;
+                                        if(myNumber!=4)
+                                            player4ComboBox.setSelectedIndex(me);
                                     }
                                     try{
                                         Thread.sleep(20);
                                     }catch(InterruptedException e){}
                                     while(true){
                                         String tempo = sc.next();
+                                        System.out.println(tempo);
                                         String[] tempor = tempo.split("\\\\"); 
                                         if(tempor.length<7){
                                             continue;
                                         }
                                         String[][] right = new String[tempor.length/6][6];
-                                        for(int i=0; i!=tempor.length; i+=6){
-                                            right[i/6][i%6] = tempor[i];
+                                        for(int i=0; i<tempor.length; i++){
+                                            try{
+                                                right[i/6][i%6] = tempor[i];
+                                            }catch(ArrayIndexOutOfBoundsException e){}
                                         }
                                         mapper.getMap(right);
+                                        mapper.repaint();
                                     }
                                 }
                             }).start();
@@ -131,6 +133,9 @@ public class OnlineGameSetee extends GameSetup
                             }
                             pw.write(myString+"\\\\\\");
                             pw.flush();
+                            try{
+                                Thread.sleep(30);
+                            }catch(InterruptedException e){}
                         }
                         try{
                             Thread.sleep(20);
@@ -142,6 +147,9 @@ public class OnlineGameSetee extends GameSetup
                             }
                             pw.write("\\");
                             pw.flush();
+                            try{
+                                Thread.sleep(15);
+                            }catch(InterruptedException e){}
                         }
                     }catch(IOException e){}
                 }
@@ -157,15 +165,17 @@ public class OnlineGameSetee extends GameSetup
                     x.setSize(1050,720);
                     x.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     x.setVisible(true);
-                    //x.add(map);
+                    x.add(mapper);
                     x.addComponentListener(new Resizer(mapper));
+                    //myController = new NetworkedController(mapper);
                     mapper.addKeyListener(myController);
                     mapper.addSpawnController(myController);
+                    mapper.gameLoop();
                 }
             }).start();
     }
 
     public static void main(String args[]){
-        JFrame a = new OnlineGameSetee("1","1","1");
+        JFrame a = new OnlineGameSetee("192.168.0.11","1000","1");
     }
 }
