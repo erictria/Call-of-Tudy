@@ -157,9 +157,7 @@ public class Map extends Canvas
         //System.out.println(timeElapsed);
         setBackground(Color.MAGENTA);
         while(true){
-            //System.out.println(System.nanoTime()-timeElapsed);
             timeElapsed = System.nanoTime();
-            //System.out.println(timeElapsed);
             gameHook();
             iterateSpawnControllers();
             iterateSpawns();

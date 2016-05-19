@@ -50,7 +50,7 @@ public class LaunchGame extends JFrame
                 String port = JOptionPane.showInputDialog(lg, "Please Input Port Number");
                 String name = JOptionPane.showInputDialog(lg, "What is your name?");
                 //System.out.println("Port: " + port + "\nName: " + name);
-                JFrame next = new GameSetup("localhost", port, name);
+                JFrame next = new OnlineGameSetup("localhost", port, name);
                 lg.setVisible(false);
             }
             

@@ -32,12 +32,14 @@ public class GameSetup extends javax.swing.JFrame {
         this.port = port;
         this.name = name;
         initComponents();
+        //addWindowListner(new OpenMain());
     }
     public GameSetup(String name)
     {
         this.name = name;
         isLocal = true;
         initComponents();
+        //addWindowListner(new OpenMain());
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,7 +49,7 @@ public class GameSetup extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
-
+        addWindowListener(new OpenMain());
         livesLabel = new javax.swing.JLabel();
         livesTextField = new javax.swing.JTextField();
         portLabel = new javax.swing.JLabel();
@@ -76,7 +78,7 @@ public class GameSetup extends javax.swing.JFrame {
         player3Image = new javax.swing.JLabel();
         player4Image = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         livesLabel.setText("Lives (Default: 3)");
 
