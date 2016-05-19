@@ -34,7 +34,7 @@ public class OnlineGameSetee extends GameSetup
                 public void run(){
                     try{
                         PrintWriter pw = new PrintWriter(ss.getOutputStream());
-                        final Scanner sc = new Scanner(ss.getInputStream()).useDelimiter("\\\\\\");
+                        final Scanner sc = new Scanner(ss.getInputStream()).useDelimiter(("\\\\{3}"));
                         final int myNumber = Integer.parseInt(sc.next());
                         player2ComboBox.setEnabled(false);
                         player3ComboBox.setEnabled(false);
@@ -80,26 +80,28 @@ public class OnlineGameSetee extends GameSetup
                                         else me = 0;
                                         if(myNumber!=2)
                                             player2ComboBox.setSelectedIndex(me);
-                                        tempo = y[4];
-                                        me = 0;
-                                        if(tempo.equals("AI"))me = 0;
-                                        else if(tempo.equals("Mr Magic"))me = 1;
-                                        else if(tempo.equals("Mr Butch"))me = 2;
-                                        else if(tempo.equals("ReD"))me = 3;
-                                        else if(tempo.equals("Chase"))me = 4;
-                                        else me = 0;
-                                        if(myNumber!=3)
-                                            player3ComboBox.setSelectedIndex(me);
-                                        tempo = y[5];
-                                        me = 0;
-                                        if(tempo.equals("AI"))me = 0;
-                                        else if(tempo.equals("Mr Magic"))me = 1;
-                                        else if(tempo.equals("Mr Butch"))me = 2;
-                                        else if(tempo.equals("ReD"))me = 3;
-                                        else if(tempo.equals("Chase"))me = 4;
-                                        else me = 0;
-                                        if(myNumber!=4)
-                                            player4ComboBox.setSelectedIndex(me);
+                                        if(y.length>4){
+                                            tempo = y[4];
+                                            me = 0;
+                                            if(tempo.equals("AI"))me = 0;
+                                            else if(tempo.equals("Mr Magic"))me = 1;
+                                            else if(tempo.equals("Mr Butch"))me = 2;
+                                            else if(tempo.equals("ReD"))me = 3;
+                                            else if(tempo.equals("Chase"))me = 4;
+                                            else me = 0;
+                                            if(myNumber!=3)
+                                                player3ComboBox.setSelectedIndex(me);
+                                            tempo = y[5];
+                                            me = 0;
+                                            if(tempo.equals("AI"))me = 0;
+                                            else if(tempo.equals("Mr Magic"))me = 1;
+                                            else if(tempo.equals("Mr Butch"))me = 2;
+                                            else if(tempo.equals("ReD"))me = 3;
+                                            else if(tempo.equals("Chase"))me = 4;
+                                            else me = 0;
+                                            if(myNumber!=4)
+                                                player4ComboBox.setSelectedIndex(me);
+                                        }
                                     }
                                     try{
                                         Thread.sleep(20);
@@ -147,16 +149,20 @@ public class OnlineGameSetee extends GameSetup
         //player2ComboBox.setEnabled(false);
         //player3ComboBox.setEnabled(false);
         //player4ComboBox.setEnabled(false);
-        while(!hasStarted);
-        dispose();
-        JFrame x = new JFrame();
-        x.setSize(1050,720);
-        x.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        x.setVisible(true);
-        //x.add(map);
-        x.addComponentListener(new Resizer(mapper));
-        mapper.addKeyListener(myController);
-        mapper.addSpawnController(myController);
+        new Thread(grover,new Runnable(){
+                public void run(){
+                    while(!hasStarted);
+                    dispose();
+                    JFrame x = new JFrame();
+                    x.setSize(1050,720);
+                    x.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    x.setVisible(true);
+                    //x.add(map);
+                    x.addComponentListener(new Resizer(mapper));
+                    mapper.addKeyListener(myController);
+                    mapper.addSpawnController(myController);
+                }
+            }).start();
     }
 
     public static void main(String args[]){
