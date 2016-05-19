@@ -92,5 +92,6 @@ public abstract class BattleGameFactory extends BattleMap
                 receiveControls(i+1,receiver[i]);
             }
         }
+        if(!here) OnlineGameSetup.xevere = giveMap();
     }
 }

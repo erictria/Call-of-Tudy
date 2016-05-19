@@ -10,6 +10,7 @@ public class OnlineGameSetup extends GameSetup
     static ThreadGroup grover = new ThreadGroup("OMG");
     static ArrayList<Socket> s = new ArrayList<Socket>();
     static boolean hasStarted = false;
+    static String[][] xevere = null;
     public OnlineGameSetup(String ip, String port, String name){
         super(ip,port,name);
         hasStarted = false;
@@ -24,7 +25,8 @@ public class OnlineGameSetup extends GameSetup
                         System.out.println("Waiting...");
                         ss = new ServerSocket(Integer.parseInt(port1));
                         while(!hasStarted){
-                            Socket socket = ss.accept();
+                            Socket socket;
+                            socket = ss.accept();
                             int numberOfPlayers = Integer.parseInt( 
                                     (String) playerAmount.getSelectedItem());
                             if(s.size()<numberOfPlayers){
@@ -69,7 +71,7 @@ public class OnlineGameSetup extends GameSetup
                                                                         }catch(NumberFormatException e){}
                                                                     }
                                                                     at.map.addControls(playNum-1,xer);
-                                                                }catch(NoSuchElementException e){}
+                                                                }catch(NoSuchElementException|NullPointerException e){}
                                                             }
                                                         }
                                                     }).start();
@@ -101,7 +103,7 @@ public class OnlineGameSetup extends GameSetup
                                                 }catch(InterruptedException e){}
                                                 while(true){
                                                     try{
-                                                        String[][] temp = at.map.giveMap();
+                                                        String[][] temp = xevere;
                                                         for(int i = 0; i!= temp.length; i++){
                                                             for(int j = 0; j!= temp[0].length; j++){
                                                                 pw.write(temp[i][j]+"\\\\");
