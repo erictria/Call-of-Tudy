@@ -35,7 +35,7 @@ public class OnlineGameSetup extends GameSetup
                                         public void run(){
                                             try{
                                                 PrintWriter pw = new PrintWriter(a.getOutputStream());
-                                                final Scanner sc = new Scanner(a.getInputStream()).useDelimiter("\\\\");
+                                                final Scanner sc = new Scanner(a.getInputStream()).useDelimiter("\\\\\\");
                                                 new Thread(grover, new Runnable(){
                                                         public void run(){
                                                             while(!hasStarted){
@@ -57,7 +57,7 @@ public class OnlineGameSetup extends GameSetup
                                                             }
                                                             while(true){
                                                                 String tempo = sc.next();
-                                                                String[] tempor = tempo.split("\\"); 
+                                                                String[] tempor = tempo.split("\\\\"); 
                                                                 if(tempor.length<4){
                                                                     continue;
                                                                 }
@@ -69,7 +69,7 @@ public class OnlineGameSetup extends GameSetup
                                                             }
                                                         }
                                                     }).start();
-                                                pw.write(playNum+"\\\\");
+                                                pw.write(playNum+"\\\\\\");
                                                 pw.flush();
                                                 while(!hasStarted){
                                                     //pw.print();
@@ -79,20 +79,20 @@ public class OnlineGameSetup extends GameSetup
                                                     String player4Type = (String) player4ComboBox.getSelectedItem();
                                                     String mapChosen = (String) mapsComboBox.getSelectedItem();
                                                     int livesChosen = Integer.parseInt( livesTextField.getText());
-                                                    pw.write(livesChosen+"\\"+mapChosen+"\\"
-                                                        +player1Type+"\\"+player2Type+"\\"
-                                                        +"\\"+player3Type+"\\"+player4Type+"\\\\");
+                                                    pw.write(livesChosen+"\\\\"+mapChosen+"\\\\"
+                                                        +player1Type+"\\\\"+player2Type+"\\\\"
+                                                        +"\\\\"+player3Type+"\\\\"+player4Type+"\\\\\\");
                                                     pw.flush();
                                                     //System.out.println("Got em");
                                                 }
-                                                pw.write("GO!"+"\\\\");
+                                                pw.write("GO!"+"\\\\\\");
                                                 while(GameStarter.runMe){
                                                     String[][] temp = at.map.giveMap();
                                                     for(int i = 0; i!= temp.length; i++){
                                                         for(int j = 0; j!= temp.length; j++){
                                                             pw.write(temp[i][j]);
                                                             if(i==0&&j==0){
-                                                                pw.write("\\");
+                                                                pw.write("\\\\");
                                                             }
                                                         }
                                                     }

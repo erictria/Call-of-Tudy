@@ -34,7 +34,7 @@ public class OnlineGameSetee extends GameSetup
                 public void run(){
                     try{
                         PrintWriter pw = new PrintWriter(ss.getOutputStream());
-                        final Scanner sc = new Scanner(ss.getInputStream()).useDelimiter("\\\\");
+                        final Scanner sc = new Scanner(ss.getInputStream()).useDelimiter("\\\\\\");
                         final int myNumber = Integer.parseInt(sc.next());
                         player2ComboBox.setEnabled(false);
                         player3ComboBox.setEnabled(false);
@@ -54,7 +54,7 @@ public class OnlineGameSetee extends GameSetup
                                             hasStarted = true;
                                             continue;
                                         }
-                                        String[] y = x.split("\\");
+                                        String[] y = x.split("\\\\");
                                         livesTextField.setText(y[0]);
                                         int z = y[1].equals("Classic")? 0 :
                                             y[1].equals("Spicy")? 1 : 
@@ -106,7 +106,7 @@ public class OnlineGameSetee extends GameSetup
                                     }catch(InterruptedException e){}
                                     while(true){
                                         String tempo = sc.next();
-                                        String[] tempor = tempo.split("\\"); 
+                                        String[] tempor = tempo.split("\\\\"); 
                                         if(tempor.length<7){
                                             continue;
                                         }
@@ -127,7 +127,7 @@ public class OnlineGameSetee extends GameSetup
                             }else if(myNumber==4){
                                 myString = (String) player4ComboBox.getSelectedItem();
                             }
-                            pw.write(myString+"\\\\");
+                            pw.write(myString+"\\\\\\");
                             pw.flush();
                         }
                         try{
@@ -136,7 +136,7 @@ public class OnlineGameSetee extends GameSetup
                         while(true){
                             int[] getHere = mapper.sendInput();
                             for(int i = 0; i!=getHere.length; i++){
-                                pw.write(getHere[i]+"\\");
+                                pw.write(getHere[i]+"\\\\");
                             }
                             pw.write("\\");
                             pw.flush();
@@ -148,6 +148,15 @@ public class OnlineGameSetee extends GameSetup
         //player3ComboBox.setEnabled(false);
         //player4ComboBox.setEnabled(false);
         while(!hasStarted);
+        dispose();
+        JFrame x = new JFrame();
+        x.setSize(1050,720);
+        x.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        x.setVisible(true);
+        //x.add(map);
+        x.addComponentListener(new Resizer(mapper));
+        mapper.addKeyListener(myController);
+        mapper.addSpawnController(myController);
     }
 
     public static void main(String args[]){

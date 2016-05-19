@@ -65,7 +65,7 @@ public class LaunchGame extends JFrame
                 String IP = JOptionPane.showInputDialog(lg, "Please Input IP Address of Server");
                 String name = JOptionPane.showInputDialog(lg, "What is your name?");
                 //System.out.println("Port: " + port + "\nIP Address: " + IP + "\nName: " + name);
-                JFrame next = new GameSetup(IP, port, name);
+                JFrame next = new OnlineGameSetee(IP, port, name);
                 lg.setVisible(false);
                 
             }

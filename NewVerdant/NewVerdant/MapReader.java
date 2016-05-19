@@ -80,6 +80,8 @@ public class MapReader extends Map
         drawMe = x;
         return 0;
     }
+    public void gameHook(){
+    }
     public int[] sendInput(){
         int[] temp = new int[9];
         temp[0] = (up? 1 : 0);
